@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #FAF7F2;
+    color: #251C12;
+  }
+}
+
+@layer components {
+  /* Botones Primarios y Secundarios */
+  .btn-vino {
+    @apply bg-vino-700 hover:bg-vino-800 active:bg-vino-900 text-white font-medium px-4 py-2.5 rounded-xl shadow-sm transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2;
+  }
+
+  .btn-celeste {
+    @apply bg-celeste-600 hover:bg-celeste-700 active:bg-celeste-800 text-white font-medium px-4 py-2.5 rounded-xl shadow-sm transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2;
+  }
+
+  .btn-outline-vino {
+    @apply border-2 border-vino-700 text-vino-700 hover:bg-vino-50 active:bg-vino-100 font-medium px-4 py-2 rounded-xl transition-all duration-200 inline-flex items-center justify-center gap-2;
+  }
+
+  .btn-outline-celeste {
+    @apply border-2 border-celeste-600 text-celeste-700 hover:bg-celeste-50 active:bg-celeste-100 font-medium px-4 py-2 rounded-xl transition-all duration-200 inline-flex items-center justify-center gap-2;
+  }
+
+  .btn-beige {
+    @apply bg-beige-200 hover:bg-beige-300 text-beige-900 font-medium px-4 py-2.5 rounded-xl transition-all duration-200 inline-flex items-center justify-center gap-2;
+  }
+
+  /* Tarjetas Estilo Gastronómico */
+  .card-gourmet {
+    @apply bg-white border border-beige-200 rounded-2xl p-5 shadow-warm hover:shadow-warm-lg transition-all duration-300;
+  }
+
+  .badge-vino {
+    @apply bg-vino-100 text-vino-800 border border-vino-200 px-2.5 py-0.5 rounded-full text-xs font-semibold uppercase tracking-wider;
+  }
+
+  .badge-celeste {
+    @apply bg-celeste-100 text-celeste-800 border border-celeste-200 px-2.5 py-0.5 rounded-full text-xs font-semibold uppercase tracking-wider;
+  }
+
+  .badge-beige {
+    @apply bg-beige-200 text-beige-800 border border-beige-300 px-2.5 py-0.5 rounded-full text-xs font-semibold uppercase tracking-wider;
+  }
+}
+
+/* Scrollbar refinada */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #FAF7F2;
+}
+::-webkit-scrollbar-thumb {
+  background: #D9C8A8;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #80142E;
+}

@@ -1,0 +1,26 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const authRoutes_1 = __importDefault(require("./authRoutes"));
+const mesaRoutes_1 = __importDefault(require("./mesaRoutes"));
+const categoriaRoutes_1 = __importDefault(require("./categoriaRoutes"));
+const productoRoutes_1 = __importDefault(require("./productoRoutes"));
+const pedidoRoutes_1 = __importDefault(require("./pedidoRoutes"));
+const reservaRoutes_1 = __importDefault(require("./reservaRoutes"));
+const listaEsperaRoutes_1 = __importDefault(require("./listaEsperaRoutes"));
+const facturacionRoutes_1 = __importDefault(require("./facturacionRoutes"));
+const healthRoutes_1 = __importDefault(require("./healthRoutes"));
+const router = (0, express_1.Router)();
+router.use('/health', healthRoutes_1.default);
+router.use('/auth', authRoutes_1.default);
+router.use('/mesas', mesaRoutes_1.default);
+router.use('/categorias', categoriaRoutes_1.default);
+router.use('/productos', productoRoutes_1.default);
+router.use('/pedidos', pedidoRoutes_1.default);
+router.use('/reservas', reservaRoutes_1.default);
+router.use('/lista-espera', listaEsperaRoutes_1.default);
+router.use('/facturacion', facturacionRoutes_1.default);
+exports.default = router;
