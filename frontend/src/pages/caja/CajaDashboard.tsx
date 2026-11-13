@@ -186,19 +186,19 @@ export const CajaDashboard: React.FC = () => {
   const mesasLibres = mesas.filter((m) => m.estado === 'disponible');
 
   return (
-    <div className="min-h-screen bg-beige-50 p-4 sm:p-6 pb-20">
+    <div className="min-h-screen bg-carbon-50 p-4 sm:p-6 pb-20">
       <div className="max-w-7xl mx-auto space-y-6">
         {/* Encabezado y Métricas Rápidas de Caja */}
-        <header className="bg-white border border-beige-200 rounded-3xl p-5 shadow-warm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <header className="bg-carbon-100 border border-carbon-200 rounded-3xl p-5 shadow-warm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-2xl bg-vino-700 text-white flex items-center justify-center shadow-md">
-              <LayoutDashboard className="w-6 h-6 text-beige-100" />
+            <div className="w-12 h-12 rounded-2xl bg-terracota-700 text-white flex items-center justify-center shadow-md">
+              <LayoutDashboard className="w-6 h-6 text-carbon-900" />
             </div>
             <div>
-              <h1 className="font-serif text-2xl font-bold text-vino-950">
+              <h1 className="font-serif text-2xl font-bold text-carbon-900">
                 Panel de Caja & Control del Salón
               </h1>
-              <span className="text-xs text-beige-600">
+              <span className="text-xs text-carbon-600">
                 Gestión en tiempo real de mesas, comandas, reservas y facturación
               </span>
             </div>
@@ -207,7 +207,7 @@ export const CajaDashboard: React.FC = () => {
           <div className="flex flex-wrap items-center gap-3">
             <button
               onClick={() => setIsReservationOpen(true)}
-              className="btn-outline-celeste text-xs py-2 px-3.5"
+              className="btn-contorno-dorado text-xs py-2 px-3.5"
             >
               <Calendar className="w-4 h-4" />
               <span>Nueva Reserva</span>
@@ -215,7 +215,7 @@ export const CajaDashboard: React.FC = () => {
 
             <button
               onClick={() => setIsWaitlistOpen(true)}
-              className="btn-outline-vino text-xs py-2 px-3.5"
+              className="btn-contorno text-xs py-2 px-3.5"
             >
               <UserPlus className="w-4 h-4" />
               <span>Turno Espera</span>
@@ -223,7 +223,7 @@ export const CajaDashboard: React.FC = () => {
 
             <button
               onClick={loadAllData}
-              className="p-2.5 rounded-xl bg-beige-100 text-beige-700 hover:text-vino-800 border border-beige-200"
+              className="p-2.5 rounded-xl bg-carbon-100 text-carbon-700 hover:text-terracota-400 border border-carbon-200"
               title="Actualizar datos"
             >
               <RefreshCw className="w-4 h-4" />
@@ -233,45 +233,45 @@ export const CajaDashboard: React.FC = () => {
 
         {/* Tarjetas KPI Superiores */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="card-gourmet bg-white p-4">
-            <span className="text-xs font-semibold text-beige-600 uppercase">Mesas Ocupadas</span>
+          <div className="card-gourmet bg-carbon-100 p-4">
+            <span className="text-xs font-semibold text-carbon-600 uppercase">Mesas Ocupadas</span>
             <div className="flex items-baseline justify-between mt-1">
-              <span className="font-serif text-2xl font-bold text-vino-700">
+              <span className="font-serif text-2xl font-bold text-terracota-400">
                 {mesas.filter((m) => m.estado === 'ocupada').length} / {mesas.length}
               </span>
-              <span className="text-xs text-emerald-600 font-bold">
+              <span className="text-xs text-verde-400 font-bold">
                 {mesasLibres.length} libres
               </span>
             </div>
           </div>
 
-          <div className="card-gourmet bg-white p-4">
-            <span className="text-xs font-semibold text-beige-600 uppercase">Comandas Activas</span>
+          <div className="card-gourmet bg-carbon-100 p-4">
+            <span className="text-xs font-semibold text-carbon-600 uppercase">Comandas Activas</span>
             <div className="flex items-baseline justify-between mt-1">
-              <span className="font-serif text-2xl font-bold text-celeste-600">
+              <span className="font-serif text-2xl font-bold text-ocre-400">
                 {pedidosActivosPorMesa.size}
               </span>
-              <span className="text-xs text-beige-600">en cocina/salón</span>
+              <span className="text-xs text-carbon-600">en cocina/salón</span>
             </div>
           </div>
 
-          <div className="card-gourmet bg-white p-4">
-            <span className="text-xs font-semibold text-beige-600 uppercase">Lista de Espera</span>
+          <div className="card-gourmet bg-carbon-100 p-4">
+            <span className="text-xs font-semibold text-carbon-600 uppercase">Lista de Espera</span>
             <div className="flex items-baseline justify-between mt-1">
-              <span className="font-serif text-2xl font-bold text-amber-600">
+              <span className="font-serif text-2xl font-bold text-ocre-400">
                 {listaEspera.filter((l) => l.estado === 'esperando').length}
               </span>
-              <span className="text-xs text-beige-600">grupos esperando</span>
+              <span className="text-xs text-carbon-600">grupos esperando</span>
             </div>
           </div>
 
-          <div className="card-gourmet bg-white p-4">
-            <span className="text-xs font-semibold text-beige-600 uppercase">Total Facturado</span>
+          <div className="card-gourmet bg-carbon-100 p-4">
+            <span className="text-xs font-semibold text-carbon-600 uppercase">Total Facturado</span>
             <div className="flex items-baseline justify-between mt-1">
-              <span className="font-serif text-2xl font-bold text-vino-950">
+              <span className="font-serif text-2xl font-bold text-carbon-900">
                 Bs. {(resumen?.ingresosTotales || 0).toFixed(2)}
               </span>
-              <span className="text-xs text-emerald-600 font-bold">
+              <span className="text-xs text-verde-400 font-bold">
                 {resumen?.pedidosCompletados || 0} cobros
               </span>
             </div>
@@ -279,13 +279,13 @@ export const CajaDashboard: React.FC = () => {
         </div>
 
         {/* Pestañas de Navegación del Panel */}
-        <div className="flex items-center gap-2 border-b border-beige-200 overflow-x-auto pb-1 scrollbar-none">
+        <div className="flex items-center gap-2 border-b border-carbon-200 overflow-x-auto pb-1 scrollbar-none">
           <button
             onClick={() => setActiveTab('salon')}
             className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 whitespace-nowrap ${
               activeTab === 'salon'
-                ? 'bg-vino-700 text-white shadow-sm'
-                : 'text-beige-700 hover:bg-beige-100 hover:text-vino-800'
+                ? 'bg-terracota-700 text-white shadow-sm'
+                : 'text-carbon-700 hover:bg-carbon-100 hover:text-terracota-400'
             }`}
           >
             <Grid className="w-4 h-4" />
@@ -296,8 +296,8 @@ export const CajaDashboard: React.FC = () => {
             onClick={() => setActiveTab('pedidos')}
             className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 whitespace-nowrap ${
               activeTab === 'pedidos'
-                ? 'bg-vino-700 text-white shadow-sm'
-                : 'text-beige-700 hover:bg-beige-100 hover:text-vino-800'
+                ? 'bg-terracota-700 text-white shadow-sm'
+                : 'text-carbon-700 hover:bg-carbon-100 hover:text-terracota-400'
             }`}
           >
             <Receipt className="w-4 h-4" />
@@ -308,8 +308,8 @@ export const CajaDashboard: React.FC = () => {
             onClick={() => setActiveTab('reservas')}
             className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 whitespace-nowrap ${
               activeTab === 'reservas'
-                ? 'bg-vino-700 text-white shadow-sm'
-                : 'text-beige-700 hover:bg-beige-100 hover:text-vino-800'
+                ? 'bg-terracota-700 text-white shadow-sm'
+                : 'text-carbon-700 hover:bg-carbon-100 hover:text-terracota-400'
             }`}
           >
             <Calendar className="w-4 h-4" />
@@ -320,8 +320,8 @@ export const CajaDashboard: React.FC = () => {
             onClick={() => setActiveTab('espera')}
             className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 whitespace-nowrap ${
               activeTab === 'espera'
-                ? 'bg-vino-700 text-white shadow-sm'
-                : 'text-beige-700 hover:bg-beige-100 hover:text-vino-800'
+                ? 'bg-terracota-700 text-white shadow-sm'
+                : 'text-carbon-700 hover:bg-carbon-100 hover:text-terracota-400'
             }`}
           >
             <Clock className="w-4 h-4" />
@@ -332,8 +332,8 @@ export const CajaDashboard: React.FC = () => {
             onClick={() => setActiveTab('reportes')}
             className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 whitespace-nowrap ${
               activeTab === 'reportes'
-                ? 'bg-vino-700 text-white shadow-sm'
-                : 'text-beige-700 hover:bg-beige-100 hover:text-vino-800'
+                ? 'bg-terracota-700 text-white shadow-sm'
+                : 'text-carbon-700 hover:bg-carbon-100 hover:text-terracota-400'
             }`}
           >
             <TrendingUp className="w-4 h-4" />
@@ -346,16 +346,16 @@ export const CajaDashboard: React.FC = () => {
           <div className="space-y-4">
             {/* Selector de Vista Dual (Mapa vs Lista) */}
             <div className="flex items-center justify-between">
-              <h2 className="font-serif text-lg font-bold text-vino-950">
+              <h2 className="font-serif text-lg font-bold text-carbon-900">
                 Rotación de Mesas en Salón
               </h2>
-              <div className="flex items-center gap-1 bg-white border border-beige-200 p-1 rounded-xl shadow-xs">
+              <div className="flex items-center gap-1 bg-carbon-100 border border-carbon-200 p-1 rounded-xl shadow-xs">
                 <button
                   onClick={() => setViewMode('map')}
                   className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-colors ${
                     viewMode === 'map'
-                      ? 'bg-vino-700 text-white shadow-xs'
-                      : 'text-beige-600 hover:text-vino-800'
+                      ? 'bg-terracota-700 text-white shadow-xs'
+                      : 'text-carbon-600 hover:text-terracota-400'
                   }`}
                 >
                   <Grid className="w-3.5 h-3.5" />
@@ -365,8 +365,8 @@ export const CajaDashboard: React.FC = () => {
                   onClick={() => setViewMode('list')}
                   className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-colors ${
                     viewMode === 'list'
-                      ? 'bg-vino-700 text-white shadow-xs'
-                      : 'text-beige-600 hover:text-vino-800'
+                      ? 'bg-terracota-700 text-white shadow-xs'
+                      : 'text-carbon-600 hover:text-terracota-400'
                   }`}
                 >
                   <List className="w-3.5 h-3.5" />
@@ -394,14 +394,14 @@ export const CajaDashboard: React.FC = () => {
 
         {/* CONTENIDO TAB 2: COBRO DE PEDIDOS */}
         {activeTab === 'pedidos' && (
-          <div className="card-gourmet bg-white space-y-4">
-            <h2 className="font-serif text-lg font-bold text-vino-950 pb-2 border-b border-beige-200">
+          <div className="card-gourmet bg-carbon-100 space-y-4">
+            <h2 className="font-serif text-lg font-bold text-carbon-900 pb-2 border-b border-carbon-200">
               Comandas Activas Pendientes de Cobro
             </h2>
 
             {pedidosActivosPorMesa.size === 0 ? (
-              <div className="text-center py-12 text-beige-500">
-                <Receipt className="w-12 h-12 mx-auto text-beige-300 mb-2" />
+              <div className="text-center py-12 text-carbon-500">
+                <Receipt className="w-12 h-12 mx-auto text-carbon-800 mb-2" />
                 <p>No hay mesas con cuentas pendientes por cobrar</p>
               </div>
             ) : (
@@ -409,24 +409,24 @@ export const CajaDashboard: React.FC = () => {
                 {Array.from(pedidosActivosPorMesa.values()).map((p) => (
                   <div
                     key={p.id}
-                    className="p-4 rounded-2xl border border-beige-200 bg-beige-50/50 hover:bg-white hover:shadow-warm transition-all flex flex-col justify-between"
+                    className="p-4 rounded-2xl border border-carbon-200 bg-carbon-50/50 hover:bg-carbon-100 hover:shadow-warm transition-all flex flex-col justify-between"
                   >
                     <div>
-                      <div className="flex items-center justify-between pb-2 border-b border-beige-200">
-                        <span className="font-serif font-bold text-lg text-vino-950">
+                      <div className="flex items-center justify-between pb-2 border-b border-carbon-200">
+                        <span className="font-serif font-bold text-lg text-carbon-900">
                           MESA #{p.numero_mesa || p.mesa_id}
                         </span>
                         <Badge tipo="pedido" estado={p.estado} size="sm" />
                       </div>
                       <div className="py-2.5 space-y-1 text-xs">
-                        <div className="text-beige-600">Código: <strong className="text-vino-900 font-mono">#{p.codigo}</strong></div>
-                        <div className="text-beige-600">Platos pedidos: <strong>{p.detalles?.length || 0}</strong></div>
-                        <div className="text-beige-600">Hora: <strong>{new Date(p.creado_en).toLocaleTimeString()}</strong></div>
+                        <div className="text-carbon-600">Código: <strong className="text-carbon-900 font-mono">#{p.codigo}</strong></div>
+                        <div className="text-carbon-600">Platos pedidos: <strong>{p.detalles?.length || 0}</strong></div>
+                        <div className="text-carbon-600">Hora: <strong>{new Date(p.creado_en).toLocaleTimeString()}</strong></div>
                       </div>
                     </div>
 
-                    <div className="pt-3 border-t border-beige-200 flex items-center justify-between">
-                      <span className="font-serif font-bold text-lg text-vino-700">
+                    <div className="pt-3 border-t border-carbon-200 flex items-center justify-between">
+                      <span className="font-serif font-bold text-lg text-terracota-400">
                         Bs. {p.total.toFixed(2)}
                       </span>
                       <button
@@ -434,7 +434,7 @@ export const CajaDashboard: React.FC = () => {
                           setSelectedPedido(p);
                           setIsBillingOpen(true);
                         }}
-                        className="btn-vino text-xs py-2 px-3.5"
+                        className="btn-primario text-xs py-2 px-3.5"
                       >
                         <Receipt className="w-3.5 h-3.5" />
                         Cobrar Comanda
@@ -449,14 +449,14 @@ export const CajaDashboard: React.FC = () => {
 
         {/* CONTENIDO TAB 3: RESERVAS */}
         {activeTab === 'reservas' && (
-          <div className="card-gourmet bg-white space-y-4">
-            <div className="flex items-center justify-between pb-2 border-b border-beige-200">
-              <h2 className="font-serif text-lg font-bold text-vino-950">
+          <div className="card-gourmet bg-carbon-100 space-y-4">
+            <div className="flex items-center justify-between pb-2 border-b border-carbon-200">
+              <h2 className="font-serif text-lg font-bold text-carbon-900">
                 Reservaciones de Salón
               </h2>
               <button
                 onClick={() => setIsReservationOpen(true)}
-                className="btn-celeste text-xs py-2 px-3 font-bold"
+                className="btn-dorado text-xs py-2 px-3 font-bold"
               >
                 <Plus className="w-3.5 h-3.5" />
                 Registrar Reserva
@@ -464,8 +464,8 @@ export const CajaDashboard: React.FC = () => {
             </div>
 
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs text-beige-900">
-                <thead className="bg-beige-100/70 text-beige-700 uppercase tracking-wider text-[11px]">
+              <table className="w-full text-left text-xs text-carbon-900">
+                <thead className="bg-carbon-100/70 text-carbon-700 uppercase tracking-wider text-[11px]">
                   <tr>
                     <th className="py-3 px-4">Cliente</th>
                     <th className="py-3 px-4">Teléfono</th>
@@ -476,16 +476,16 @@ export const CajaDashboard: React.FC = () => {
                     <th className="py-3 px-4 text-right">Acciones</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-beige-100">
+                <tbody className="divide-y divide-carbon-100">
                   {reservas.map((r) => (
-                    <tr key={r.id} className="hover:bg-beige-50/60">
-                      <td className="py-3 px-4 font-bold text-vino-950">{r.cliente_nombre}</td>
-                      <td className="py-3 px-4 text-beige-600">{r.cliente_telefono}</td>
-                      <td className="py-3 px-4 font-bold text-vino-800">Mesa #{r.numero_mesa || r.mesa_id}</td>
+                    <tr key={r.id} className="hover:bg-carbon-50/60">
+                      <td className="py-3 px-4 font-bold text-carbon-900">{r.cliente_nombre}</td>
+                      <td className="py-3 px-4 text-carbon-600">{r.cliente_telefono}</td>
+                      <td className="py-3 px-4 font-bold text-terracota-400">Mesa #{r.numero_mesa || r.mesa_id}</td>
                       <td className="py-3 px-4">{r.num_personas} pers.</td>
                       <td className="py-3 px-4 font-mono">{new Date(r.fecha_hora).toLocaleString()}</td>
                       <td className="py-3 px-4">
-                        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase bg-celeste-100 text-celeste-800 border border-celeste-300">
+                        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase bg-ocre-100 text-ocre-400 border border-ocre-300">
                           {r.estado}
                         </span>
                       </td>
@@ -493,7 +493,7 @@ export const CajaDashboard: React.FC = () => {
                         {r.estado === 'pendiente' && (
                           <button
                             onClick={() => handleUpdateReservaEstado(r.id, 'confirmada')}
-                            className="p-1.5 rounded-lg bg-emerald-50 text-emerald-700 hover:bg-emerald-100"
+                            className="p-1.5 rounded-lg bg-verde-50 text-verde-400 hover:bg-verde-100"
                             title="Confirmar"
                           >
                             <CheckCircle className="w-4 h-4" />
@@ -502,7 +502,7 @@ export const CajaDashboard: React.FC = () => {
                         {r.estado !== 'cancelada' && (
                           <button
                             onClick={() => handleUpdateReservaEstado(r.id, 'cancelada')}
-                            className="p-1.5 rounded-lg bg-red-50 text-red-700 hover:bg-red-100"
+                            className="p-1.5 rounded-lg bg-kantuta-50 text-kantuta-400 hover:bg-kantuta-100"
                             title="Cancelar"
                           >
                             <XCircle className="w-4 h-4" />
@@ -519,14 +519,14 @@ export const CajaDashboard: React.FC = () => {
 
         {/* CONTENIDO TAB 4: LISTA DE ESPERA */}
         {activeTab === 'espera' && (
-          <div className="card-gourmet bg-white space-y-4">
-            <div className="flex items-center justify-between pb-2 border-b border-beige-200">
-              <h2 className="font-serif text-lg font-bold text-vino-950">
+          <div className="card-gourmet bg-carbon-100 space-y-4">
+            <div className="flex items-center justify-between pb-2 border-b border-carbon-200">
+              <h2 className="font-serif text-lg font-bold text-carbon-900">
                 Lista de Espera y Turnos
               </h2>
               <button
                 onClick={() => setIsWaitlistOpen(true)}
-                className="btn-vino text-xs py-2 px-3 font-bold"
+                className="btn-primario text-xs py-2 px-3 font-bold"
               >
                 <Plus className="w-3.5 h-3.5" />
                 Añadir a la Espera
@@ -539,32 +539,32 @@ export const CajaDashboard: React.FC = () => {
                 .map((item) => (
                   <div
                     key={item.id}
-                    className="p-4 rounded-2xl border border-beige-200 bg-beige-50/60 flex flex-col justify-between"
+                    className="p-4 rounded-2xl border border-carbon-200 bg-carbon-50/60 flex flex-col justify-between"
                   >
                     <div>
-                      <div className="flex items-center justify-between pb-2 border-b border-beige-200">
-                        <span className="font-bold text-base text-vino-950">
+                      <div className="flex items-center justify-between pb-2 border-b border-carbon-200">
+                        <span className="font-bold text-base text-carbon-900">
                           Turno #{item.posicion} • {item.cliente_nombre}
                         </span>
-                        <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-amber-100 text-amber-900 border border-amber-300">
+                        <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-ocre-100 text-ocre-400 border border-ocre-300">
                           ~{item.tiempo_estimado_espera} min
                         </span>
                       </div>
-                      <div className="py-2 text-xs space-y-1 text-beige-700">
+                      <div className="py-2 text-xs space-y-1 text-carbon-700">
                         <p>Teléfono: <strong>{item.telefono}</strong></p>
                         <p>Grupo: <strong>{item.num_personas} personas</strong></p>
-                        {item.notas && <p className="italic text-beige-600">"{item.notas}"</p>}
+                        {item.notas && <p className="italic text-carbon-600">"{item.notas}"</p>}
                       </div>
                     </div>
 
-                    <div className="pt-3 border-t border-beige-200">
-                      <label className="block text-[11px] font-bold text-beige-700 mb-1">
+                    <div className="pt-3 border-t border-carbon-200">
+                      <label className="block text-[11px] font-bold text-carbon-700 mb-1">
                         Asignar y sentar en mesa:
                       </label>
                       <div className="flex items-center gap-2">
                         <select
                           id={`mesa-select-${item.id}`}
-                          className="text-xs p-2 rounded-xl border border-beige-300 bg-white flex-1"
+                          className="text-xs p-2 rounded-xl border border-carbon-300 bg-carbon-100 flex-1"
                         >
                           {mesasLibres.map((m) => (
                             <option key={m.id} value={m.id}>
@@ -582,7 +582,7 @@ export const CajaDashboard: React.FC = () => {
                             }
                           }}
                           disabled={mesasLibres.length === 0}
-                          className="btn-celeste text-xs py-2 px-3 font-bold"
+                          className="btn-dorado text-xs py-2 px-3 font-bold"
                         >
                           Sentar
                         </button>
@@ -599,23 +599,23 @@ export const CajaDashboard: React.FC = () => {
           <div className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Desglose por Método de Pago */}
-              <div className="card-gourmet bg-white">
-                <h3 className="font-serif text-lg font-bold text-vino-950 mb-3 pb-2 border-b border-beige-200">
+              <div className="card-gourmet bg-carbon-100">
+                <h3 className="font-serif text-lg font-bold text-carbon-900 mb-3 pb-2 border-b border-carbon-200">
                   Desglose por Métodos de Pago
                 </h3>
                 <div className="space-y-3">
                   {resumen.metodosPago.map((m) => (
                     <div
                       key={m.metodo}
-                      className="flex items-center justify-between p-3 rounded-xl bg-beige-50/70 border border-beige-200"
+                      className="flex items-center justify-between p-3 rounded-xl bg-carbon-50/70 border border-carbon-200"
                     >
                       <div className="flex items-center gap-2">
-                        <span className="capitalize font-bold text-sm text-vino-900">
+                        <span className="capitalize font-bold text-sm text-carbon-900">
                           {m.metodo}
                         </span>
-                        <span className="text-xs text-beige-600">({m.cantidad} transacciones)</span>
+                        <span className="text-xs text-carbon-600">({m.cantidad} transacciones)</span>
                       </div>
-                      <span className="font-serif font-bold text-base text-vino-700">
+                      <span className="font-serif font-bold text-base text-terracota-400">
                         Bs. {m.total.toFixed(2)}
                       </span>
                     </div>
@@ -624,25 +624,25 @@ export const CajaDashboard: React.FC = () => {
               </div>
 
               {/* Top 5 Platos Más Vendidos */}
-              <div className="card-gourmet bg-white">
-                <h3 className="font-serif text-lg font-bold text-vino-950 mb-3 pb-2 border-b border-beige-200">
+              <div className="card-gourmet bg-carbon-100">
+                <h3 className="font-serif text-lg font-bold text-carbon-900 mb-3 pb-2 border-b border-carbon-200">
                   Top 5 Especialidades Más Vendidas
                 </h3>
                 <div className="space-y-3">
                   {resumen.topProductos.map((p, idx) => (
                     <div
                       key={p.nombre}
-                      className="flex items-center justify-between p-3 rounded-xl bg-beige-50/70 border border-beige-200 text-xs"
+                      className="flex items-center justify-between p-3 rounded-xl bg-carbon-50/70 border border-carbon-200 text-xs"
                     >
                       <div className="flex items-center gap-2.5">
-                        <span className="w-6 h-6 rounded-lg bg-celeste-600 text-white font-bold flex items-center justify-center">
+                        <span className="w-6 h-6 rounded-lg bg-ocre-600 text-white font-bold flex items-center justify-center">
                           #{idx + 1}
                         </span>
-                        <span className="font-bold text-vino-950 text-sm">{p.nombre}</span>
+                        <span className="font-bold text-carbon-900 text-sm">{p.nombre}</span>
                       </div>
                       <div className="text-right">
-                        <span className="font-bold text-vino-900 block">{p.cantidad} porciones</span>
-                        <span className="text-beige-600">Bs. {p.total.toFixed(2)}</span>
+                        <span className="font-bold text-carbon-900 block">{p.cantidad} porciones</span>
+                        <span className="text-carbon-600">Bs. {p.total.toFixed(2)}</span>
                       </div>
                     </div>
                   ))}

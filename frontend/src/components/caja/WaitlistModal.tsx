@@ -42,49 +42,49 @@ export const WaitlistModal: React.FC<Props> = ({ isOpen, onClose, onAddWaitlist 
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
-      <div className="relative bg-white rounded-3xl max-w-md w-full shadow-2xl border border-beige-200 overflow-hidden">
-        <div className="p-6 bg-beige-50/80 border-b border-beige-200 flex items-center justify-between">
+      <div className="relative bg-carbon-100 rounded-3xl max-w-md w-full shadow-2xl border border-carbon-200 overflow-hidden">
+        <div className="p-6 bg-carbon-50/80 border-b border-carbon-200 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-vino-700 text-white flex items-center justify-center">
-              <UserPlus className="w-5 h-5 text-beige-100" />
+            <div className="w-10 h-10 rounded-2xl bg-terracota-700 text-white flex items-center justify-center">
+              <UserPlus className="w-5 h-5 text-carbon-900" />
             </div>
             <div>
-              <h3 className="font-serif text-lg font-bold text-vino-950">Añadir a Lista de Espera</h3>
-              <p className="text-xs text-beige-600">Turnos en vivo para recepción</p>
+              <h3 className="font-serif text-lg font-bold text-carbon-900">Añadir a Lista de Espera</h3>
+              <p className="text-xs text-carbon-600">Turnos en vivo para recepción</p>
             </div>
           </div>
-          <button onClick={onClose} className="p-2 text-beige-500 hover:text-vino-800 rounded-lg">
+          <button onClick={onClose} className="p-2 text-carbon-500 hover:text-terracota-400 rounded-lg">
             <X className="w-5 h-5" />
           </button>
         </div>
 
         <form onSubmit={handleSubmit} className="p-6 space-y-4">
           <div>
-            <label className="block text-xs font-bold text-beige-800 mb-1">Nombre del Cliente *</label>
+            <label className="block text-xs font-bold text-carbon-800 mb-1">Nombre del Cliente *</label>
             <input
               type="text"
               required
               value={nombre}
               onChange={(e) => setNombre(e.target.value)}
               placeholder="Ej: Laura Vargas"
-              className="w-full text-xs px-3 py-2 rounded-xl border border-beige-300 focus:outline-none focus:ring-1 focus:ring-vino-600"
+              className="w-full text-xs px-3 py-2 rounded-xl border border-carbon-300 focus:outline-none focus:ring-1 focus:ring-terracota-600"
             />
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-bold text-beige-800 mb-1">Teléfono Móvil *</label>
+              <label className="block text-xs font-bold text-carbon-800 mb-1">Teléfono Móvil *</label>
               <input
                 type="text"
                 required
                 value={telefono}
                 onChange={(e) => setTelefono(e.target.value)}
                 placeholder="+591 7..."
-                className="w-full text-xs px-3 py-2 rounded-xl border border-beige-300 focus:outline-none focus:ring-1 focus:ring-vino-600"
+                className="w-full text-xs px-3 py-2 rounded-xl border border-carbon-300 focus:outline-none focus:ring-1 focus:ring-terracota-600"
               />
             </div>
             <div>
-              <label className="block text-xs font-bold text-beige-800 mb-1">Nº Personas *</label>
+              <label className="block text-xs font-bold text-carbon-800 mb-1">Nº Personas *</label>
               <input
                 type="number"
                 min="1"
@@ -92,13 +92,13 @@ export const WaitlistModal: React.FC<Props> = ({ isOpen, onClose, onAddWaitlist 
                 required
                 value={personas}
                 onChange={(e) => setPersonas(Number(e.target.value))}
-                className="w-full text-xs px-3 py-2 rounded-xl border border-beige-300 focus:outline-none focus:ring-1 focus:ring-vino-600"
+                className="w-full text-xs px-3 py-2 rounded-xl border border-carbon-300 focus:outline-none focus:ring-1 focus:ring-terracota-600"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-beige-800 mb-1">
+            <label className="block text-xs font-bold text-carbon-800 mb-1">
               Tiempo estimado de espera (minutos)
             </label>
             <input
@@ -107,26 +107,26 @@ export const WaitlistModal: React.FC<Props> = ({ isOpen, onClose, onAddWaitlist 
               step="5"
               value={tiempoEspera}
               onChange={(e) => setTiempoEspera(Number(e.target.value))}
-              className="w-full text-xs px-3 py-2 rounded-xl border border-beige-300 focus:outline-none focus:ring-1 focus:ring-vino-600"
+              className="w-full text-xs px-3 py-2 rounded-xl border border-carbon-300 focus:outline-none focus:ring-1 focus:ring-terracota-600"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-beige-800 mb-1">Preferencia / Notas</label>
+            <label className="block text-xs font-bold text-carbon-800 mb-1">Preferencia / Notas</label>
             <input
               type="text"
               value={notas}
               onChange={(e) => setNotas(e.target.value)}
               placeholder="Ej: Prefiere terraza al aire libre..."
-              className="w-full text-xs px-3 py-2 rounded-xl border border-beige-300 focus:outline-none focus:ring-1 focus:ring-vino-600"
+              className="w-full text-xs px-3 py-2 rounded-xl border border-carbon-300 focus:outline-none focus:ring-1 focus:ring-terracota-600"
             />
           </div>
 
-          <div className="pt-3 border-t border-beige-200 flex justify-end gap-2">
-            <button type="button" onClick={onClose} className="btn-beige text-xs py-2 px-4">
+          <div className="pt-3 border-t border-carbon-200 flex justify-end gap-2">
+            <button type="button" onClick={onClose} className="btn-suave text-xs py-2 px-4">
               Cancelar
             </button>
-            <button type="submit" disabled={loading} className="btn-vino text-xs py-2 px-4 font-bold">
+            <button type="submit" disabled={loading} className="btn-primario text-xs py-2 px-4 font-bold">
               {loading ? 'Añadiendo...' : 'Añadir Turno'}
             </button>
           </div>

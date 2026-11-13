@@ -107,21 +107,21 @@ export const KdsBoard: React.FC = () => {
   const terminados = pedidos.filter((p) => p.estado === 'terminado');
 
   return (
-    <div className="min-h-screen bg-beige-100/60 p-4 sm:p-6 pb-16 flex flex-col">
+    <div className="min-h-screen bg-carbon-100/60 p-4 sm:p-6 pb-16 flex flex-col">
       {/* Barra de control superior de KDS */}
-      <header className="bg-white border border-beige-200 rounded-2xl p-4 sm:p-5 shadow-warm mb-6 flex flex-wrap items-center justify-between gap-4">
+      <header className="bg-carbon-100 border border-carbon-200 rounded-2xl p-4 sm:p-5 shadow-warm mb-6 flex flex-wrap items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-xl bg-celeste-600 text-white flex items-center justify-center shadow-md">
+          <div className="w-12 h-12 rounded-xl bg-ocre-600 text-white flex items-center justify-center shadow-md">
             <ChefHat className="w-6 h-6" />
           </div>
           <div>
-            <h1 className="font-serif text-2xl font-bold text-vino-950">
+            <h1 className="font-serif text-2xl font-bold text-carbon-900">
               Kitchen Display System (KDS)
             </h1>
-            <div className="flex items-center gap-2 text-xs text-beige-600 mt-0.5">
+            <div className="flex items-center gap-2 text-xs text-carbon-600 mt-0.5">
               <span>{pedidos.length} comandas en preparación activa</span>
               <span>•</span>
-              <span className={isConnected ? 'text-emerald-600 font-bold' : 'text-amber-600'}>
+              <span className={isConnected ? 'text-verde-400 font-bold' : 'text-ocre-400'}>
                 {isConnected ? '🟢 Sockets Sincronizados' : '🟠 Reconectando'}
               </span>
             </div>
@@ -130,8 +130,8 @@ export const KdsBoard: React.FC = () => {
 
         {/* Reloj y Controles */}
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-beige-50 border border-beige-200 font-mono text-sm font-bold text-vino-900">
-            <Clock className="w-4 h-4 text-celeste-600" />
+          <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-carbon-50 border border-carbon-200 font-mono text-sm font-bold text-carbon-900">
+            <Clock className="w-4 h-4 text-ocre-400" />
             <span>{currentTime.toLocaleTimeString()}</span>
           </div>
 
@@ -139,8 +139,8 @@ export const KdsBoard: React.FC = () => {
             onClick={() => setSoundEnabled(!soundEnabled)}
             className={`p-2.5 rounded-xl border transition-colors ${
               soundEnabled
-                ? 'bg-celeste-50 text-celeste-700 border-celeste-300'
-                : 'bg-beige-100 text-beige-500 border-beige-200'
+                ? 'bg-ocre-50 text-ocre-400 border-ocre-300'
+                : 'bg-carbon-100 text-carbon-500 border-carbon-200'
             }`}
             title={soundEnabled ? 'Silenciar campanilla' : 'Activar campanilla'}
           >
@@ -149,7 +149,7 @@ export const KdsBoard: React.FC = () => {
 
           <button
             onClick={fetchOrders}
-            className="p-2.5 rounded-xl bg-beige-100 text-beige-700 hover:text-vino-800 border border-beige-200"
+            className="p-2.5 rounded-xl bg-carbon-100 text-carbon-700 hover:text-terracota-400 border border-carbon-200"
             title="Refrescar comanderas"
           >
             <RefreshCw className="w-5 h-5" />
@@ -160,20 +160,20 @@ export const KdsBoard: React.FC = () => {
       {/* Tablero Kanban de Cocina en 3 Columnas */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 flex-1">
         {/* Columna 1: PENDIENTES */}
-        <section className="bg-beige-50/70 border border-beige-300 rounded-3xl p-4 flex flex-col shadow-xs">
-          <div className="flex items-center justify-between pb-3 mb-4 border-b border-amber-300/80">
+        <section className="bg-carbon-50/70 border border-carbon-300 rounded-3xl p-4 flex flex-col shadow-xs">
+          <div className="flex items-center justify-between pb-3 mb-4 border-b border-ocre-300/80">
             <div className="flex items-center gap-2">
-              <span className="w-3.5 h-3.5 rounded-full bg-amber-500 animate-pulse"></span>
-              <h2 className="font-serif text-lg font-bold text-amber-950">Nuevos Pedidos</h2>
+              <span className="w-3.5 h-3.5 rounded-full bg-ocre-500 animate-pulse"></span>
+              <h2 className="font-serif text-lg font-bold text-ocre-400">Nuevos Pedidos</h2>
             </div>
-            <span className="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 text-xs font-bold border border-amber-300">
+            <span className="px-2.5 py-0.5 rounded-full bg-ocre-100 text-ocre-400 text-xs font-bold border border-ocre-300">
               {pendientes.length}
             </span>
           </div>
 
           <div className="space-y-4 flex-1 overflow-y-auto">
             {pendientes.length === 0 ? (
-              <div className="h-48 flex items-center justify-center text-center text-xs text-beige-500">
+              <div className="h-48 flex items-center justify-center text-center text-xs text-carbon-500">
                 Sin pedidos pendientes de ingreso
               </div>
             ) : (
@@ -190,20 +190,20 @@ export const KdsBoard: React.FC = () => {
         </section>
 
         {/* Columna 2: EN PROCESO */}
-        <section className="bg-beige-50/70 border border-celeste-300 rounded-3xl p-4 flex flex-col shadow-xs">
-          <div className="flex items-center justify-between pb-3 mb-4 border-b border-celeste-400/80">
+        <section className="bg-carbon-50/70 border border-ocre-300 rounded-3xl p-4 flex flex-col shadow-xs">
+          <div className="flex items-center justify-between pb-3 mb-4 border-b border-ocre-400/80">
             <div className="flex items-center gap-2">
-              <span className="w-3.5 h-3.5 rounded-full bg-celeste-500 animate-spin"></span>
-              <h2 className="font-serif text-lg font-bold text-celeste-950">En Preparación</h2>
+              <span className="w-3.5 h-3.5 rounded-full bg-ocre-500 animate-spin"></span>
+              <h2 className="font-serif text-lg font-bold text-ocre-400">En Preparación</h2>
             </div>
-            <span className="px-2.5 py-0.5 rounded-full bg-celeste-100 text-celeste-900 text-xs font-bold border border-celeste-300">
+            <span className="px-2.5 py-0.5 rounded-full bg-ocre-100 text-ocre-400 text-xs font-bold border border-ocre-300">
               {enProceso.length}
             </span>
           </div>
 
           <div className="space-y-4 flex-1 overflow-y-auto">
             {enProceso.length === 0 ? (
-              <div className="h-48 flex items-center justify-center text-center text-xs text-beige-500">
+              <div className="h-48 flex items-center justify-center text-center text-xs text-carbon-500">
                 Ningún plato en cocción activa
               </div>
             ) : (
@@ -220,20 +220,20 @@ export const KdsBoard: React.FC = () => {
         </section>
 
         {/* Columna 3: TERMINADOS */}
-        <section className="bg-beige-50/70 border border-emerald-300 rounded-3xl p-4 flex flex-col shadow-xs">
-          <div className="flex items-center justify-between pb-3 mb-4 border-b border-emerald-400/80">
+        <section className="bg-carbon-50/70 border border-verde-300 rounded-3xl p-4 flex flex-col shadow-xs">
+          <div className="flex items-center justify-between pb-3 mb-4 border-b border-verde-400/80">
             <div className="flex items-center gap-2">
-              <span className="w-3.5 h-3.5 rounded-full bg-emerald-500"></span>
-              <h2 className="font-serif text-lg font-bold text-emerald-950">Listos en Barra</h2>
+              <span className="w-3.5 h-3.5 rounded-full bg-verde-500"></span>
+              <h2 className="font-serif text-lg font-bold text-verde-400">Listos en Barra</h2>
             </div>
-            <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-900 text-xs font-bold border border-emerald-300">
+            <span className="px-2.5 py-0.5 rounded-full bg-verde-100 text-verde-400 text-xs font-bold border border-verde-300">
               {terminados.length}
             </span>
           </div>
 
           <div className="space-y-4 flex-1 overflow-y-auto">
             {terminados.length === 0 ? (
-              <div className="h-48 flex items-center justify-center text-center text-xs text-beige-500">
+              <div className="h-48 flex items-center justify-center text-center text-xs text-carbon-500">
                 No hay platos listos para despachar
               </div>
             ) : (
