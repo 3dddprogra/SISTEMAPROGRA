@@ -13,19 +13,19 @@ export const FloorMap: React.FC<Props> = ({ mesas, pedidosActivos, onSelectMesa 
   return (
     <div className="space-y-6">
       {/* Leyenda de estados */}
-      <div className="flex flex-wrap items-center gap-4 p-4 rounded-xl bg-white border border-beige-200 text-xs">
-        <span className="font-bold text-beige-700 uppercase tracking-wider">Leyenda del Salón:</span>
+      <div className="flex flex-wrap items-center gap-4 p-4 rounded-xl bg-carbon-100 border border-carbon-200 text-xs">
+        <span className="font-bold text-carbon-700 uppercase tracking-wider">Leyenda del Salón:</span>
         <div className="flex items-center gap-1.5">
-          <span className="w-3.5 h-3.5 rounded-md bg-emerald-500"></span>
-          <span className="font-semibold text-beige-800">Disponible</span>
+          <span className="w-3.5 h-3.5 rounded-md bg-verde-500"></span>
+          <span className="font-semibold text-carbon-800">Disponible</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <span className="w-3.5 h-3.5 rounded-md bg-vino-700"></span>
-          <span className="font-semibold text-vino-950">Ocupada con Comanda</span>
+          <span className="w-3.5 h-3.5 rounded-md bg-terracota-700"></span>
+          <span className="font-semibold text-carbon-900">Ocupada con Comanda</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <span className="w-3.5 h-3.5 rounded-md bg-celeste-600"></span>
-          <span className="font-semibold text-celeste-900">Reservada</span>
+          <span className="w-3.5 h-3.5 rounded-md bg-ocre-600"></span>
+          <span className="font-semibold text-ocre-400">Reservada</span>
         </div>
       </div>
 
@@ -36,11 +36,11 @@ export const FloorMap: React.FC<Props> = ({ mesas, pedidosActivos, onSelectMesa 
           const isOcupada = mesa.estado === 'ocupada';
           const isReservada = mesa.estado === 'reservada';
 
-          let cardBorder = 'border-beige-200 hover:border-emerald-400 bg-white';
+          let cardBorder = 'border-carbon-200 hover:border-verde-400 bg-carbon-100';
           if (isOcupada) {
-            cardBorder = 'border-vino-400 bg-gradient-to-br from-white to-vino-50/40 shadow-warm';
+            cardBorder = 'border-terracota-400 bg-gradient-to-br from-carbon-100 to-terracota-50/40 shadow-warm';
           } else if (isReservada) {
-            cardBorder = 'border-celeste-400 bg-gradient-to-br from-white to-celeste-50/40';
+            cardBorder = 'border-ocre-400 bg-gradient-to-br from-carbon-100 to-ocre-50/40';
           }
 
           return (
@@ -55,17 +55,17 @@ export const FloorMap: React.FC<Props> = ({ mesas, pedidosActivos, onSelectMesa 
                     <div
                       className={`w-9 h-9 rounded-xl flex items-center justify-center font-serif font-bold text-base ${
                         isOcupada
-                          ? 'bg-vino-700 text-white'
+                          ? 'bg-terracota-700 text-white'
                           : isReservada
-                          ? 'bg-celeste-600 text-white'
-                          : 'bg-emerald-100 text-emerald-800'
+                          ? 'bg-ocre-600 text-white'
+                          : 'bg-verde-100 text-verde-400'
                       }`}
                     >
                       {mesa.numero}
                     </div>
                     <div>
-                      <h4 className="font-bold text-sm text-vino-950 leading-tight">Mesa {mesa.numero}</h4>
-                      <span className="text-[11px] text-beige-600">{mesa.ubicacion}</span>
+                      <h4 className="font-bold text-sm text-carbon-900 leading-tight">Mesa {mesa.numero}</h4>
+                      <span className="text-[11px] text-carbon-600">{mesa.ubicacion}</span>
                     </div>
                   </div>
                   <Badge tipo="mesa" estado={mesa.estado} size="sm" />
@@ -73,18 +73,18 @@ export const FloorMap: React.FC<Props> = ({ mesas, pedidosActivos, onSelectMesa 
 
                 {/* Info de Ocupación / Comanda Activa */}
                 {isOcupada && pedidoActivo && (
-                  <div className="mt-3 p-2.5 rounded-xl bg-white/90 border border-vino-200/60 shadow-xs space-y-1">
+                  <div className="mt-3 p-2.5 rounded-xl bg-carbon-100/90 border border-terracota-200/60 shadow-xs space-y-1">
                     <div className="flex items-center justify-between text-xs">
-                      <span className="font-semibold text-vino-900 truncate">
+                      <span className="font-semibold text-carbon-900 truncate">
                         #{pedidoActivo.codigo}
                       </span>
-                      <span className="font-bold text-vino-700">
+                      <span className="font-bold text-terracota-400">
                         Bs. {pedidoActivo.total.toFixed(2)}
                       </span>
                     </div>
-                    <div className="flex items-center justify-between text-[11px] text-beige-600">
+                    <div className="flex items-center justify-between text-[11px] text-carbon-600">
                       <span>Platos: {pedidoActivo.detalles?.length || 0}</span>
-                      <span className="capitalize font-medium text-celeste-700">
+                      <span className="capitalize font-medium text-ocre-400">
                         {pedidoActivo.estado.replace('_', ' ')}
                       </span>
                     </div>
@@ -93,19 +93,19 @@ export const FloorMap: React.FC<Props> = ({ mesas, pedidosActivos, onSelectMesa 
               </div>
 
               {/* Pie de la tarjeta con capacidad y acción rápida */}
-              <div className="pt-3 border-t border-beige-100 flex items-center justify-between text-xs">
-                <span className="flex items-center gap-1 text-beige-600">
-                  <Users className="w-3.5 h-3.5 text-beige-500" />
+              <div className="pt-3 border-t border-carbon-100 flex items-center justify-between text-xs">
+                <span className="flex items-center gap-1 text-carbon-600">
+                  <Users className="w-3.5 h-3.5 text-carbon-500" />
                   <span>Cap. {mesa.capacidad} pers.</span>
                 </span>
 
                 {isOcupada ? (
-                  <button className="text-[11px] font-bold text-vino-700 hover:text-vino-900 flex items-center gap-1">
+                  <button className="text-[11px] font-bold text-terracota-400 hover:text-carbon-900 flex items-center gap-1">
                     <Receipt className="w-3.5 h-3.5" />
                     <span>Cobrar</span>
                   </button>
                 ) : (
-                  <span className="text-[11px] font-medium text-emerald-600">Disponible</span>
+                  <span className="text-[11px] font-medium text-verde-400">Disponible</span>
                 )}
               </div>
             </div>

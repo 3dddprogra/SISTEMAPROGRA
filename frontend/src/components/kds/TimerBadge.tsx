@@ -22,21 +22,21 @@ export const TimerBadge: React.FC<Props> = ({ createdAt }) => {
   }, [createdAt]);
 
   // Color alerts: Verde < 10m, Ámbar 10-20m, Rojo > 20m
-  let badgeStyle = 'bg-emerald-100 text-emerald-800 border-emerald-300';
+  let badgeStyle = 'bg-verde-100 text-verde-400 border-verde-300';
   let isAlert = false;
 
   if (elapsedMinutes >= 20) {
-    badgeStyle = 'bg-red-100 text-red-900 border-red-400 animate-pulse';
+    badgeStyle = 'bg-kantuta-100 text-kantuta-400 border-kantuta-400 animate-pulse';
     isAlert = true;
   } else if (elapsedMinutes >= 10) {
-    badgeStyle = 'bg-amber-100 text-amber-900 border-amber-300';
+    badgeStyle = 'bg-ocre-100 text-ocre-400 border-ocre-300';
   }
 
   return (
     <span
       className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold border shadow-xs ${badgeStyle}`}
     >
-      {isAlert ? <AlertTriangle className="w-3.5 h-3.5 text-red-600" /> : <Clock className="w-3.5 h-3.5" />}
+      {isAlert ? <AlertTriangle className="w-3.5 h-3.5 text-kantuta-400" /> : <Clock className="w-3.5 h-3.5" />}
       <span>{elapsedMinutes} min</span>
     </span>
   );

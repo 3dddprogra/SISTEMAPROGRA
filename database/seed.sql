@@ -18,8 +18,11 @@ INSERT INTO usuarios (nombre, email, password_hash, rol, activo) VALUES
 INSERT INTO categorias (id, nombre, descripcion, icono, orden, activo) VALUES
 (1, 'Entradas', 'Para comenzar y compartir la experiencia culinaria', 'UtensilsCrossed', 1, TRUE),
 (2, 'Platos Fuertes', 'Especialidades gourmet y tradicionales de la casa', 'Utensils', 2, TRUE),
-(3, 'Bebidas', 'Refrescos artesanales, cervezas y jugos naturales', 'GlassWater', 3, TRUE),
-(4, 'Postres', 'El cierre dulce artesanal para tu mesa', 'Cake', 4, TRUE);
+(3, 'Bebidas', 'Limonadas, jugos naturales y cervezas', 'GlassWater', 6, TRUE),
+(4, 'Postres', 'El cierre dulce artesanal para tu mesa', 'Cake', 7, TRUE),
+(5, 'Refrescos Hervidos', 'Refrescos tradicionales cocidos: chicha morada, mocochinchi y api', 'Coffee', 4, TRUE),
+(6, 'Gaseosas', 'Gaseosas frías para acompañar tu plato', 'CupSoda', 5, TRUE),
+(7, 'Pollo Broaster', 'Pollo crocante a la broaster con papas y ensalada', 'Drumstick', 3, TRUE);
 
 -- 3. Catálogo de 15 Productos Gastronómicos
 INSERT INTO productos (id, categoria_id, nombre, descripcion, precio, imagen_url, disponible, tiempo_estimado_min) VALUES
@@ -37,14 +40,25 @@ INSERT INTO productos (id, categoria_id, nombre, descripcion, precio, imagen_url
 (9, 2, 'Costillas BBQ al Horno de Leña', 'Costillas de cerdo glaseadas en salsa barbacoa de chicha morada, con papas rústicas al pimentón.', 52.00, 'https://images.unsplash.com/photo-1544025162-d76694265947?w=400&q=80', TRUE, 20),
 
 -- Bebidas
-(10, 3, 'Chicha Morada Artesanal (500ml)', 'Infusión natural de maíz morado con piña, manzana, canela y gotas de limón fresco.', 12.00, 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=400&q=80', TRUE, 5),
-(11, 3, 'Mocochinchi Tradicional Frío (500ml)', 'Refresco andino de durazno deshidratado caramelizado con especias y hielo frappé.', 10.00, 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=400&q=80', TRUE, 5),
+(10, 5, 'Chicha Morada Artesanal (500ml)', 'Infusión natural de maíz morado con piña, manzana, canela y gotas de limón fresco.', 12.00, 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=400&q=80', TRUE, 5),
+(11, 5, 'Mocochinchi Tradicional Frío (500ml)', 'Refresco andino de durazno deshidratado caramelizado con especias y hielo frappé.', 10.00, 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=400&q=80', TRUE, 5),
 (12, 3, 'Limonada de Hierbabuena y Jengibre', 'Jugo fresco de limones sutiles batido con hojas de hierbabuena y toque sutil de jengibre.', 14.00, 'https://images.unsplash.com/photo-1523371067-1ac2b2108573?w=400&q=80', TRUE, 5),
 (13, 3, 'Cerveza Huari Tradicional (620ml)', 'Cerveza rubia boliviana tipo Pilsener elaborada con agua pura de vertientes andinas.', 22.00, 'https://images.unsplash.com/photo-1608270116812-40a1b80d0d8f?w=400&q=80', TRUE, 3),
 
 -- Postres
 (14, 4, 'Cheesecake de Maracuyá', 'Base crujiente de galleta con suave crema de queso y cobertura brillante de maracuyá ácido.', 24.00, 'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=400&q=80', TRUE, 6),
 (15, 4, 'Volcán de Chocolate Criollo', 'Bizcocho tibio de cacao boliviano al 70% con corazón fundido y helado artesanal de canela.', 26.00, 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400&q=80', TRUE, 12);
+
+-- Refrescos hervidos, gaseosas y pollo broaster (nombres genéricos, sin imagen: se muestra imagen por defecto)
+INSERT INTO productos (id, categoria_id, nombre, descripcion, precio, imagen_url, disponible, tiempo_estimado_min) VALUES
+(16, 5, 'Api Morado Tradicional (caliente)', 'Bebida caliente espesa de maíz morado con canela y clavo, servida bien caliente.', 10.00, NULL, TRUE, 5),
+(17, 6, 'Gaseosa Cola (500ml)', 'Gaseosa fría sabor cola.', 8.00, NULL, TRUE, 2),
+(18, 6, 'Gaseosa Naranja (500ml)', 'Gaseosa fría sabor naranja.', 8.00, NULL, TRUE, 2),
+(19, 6, 'Gaseosa Lima-Limón (500ml)', 'Gaseosa fría sabor lima-limón.', 8.00, NULL, TRUE, 2),
+(20, 7, 'Pollo Broaster 1/4 con Papas', 'Cuarto de pollo crocante a la broaster con papas fritas, ensalada y salsas de la casa.', 28.00, NULL, TRUE, 18),
+(21, 7, 'Pollo Broaster 1/2 con Papas', 'Medio pollo crocante a la broaster con papas fritas, ensalada y salsas de la casa.', 45.00, NULL, TRUE, 22),
+(22, 7, 'Pollo Broaster Familiar (entero)', 'Pollo entero a la broaster para compartir, con papas fritas grandes, ensalada y salsas.', 85.00, NULL, TRUE, 28),
+(23, 7, 'Alitas Broaster (8 unidades)', 'Alitas crocantes bañadas en salsa de la casa, con papas fritas.', 32.00, NULL, TRUE, 15);
 
 -- 4. 8 Mesas del Salón
 INSERT INTO mesas (id, numero, capacidad, estado, ubicacion, qr_token) VALUES

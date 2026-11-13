@@ -2,65 +2,77 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ───────────── Base global ───────────── */
 @layer base {
   body {
-    background-color: #FAF7F2;
-    color: #251C12;
+    background-color: #0E0D0B; /* carbon-50 */
+    color: #F2E6D2;            /* carbon-900 (crema) */
+  }
+  /* Foco visible para navegación por teclado */
+  :focus-visible {
+    outline: 2px solid #C99643; /* ocre */
+    outline-offset: 2px;
   }
 }
 
+/* ───────────── Componentes reutilizables ───────────── */
 @layer components {
-  /* Botones Primarios y Secundarios */
-  .btn-vino {
-    @apply bg-vino-700 hover:bg-vino-800 active:bg-vino-900 text-white font-medium px-4 py-2.5 rounded-xl shadow-sm transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2;
+  /* Botón PRIMARIO: fondo terracota */
+  .btn-primario {
+    @apply bg-terracota-600 hover:bg-terracota-800 active:bg-terracota-900 text-white font-semibold px-4 py-2.5 rounded-boton shadow-sm transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2;
+  }
+  /* Botón DORADO: acciones premium / secundarias de énfasis */
+  .btn-dorado {
+    @apply bg-ocre-600 hover:bg-ocre-700 active:bg-ocre-800 text-carbon-50 font-semibold px-4 py-2.5 rounded-boton shadow-sm transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2;
+  }
+  /* Botón SECUNDARIO: solo contorno */
+  .btn-contorno {
+    @apply border border-ocre-600 text-ocre-400 hover:bg-ocre-100 active:bg-ocre-200 font-semibold px-4 py-2 rounded-boton transition-all duration-200 inline-flex items-center justify-center gap-2;
+  }
+  .btn-contorno-dorado {
+    @apply border border-carbon-700 text-carbon-900 hover:bg-carbon-150 active:bg-carbon-200 font-semibold px-4 py-2 rounded-boton transition-all duration-200 inline-flex items-center justify-center gap-2;
+  }
+  /* Botón TERCIARIO: transparente */
+  .btn-suave {
+    @apply bg-transparent hover:bg-carbon-150 text-carbon-800 font-semibold px-4 py-2.5 rounded-boton transition-all duration-200 inline-flex items-center justify-center gap-2;
+  }
+  /* Botón PELIGRO: rojo kantuta */
+  .btn-peligro {
+    @apply bg-kantuta-600 hover:bg-kantuta-800 text-white font-semibold px-4 py-2.5 rounded-boton transition-all duration-200 inline-flex items-center justify-center gap-2;
   }
 
-  .btn-celeste {
-    @apply bg-celeste-600 hover:bg-celeste-700 active:bg-celeste-800 text-white font-medium px-4 py-2.5 rounded-xl shadow-sm transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2;
-  }
-
-  .btn-outline-vino {
-    @apply border-2 border-vino-700 text-vino-700 hover:bg-vino-50 active:bg-vino-100 font-medium px-4 py-2 rounded-xl transition-all duration-200 inline-flex items-center justify-center gap-2;
-  }
-
-  .btn-outline-celeste {
-    @apply border-2 border-celeste-600 text-celeste-700 hover:bg-celeste-50 active:bg-celeste-100 font-medium px-4 py-2 rounded-xl transition-all duration-200 inline-flex items-center justify-center gap-2;
-  }
-
-  .btn-beige {
-    @apply bg-beige-200 hover:bg-beige-300 text-beige-900 font-medium px-4 py-2.5 rounded-xl transition-all duration-200 inline-flex items-center justify-center gap-2;
-  }
-
-  /* Tarjetas Estilo Gastronómico */
+  /* Tarjeta oscura con borde discreto */
   .card-gourmet {
-    @apply bg-white border border-beige-200 rounded-2xl p-5 shadow-warm hover:shadow-warm-lg transition-all duration-300;
+    @apply bg-carbon-100 border border-carbon-200 rounded-tarjeta p-5 shadow-warm hover:shadow-warm-lg transition-all duration-300;
   }
 
-  .badge-vino {
-    @apply bg-vino-100 text-vino-800 border border-vino-200 px-2.5 py-0.5 rounded-full text-xs font-semibold uppercase tracking-wider;
+  /* Badges de estado */
+  .badge-terracota {
+    @apply bg-terracota-100 text-terracota-400 border border-terracota-200 px-2.5 py-0.5 rounded-full text-xs font-semibold uppercase tracking-wider;
+  }
+  .badge-ocre {
+    @apply bg-ocre-100 text-ocre-400 border border-ocre-200 px-2.5 py-0.5 rounded-full text-xs font-semibold uppercase tracking-wider;
+  }
+  .badge-neutro {
+    @apply bg-carbon-150 text-carbon-700 border border-carbon-200 px-2.5 py-0.5 rounded-full text-xs font-semibold uppercase tracking-wider;
   }
 
-  .badge-celeste {
-    @apply bg-celeste-100 text-celeste-800 border border-celeste-200 px-2.5 py-0.5 rounded-full text-xs font-semibold uppercase tracking-wider;
-  }
-
-  .badge-beige {
-    @apply bg-beige-200 text-beige-800 border border-beige-300 px-2.5 py-0.5 rounded-full text-xs font-semibold uppercase tracking-wider;
+  /* Detalle andino sutil: franja geométrica tipo aguayo (separadores / bordes) */
+  .franja-andina {
+    height: 6px;
+    background-image:
+      linear-gradient(135deg, #B95C3B 25%, transparent 25%),
+      linear-gradient(225deg, #C99643 25%, transparent 25%),
+      linear-gradient(45deg, #55735B 25%, transparent 25%),
+      linear-gradient(315deg, #963747 25%, #171512 25%);
+    background-size: 12px 12px;
+    background-position: 6px 0, 6px 0, 0 0, 0 0;
+    opacity: 0.85;
   }
 }
 
 /* Scrollbar refinada */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: #FAF7F2;
-}
-::-webkit-scrollbar-thumb {
-  background: #D9C8A8;
-  border-radius: 9999px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #80142E;
-}
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #0E0D0B; }
+::-webkit-scrollbar-thumb { background: #3B3027; border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: #B95C3B; }
