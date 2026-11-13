@@ -6,13 +6,13 @@
 USE unicen_app;
 
 -- 1. Usuarios con roles (Contraseñas hasheadas con bcrypt salt=10)
--- admin@foodtech.bo   -> Admin1234!  ($2b$10$UWnTsO/awCN5jmcmp.nXF.FfJBLy3oeg0h.Lyb0ywvdGFZHr6l1y.)
--- cajero@foodtech.bo  -> Cajero1234! ($2b$10$gotx8MFXKK7k11j2agv78.EpgGGU1HKCkiud7fO1ldSuIj1fC4DWW)
--- cocina@foodtech.bo  -> Cocina1234! ($2b$10$MAwmJq7ve974QducQT/LbuPt81wfYvKoN9wx8GERPGamtFfBCKcxC)
+-- admin@foodtech.bo   -> Admin1234!  ($2a$10$v2B7wdcZrzL8mIrT/jwzMuIiqHEnecCI5LElBB3taY.UjCTrQ7.m2)
+-- cajero@foodtech.bo  -> Cajero1234! ($2a$10$arMcDK2h4zanOiPWJywp8uqftVVz1o6Lh7GawnQULri.tde5Flu26)
+-- cocina@foodtech.bo  -> Cocina1234! ($2a$10$Xk.0O3lwL8Qb5wrae00XQevj35NBg0L0Qr1z2/tX8qF/NfwWNPAKi)
 INSERT INTO usuarios (nombre, email, password_hash, rol, activo) VALUES
-('Administrador General', 'admin@foodtech.bo', '$2b$10$UWnTsO/awCN5jmcmp.nXF.FfJBLy3oeg0h.Lyb0ywvdGFZHr6l1y.', 'admin', TRUE),
-('Cajera Principal (Salón)', 'cajero@foodtech.bo', '$2b$10$gotx8MFXKK7k11j2agv78.EpgGGU1HKCkiud7fO1ldSuIj1fC4DWW', 'cajero', TRUE),
-('Jefe de Cocina (KDS)', 'cocina@foodtech.bo', '$2b$10$MAwmJq7ve974QducQT/LbuPt81wfYvKoN9wx8GERPGamtFfBCKcxC', 'cocina', TRUE);
+('Administrador General', 'admin@foodtech.bo', '$2a$10$v2B7wdcZrzL8mIrT/jwzMuIiqHEnecCI5LElBB3taY.UjCTrQ7.m2', 'admin', TRUE),
+('Cajera Principal (Salón)', 'cajero@foodtech.bo', '$2a$10$arMcDK2h4zanOiPWJywp8uqftVVz1o6Lh7GawnQULri.tde5Flu26', 'cajero', TRUE),
+('Jefe de Cocina (KDS)', 'cocina@foodtech.bo', '$2a$10$Xk.0O3lwL8Qb5wrae00XQevj35NBg0L0Qr1z2/tX8qF/NfwWNPAKi', 'cocina', TRUE);
 
 -- 2. Categorías del Restaurante
 INSERT INTO categorias (id, nombre, descripcion, icono, orden, activo) VALUES
