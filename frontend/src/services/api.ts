@@ -1,6 +1,6 @@
 import { ApiResponse } from '../types';
 
-const BASE_URL = '/api/v1';
+const BASE_URL = 'http://192.168.0.15:3000/api/v1';
 
 export class ApiError extends Error {
   public code: string;

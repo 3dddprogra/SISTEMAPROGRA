@@ -1,11 +1,10 @@
-import { io, Socket } from 'socket.io-client';
+﻿import { io, Socket } from 'socket.io-client';
 
 let socket: Socket | null = null;
 
 export function getSocket(): Socket {
   if (!socket) {
-    // Conexión relativa para que funcione automáticamente con Nginx o proxy de Vite sin IPs en el código
-    socket = io('/', {
+    socket = io('http://192.168.0.15:3000', {
       path: '/socket.io',
       transports: ['websocket', 'polling'],
       autoConnect: true,
