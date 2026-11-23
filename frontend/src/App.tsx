@@ -41,15 +41,15 @@ const LandingPage: React.FC = () => {
     <div className="min-h-screen bg-carbon-50">
       {/* ───── HERO ───── */}
       <section className="relative overflow-hidden border-b border-carbon-200">
-        <div className="absolute inset-0 bg-gradient-to-br from-carbon-50 via-carbon-100 to-rojo-950/60" />
+        <div className="absolute inset-0 bg-gradient-to-br from-amarillo-400 via-amarillo-500 to-rojo-400" />
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 py-16 md:py-24 grid md:grid-cols-2 gap-10 items-center">
           <div className="space-y-5">
-            <span className="inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-amarillo-400">
+            <span className="inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-rojo-700">
               Comida rápida · Cochabamba
             </span>
             <h1 className="font-serif text-4xl sm:text-6xl font-bold leading-tight text-carbon-900">
               Pollo broaster{' '}
-              <span className="italic text-amarillo-400">crocante y dorado</span>
+              <span className="italic text-rojo-700">crocante y dorado</span>
             </h1>
             <p className="text-carbon-700 max-w-md leading-relaxed">
               Nori Pollito, Nori Pollo, Nori Combo y pipokas de pollo. Escanea el QR de tu mesa, arma tu
@@ -60,7 +60,7 @@ const LandingPage: React.FC = () => {
                 Ver Menú <ArrowRight className="w-4 h-4" />
               </Link>
               {/* "Reservar Mesa" lleva a la sección de Contacto (no hay reserva pública en el sistema) */}
-              <a href="#contacto" className="btn-contorno px-6 py-3">
+              <a href="#contacto" className="inline-flex items-center gap-2 px-6 py-3 rounded-boton border-2 border-carbon-900 text-carbon-900 font-semibold hover:bg-white/40">
                 <CalendarClock className="w-4 h-4" /> Reservar Mesa
               </a>
             </div>
@@ -221,9 +221,9 @@ const LandingPage: React.FC = () => {
       </section>
 
       {/* ───── FOOTER ───── */}
-      <footer className="border-t border-carbon-200 bg-carbon-50">
+      <footer className="bg-carbon-900">
         <div className="franja-nori" />
-        <p className="text-center text-xs text-carbon-600 py-6">
+        <p className="text-center text-xs text-white/70 py-6">
           Nori Pollo · Cochabamba · Sistema FoodTech (Universidad Central, Innovación Digital e IA)
         </p>
       </footer>

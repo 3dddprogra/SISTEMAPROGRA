@@ -44,14 +44,14 @@ export const LoginPage: React.FC = () => {
     <div className="min-h-screen bg-gradient-to-br from-carbon-100 via-carbon-50 to-rojo-50/40 flex items-center justify-center p-4">
       <div className="max-w-md w-full bg-carbon-100 rounded-3xl shadow-warm-lg border border-carbon-200 overflow-hidden">
         {/* Cabecera Gourmet */}
-        <div className="p-8 bg-gradient-to-br from-carbon-100 via-rojo-950 to-carbon-100 text-white text-center border-b border-amarillo-600/60 relative">
+        <div className="p-8 bg-gradient-to-r from-rojo-600 via-rojo-500 to-amarillo-600 text-white text-center border-b border-amarillo-600/60 relative">
           <div className="w-16 h-16 rounded-2xl bg-carbon-100/10 backdrop-blur-md text-white flex items-center justify-center mx-auto mb-3 border border-white/20 shadow-md">
-            <Utensils className="w-8 h-8 text-carbon-900" />
+            <Utensils className="w-8 h-8 text-white" />
           </div>
           <h1 className="font-serif text-2xl font-bold tracking-tight">
-            NORI <span className="text-amarillo-400">POLLO</span>
+            NORI <span className="text-amarillo-200">POLLO</span>
           </h1>
-          <p className="text-xs text-carbon-900 mt-1">
+          <p className="text-xs text-white mt-1">
             Portal de Acceso para Personal de Salón y Cocina
           </p>
         </div>

@@ -152,24 +152,24 @@ export const ClienteMenu: React.FC = () => {
   return (
     <div className="min-h-screen bg-carbon-50 pb-24">
       {/* Banner de Bienvenida a la Mesa con Selector Rápido */}
-      <section className="bg-gradient-to-r from-carbon-100 via-rojo-950 to-carbon-100 text-white py-8 px-4 sm:px-6 shadow-md border-b border-amarillo-600/60">
+      <section className="bg-gradient-to-r from-rojo-600 via-rojo-500 to-amarillo-600 text-white py-8 px-4 sm:px-6 shadow-md border-b border-amarillo-600/60">
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rojo-700/80 border border-rojo-600 text-xs font-semibold text-carbon-900 mb-2">
-              <Sparkles className="w-3.5 h-3.5 text-amarillo-400" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rojo-700/80 border border-rojo-600 text-xs font-semibold text-white mb-2">
+              <Sparkles className="w-3.5 h-3.5 text-amarillo-200" />
               <span>Pollo broaster crocante · Nori Pollo</span>
             </div>
             <h1 className="font-serif text-3xl sm:text-4xl font-bold tracking-tight text-white">
               Carta Digital • {numericMesaId === 8 ? 'Para llevar' : `Mesa #${numericMesaId}`}
             </h1>
-            <p className="text-xs sm:text-sm text-carbon-900 mt-1">
+            <p className="text-xs sm:text-sm text-white mt-1">
               Ordene cómodamente desde su smartphone. Sus platos se sincronizan al instante con cocina.
             </p>
           </div>
 
           {/* Selector de mesa para pruebas de simulación */}
           <div className="flex items-center gap-2 bg-black/30 backdrop-blur-md p-2 rounded-2xl border border-white/10 self-start sm:self-auto">
-            <span className="text-xs font-medium text-carbon-900 pl-2">Cambiar Mesa:</span>
+            <span className="text-xs font-medium text-white pl-2">Cambiar Mesa:</span>
             <select
               value={numericMesaId}
               onChange={(e) => navigate(`/m/${e.target.value}`)}
