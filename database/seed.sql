@@ -30,27 +30,27 @@ INSERT INTO productos (id, categoria_id, nombre, descripcion, precio, imagen_url
 (2, 1, 'Nori Pollo', '2 presas + arroz con zanahoria + papas fritas', 22.00, '/menu/nori-pollo.jpg', TRUE, 15),
 (3, 1, 'Nori Combo', 'Porción grande + arroz con zanahoria + papas fritas', 28.00, '/menu/nori-combo.jpg', TRUE, 15),
 -- Pipokas de pollo
-(4, 2, 'Nori Conito', 'Pipokas de pollo, papas fritas y chorizo', 15.00, '/menu/pipokas.jpg', TRUE, 10),
-(5, 2, 'Nori Cono', 'Pipokas de pollo, papas fritas y chorizo (grande)', 20.00, '/menu/pipokas.jpg', TRUE, 10),
+(4, 2, 'Nori Conito', 'Pipokas de pollo, papas fritas y chorizo', 15.00, '/menu/nori-conito.jpg', TRUE, 10),
+(5, 2, 'Nori Cono', 'Pipokas de pollo, papas fritas y chorizo (grande)', 20.00, '/menu/nori-cono.jpg', TRUE, 10),
 -- Refrescos naturales
-(6, 3, 'Limonada', 'Hervida, con hielo', 5.00, '/menu/refrescos-naturales.jpg', TRUE, 2),
-(7, 3, 'Refresco de tostada', 'Cebada tostada, con hielo', 8.00, '/menu/refrescos-naturales.jpg', TRUE, 2),
+(6, 3, 'Limonada', 'Hervida, con hielo', 5.00, '/menu/limonada.jpg', TRUE, 2),
+(7, 3, 'Refresco de tostada', 'Cebada tostada, con hielo', 8.00, '/menu/refresco-tostada.jpg', TRUE, 2),
 -- Gaseosas
-(8, 4, 'Mini 190 ml Coca-Cola', 'Botella de vidrio personal', 3.00, '/menu/gaseosas-minis.jpg', TRUE, 2),
-(9, 4, 'Mini 190 ml Fanta Naranja', 'Botella de vidrio personal', 3.00, '/menu/gaseosas-minis.jpg', TRUE, 2),
-(10, 4, 'Mini 190 ml Fanta Mandarina', 'Botella de vidrio personal', 3.00, '/menu/gaseosas-minis.jpg', TRUE, 2),
-(11, 4, 'Mini 190 ml Fanta Papaya', 'Botella de vidrio personal', 3.00, '/menu/gaseosas-minis.jpg', TRUE, 2),
-(12, 4, 'Popular Coca-Cola', 'Botella mediana', 7.00, '/menu/gaseosas-populares.jpg', TRUE, 2),
-(13, 4, 'Popular Fanta', 'Botella mediana', 7.00, '/menu/gaseosas-populares.jpg', TRUE, 2),
+(8, 4, 'Mini 190 ml Coca-Cola', 'Botella de vidrio personal', 3.00, '/menu/mini-coca-cola.jpg', TRUE, 2),
+(9, 4, 'Mini 190 ml Fanta Naranja', 'Botella de vidrio personal', 3.00, '/menu/mini-fanta-naranja.jpg', TRUE, 2),
+(10, 4, 'Mini 190 ml Fanta Mandarina', 'Botella de vidrio personal', 3.00, '/menu/mini-fanta-mandarina.jpg', TRUE, 2),
+(11, 4, 'Mini 190 ml Fanta Papaya', 'Botella de vidrio personal', 3.00, '/menu/mini-fanta-papaya.jpg', TRUE, 2),
+(12, 4, 'Popular Coca-Cola', 'Botella mediana', 7.00, '/menu/popular-coca-cola.jpg', TRUE, 2),
+(13, 4, 'Popular Fanta', 'Botella mediana', 7.00, '/menu/popular-fanta.jpg', TRUE, 2),
 (14, 4, 'Coca-Cola 1.5 L', 'Litro y medio', 12.00, '/menu/coca-cola-1-5l.jpg', TRUE, 2),
 (15, 4, 'Coca-Cola retornable 2.5 L', 'Familiar', 14.00, '/menu/coca-cola-2-5l.jpg', TRUE, 2),
-(16, 4, 'Simba 2 L Piña', 'Familiar', 14.00, '/menu/simba-2l.jpg', TRUE, 2),
-(17, 4, 'Simba 2 L Durazno', 'Familiar', 14.00, '/menu/simba-2l.jpg', TRUE, 2),
-(18, 4, 'Simba 2 L Manzana', 'Familiar', 14.00, '/menu/simba-2l.jpg', TRUE, 2),
+(16, 4, 'Simba 2 L Piña', 'Familiar', 14.00, '/menu/simba-pina.jpg', TRUE, 2),
+(17, 4, 'Simba 2 L Durazno', 'Familiar', 14.00, '/menu/simba-durazno.jpg', TRUE, 2),
+(18, 4, 'Simba 2 L Manzana', 'Familiar', 14.00, '/menu/simba-manzana.jpg', TRUE, 2),
 (19, 4, 'Fanta Naranja 2 L', 'Familiar', 16.00, '/menu/fanta-2l.jpg', TRUE, 2),
 -- Jugos
 (20, 5, 'Jugo Del Valle 1 L', 'Néctar en botella de vidrio retornable', 16.00, '/menu/jugos-1l.jpg', TRUE, 2),
-(21, 5, 'Jugo Del Sol 1 L', 'Néctar en botella de vidrio retornable', 16.00, '/menu/jugos-1l.jpg', TRUE, 2);
+(21, 5, 'Jugo Del Sol 1 L', 'Néctar en botella de vidrio retornable', 16.00, '/menu/jugo-del-sol.jpg', TRUE, 2);
 
 -- 4. Mesas: 7 mesas del salón (6 de 4 sillas y 1 de 2 = 26 sillas) + mesa virtual 8 «Mostrador – Para llevar» (RN01)
 INSERT INTO mesas (id, numero, capacidad, estado, ubicacion, qr_token) VALUES
