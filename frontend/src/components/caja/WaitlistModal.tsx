@@ -45,7 +45,7 @@ export const WaitlistModal: React.FC<Props> = ({ isOpen, onClose, onAddWaitlist 
       <div className="relative bg-carbon-100 rounded-3xl max-w-md w-full shadow-2xl border border-carbon-200 overflow-hidden">
         <div className="p-6 bg-carbon-50/80 border-b border-carbon-200 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-terracota-700 text-white flex items-center justify-center">
+            <div className="w-10 h-10 rounded-2xl bg-rojo-700 text-white flex items-center justify-center">
               <UserPlus className="w-5 h-5 text-carbon-900" />
             </div>
             <div>
@@ -53,7 +53,7 @@ export const WaitlistModal: React.FC<Props> = ({ isOpen, onClose, onAddWaitlist 
               <p className="text-xs text-carbon-600">Turnos en vivo para recepción</p>
             </div>
           </div>
-          <button onClick={onClose} className="p-2 text-carbon-500 hover:text-terracota-400 rounded-lg">
+          <button onClick={onClose} className="p-2 text-carbon-500 hover:text-rojo-400 rounded-lg">
             <X className="w-5 h-5" />
           </button>
         </div>
@@ -67,7 +67,7 @@ export const WaitlistModal: React.FC<Props> = ({ isOpen, onClose, onAddWaitlist 
               value={nombre}
               onChange={(e) => setNombre(e.target.value)}
               placeholder="Ej: Laura Vargas"
-              className="w-full text-xs px-3 py-2 rounded-xl border border-carbon-300 focus:outline-none focus:ring-1 focus:ring-terracota-600"
+              className="w-full text-xs px-3 py-2 rounded-xl border border-carbon-300 focus:outline-none focus:ring-1 focus:ring-rojo-600"
             />
           </div>
 
@@ -80,7 +80,7 @@ export const WaitlistModal: React.FC<Props> = ({ isOpen, onClose, onAddWaitlist 
                 value={telefono}
                 onChange={(e) => setTelefono(e.target.value)}
                 placeholder="+591 7..."
-                className="w-full text-xs px-3 py-2 rounded-xl border border-carbon-300 focus:outline-none focus:ring-1 focus:ring-terracota-600"
+                className="w-full text-xs px-3 py-2 rounded-xl border border-carbon-300 focus:outline-none focus:ring-1 focus:ring-rojo-600"
               />
             </div>
             <div>
@@ -92,7 +92,7 @@ export const WaitlistModal: React.FC<Props> = ({ isOpen, onClose, onAddWaitlist 
                 required
                 value={personas}
                 onChange={(e) => setPersonas(Number(e.target.value))}
-                className="w-full text-xs px-3 py-2 rounded-xl border border-carbon-300 focus:outline-none focus:ring-1 focus:ring-terracota-600"
+                className="w-full text-xs px-3 py-2 rounded-xl border border-carbon-300 focus:outline-none focus:ring-1 focus:ring-rojo-600"
               />
             </div>
           </div>
@@ -107,7 +107,7 @@ export const WaitlistModal: React.FC<Props> = ({ isOpen, onClose, onAddWaitlist 
               step="5"
               value={tiempoEspera}
               onChange={(e) => setTiempoEspera(Number(e.target.value))}
-              className="w-full text-xs px-3 py-2 rounded-xl border border-carbon-300 focus:outline-none focus:ring-1 focus:ring-terracota-600"
+              className="w-full text-xs px-3 py-2 rounded-xl border border-carbon-300 focus:outline-none focus:ring-1 focus:ring-rojo-600"
             />
           </div>
 
@@ -118,7 +118,7 @@ export const WaitlistModal: React.FC<Props> = ({ isOpen, onClose, onAddWaitlist 
               value={notas}
               onChange={(e) => setNotas(e.target.value)}
               placeholder="Ej: Prefiere terraza al aire libre..."
-              className="w-full text-xs px-3 py-2 rounded-xl border border-carbon-300 focus:outline-none focus:ring-1 focus:ring-terracota-600"
+              className="w-full text-xs px-3 py-2 rounded-xl border border-carbon-300 focus:outline-none focus:ring-1 focus:ring-rojo-600"
             />
           </div>
 

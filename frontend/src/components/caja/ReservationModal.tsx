@@ -60,7 +60,7 @@ export const ReservationModal: React.FC<Props> = ({
       <div className="relative bg-carbon-100 rounded-3xl max-w-lg w-full shadow-2xl border border-carbon-200 overflow-hidden">
         <div className="p-6 bg-carbon-50/80 border-b border-carbon-200 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-ocre-600 text-white flex items-center justify-center">
+            <div className="w-10 h-10 rounded-2xl bg-amarillo-600 text-white flex items-center justify-center">
               <Calendar className="w-5 h-5" />
             </div>
             <div>
@@ -68,7 +68,7 @@ export const ReservationModal: React.FC<Props> = ({
               <p className="text-xs text-carbon-600">Planificación de salón</p>
             </div>
           </div>
-          <button onClick={onClose} className="p-2 text-carbon-500 hover:text-terracota-400 rounded-lg">
+          <button onClick={onClose} className="p-2 text-carbon-500 hover:text-rojo-400 rounded-lg">
             <X className="w-5 h-5" />
           </button>
         </div>
@@ -83,7 +83,7 @@ export const ReservationModal: React.FC<Props> = ({
                 value={nombre}
                 onChange={(e) => setNombre(e.target.value)}
                 placeholder="Ej: Marcelo Quiroga"
-                className="w-full text-xs px-3 py-2 rounded-xl border border-carbon-300 focus:outline-none focus:ring-1 focus:ring-terracota-600"
+                className="w-full text-xs px-3 py-2 rounded-xl border border-carbon-300 focus:outline-none focus:ring-1 focus:ring-rojo-600"
               />
             </div>
             <div>
@@ -94,7 +94,7 @@ export const ReservationModal: React.FC<Props> = ({
                 value={telefono}
                 onChange={(e) => setTelefono(e.target.value)}
                 placeholder="+591 7..."
-                className="w-full text-xs px-3 py-2 rounded-xl border border-carbon-300 focus:outline-none focus:ring-1 focus:ring-terracota-600"
+                className="w-full text-xs px-3 py-2 rounded-xl border border-carbon-300 focus:outline-none focus:ring-1 focus:ring-rojo-600"
               />
             </div>
           </div>
@@ -105,7 +105,7 @@ export const ReservationModal: React.FC<Props> = ({
               <select
                 value={mesaId}
                 onChange={(e) => setMesaId(Number(e.target.value))}
-                className="w-full text-xs px-3 py-2 rounded-xl border border-carbon-300 focus:outline-none focus:ring-1 focus:ring-terracota-600 bg-carbon-100"
+                className="w-full text-xs px-3 py-2 rounded-xl border border-carbon-300 focus:outline-none focus:ring-1 focus:ring-rojo-600 bg-carbon-100"
               >
                 {mesas.map((m) => (
                   <option key={m.id} value={m.id}>
@@ -123,7 +123,7 @@ export const ReservationModal: React.FC<Props> = ({
                 required
                 value={personas}
                 onChange={(e) => setPersonas(Number(e.target.value))}
-                className="w-full text-xs px-3 py-2 rounded-xl border border-carbon-300 focus:outline-none focus:ring-1 focus:ring-terracota-600"
+                className="w-full text-xs px-3 py-2 rounded-xl border border-carbon-300 focus:outline-none focus:ring-1 focus:ring-rojo-600"
               />
             </div>
           </div>
@@ -136,7 +136,7 @@ export const ReservationModal: React.FC<Props> = ({
                 required
                 value={fecha}
                 onChange={(e) => setFecha(e.target.value)}
-                className="w-full text-xs px-3 py-2 rounded-xl border border-carbon-300 focus:outline-none focus:ring-1 focus:ring-terracota-600"
+                className="w-full text-xs px-3 py-2 rounded-xl border border-carbon-300 focus:outline-none focus:ring-1 focus:ring-rojo-600"
               />
             </div>
             <div>
@@ -146,7 +146,7 @@ export const ReservationModal: React.FC<Props> = ({
                 required
                 value={hora}
                 onChange={(e) => setHora(e.target.value)}
-                className="w-full text-xs px-3 py-2 rounded-xl border border-carbon-300 focus:outline-none focus:ring-1 focus:ring-terracota-600"
+                className="w-full text-xs px-3 py-2 rounded-xl border border-carbon-300 focus:outline-none focus:ring-1 focus:ring-rojo-600"
               />
             </div>
           </div>
@@ -158,7 +158,7 @@ export const ReservationModal: React.FC<Props> = ({
               value={notas}
               onChange={(e) => setNotas(e.target.value)}
               placeholder="Ej: Aniversario, mesa cerca de la ventana..."
-              className="w-full text-xs p-3 rounded-xl border border-carbon-300 focus:outline-none focus:ring-1 focus:ring-terracota-600"
+              className="w-full text-xs p-3 rounded-xl border border-carbon-300 focus:outline-none focus:ring-1 focus:ring-rojo-600"
             />
           </div>
 

@@ -79,11 +79,11 @@ echo -e "${GREEN}[OK] Backend ejecutándose en PM2 bajo supervisión continua.${
 
 # [PASO 5/6] Configuración del Firewall UFW
 echo -e "\n${YELLOW}[PASO 5/6] Configurando firewall UFW...${NC}"
-ufw --force enable
 ufw default deny incoming
 ufw default allow outgoing
 ufw allow 22/tcp comment 'SSH'
 ufw allow from "${VM_FRONTEND_IP}" to any port "${BACKEND_PORT}" proto tcp comment 'API desde Frontend'
+ufw --force enable
 ufw reload
 echo -e "${GREEN}[OK] Firewall UFW configurado (Puerto ${BACKEND_PORT} restringido a ${VM_FRONTEND_IP}).${NC}"
 

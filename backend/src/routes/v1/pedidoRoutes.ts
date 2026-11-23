@@ -21,11 +21,11 @@ const crearPedidoSchema = z.object({
 });
 
 const cambiarEstadoSchema = z.object({
-  estado: z.enum(['pendiente', 'en_proceso', 'terminado', 'entregado', 'pagado', 'cancelado']),
+  estado: z.enum(['en_proceso', 'terminado', 'entregado', 'cancelado']),
 });
 
 const cobrarPedidoSchema = z.object({
-  metodo_pago: z.enum(['efectivo', 'tarjeta', 'qr', 'transferencia']),
+  metodo_pago: z.enum(['efectivo', 'qr']),
 });
 
 // Crear pedido: Clientes con QR o personal del restaurante

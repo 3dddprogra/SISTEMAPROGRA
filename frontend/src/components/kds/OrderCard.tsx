@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChefHat, Check, ArrowRight, XCircle } from 'lucide-react';
+import { ChefHat, Check } from 'lucide-react';
 import { Pedido, EstadoPedido } from '../../types';
 import { TimerBadge } from './TimerBadge';
 
@@ -14,7 +14,7 @@ export const OrderCard: React.FC<Props> = ({ pedido, onAdvanceState, loadingId }
 
   const renderActionButtons = () => {
     switch (pedido.estado) {
-      case 'pendiente':
+      case 'pagado':
         return (
           <button
             onClick={() => onAdvanceState(pedido.id, 'en_proceso')}
@@ -37,15 +37,12 @@ export const OrderCard: React.FC<Props> = ({ pedido, onAdvanceState, loadingId }
           </button>
         );
       case 'terminado':
+        // RN10: la cocina no entrega; el cajero/personal de salón marca "entregado"
         return (
-          <button
-            onClick={() => onAdvanceState(pedido.id, 'entregado')}
-            disabled={isLoading}
-            className="btn-primario w-full py-2.5 text-xs font-bold shadow-sm"
-          >
-            <ArrowRight className="w-4 h-4" />
-            <span>Despachar a Mesa</span>
-          </button>
+          <div className="w-full text-center text-xs font-bold text-verde-400 py-2.5 rounded-xl bg-verde-100 border border-verde-300 flex items-center justify-center gap-2">
+            <Check className="w-4 h-4" />
+            <span>Listo · esperando entrega</span>
+          </div>
         );
       default:
         return null;
@@ -53,7 +50,7 @@ export const OrderCard: React.FC<Props> = ({ pedido, onAdvanceState, loadingId }
   };
 
   return (
-    <div className="card-gourmet bg-carbon-100 border border-carbon-200 shadow-warm flex flex-col justify-between hover:border-terracota-300 transition-all">
+    <div className="card-gourmet bg-carbon-100 border border-carbon-200 shadow-warm flex flex-col justify-between hover:border-rojo-300 transition-all">
       {/* Header comanda KDS */}
       <div>
         <div className="flex items-start justify-between gap-2 pb-3 border-b border-carbon-200">
@@ -78,7 +75,7 @@ export const OrderCard: React.FC<Props> = ({ pedido, onAdvanceState, loadingId }
               className="p-2.5 rounded-xl bg-carbon-50/70 border border-carbon-200 flex items-start justify-between gap-3"
             >
               <div className="flex items-start gap-2.5">
-                <span className="w-6 h-6 rounded-lg bg-terracota-700 text-white font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span className="w-6 h-6 rounded-lg bg-rojo-700 text-white font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5">
                   {item.cantidad}
                 </span>
                 <div>
@@ -86,7 +83,7 @@ export const OrderCard: React.FC<Props> = ({ pedido, onAdvanceState, loadingId }
                     {item.nombre_producto}
                   </span>
                   {item.notas && (
-                    <span className="inline-block text-[11px] font-semibold text-ocre-400 bg-ocre-50 px-2 py-0.5 rounded border border-ocre-200 mt-1">
+                    <span className="inline-block text-[11px] font-semibold text-amarillo-400 bg-amarillo-50 px-2 py-0.5 rounded border border-amarillo-200 mt-1">
                       ⚠️ {item.notas}
                     </span>
                   )}
@@ -98,7 +95,7 @@ export const OrderCard: React.FC<Props> = ({ pedido, onAdvanceState, loadingId }
 
         {/* Notas generales de la comanda */}
         {pedido.notas && (
-          <div className="p-2.5 mb-3 rounded-lg bg-ocre-50 border border-ocre-200 text-xs text-ocre-400 font-medium">
+          <div className="p-2.5 mb-3 rounded-lg bg-amarillo-50 border border-amarillo-200 text-xs text-amarillo-400 font-medium">
             <strong>Nota general:</strong> {pedido.notas}
           </div>
         )}

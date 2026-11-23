@@ -66,10 +66,19 @@ export const pedidoController = {
     }
   },
 
-  async actualizarEstado(req: Request, res: Response, next: NextFunction): Promise<void> {
+  async actualizarEstado(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
     try {
       const id = parseInt(req.params.id, 10);
       const { estado } = req.body as { estado: EstadoPedido };
+
+      // RN10: el rol cocina únicamente actualiza los estados de preparación
+      if (req.user?.rol === 'cocina' && !['en_proceso', 'terminado'].includes(estado)) {
+        res.status(403).json({
+          success: false,
+          error: { code: 'FORBIDDEN_STATE', message: "El rol 'cocina' solo puede marcar pedidos como en_proceso o terminado." },
+        });
+        return;
+      }
 
       const pedidoActualizado = await pedidoService.actualizarEstado(id, estado);
       res.status(200).json({

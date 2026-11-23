@@ -10,15 +10,15 @@ import { LoginPage } from './pages/auth/LoginPage';
 import { api } from './services/api';
 import { Producto } from './types';
 import {
-  QrCode, ChefHat, LayoutDashboard, ArrowRight, Zap, Receipt, CalendarClock,
-  Mountain, Wheat, Flame, MapPin, Phone, Clock,
+  QrCode, ChefHat, LayoutDashboard, ShoppingBag, ArrowRight, Zap, Receipt, CalendarClock,
+  Drumstick, Flame, CupSoda, MapPin, Phone, Clock,
 } from 'lucide-react';
 
 // ─────────────────────────────────────────────────────────────
 // LANDING PÚBLICA
 // Cada sección es un bloque <section>. Para quitar una sección,
 // borra su bloque; para cambiar colores, usa las clases de
-// tailwind.config.js (terracota, ocre, carbon, verde...).
+// tailwind.config.js (rojo, amarillo, carbon, verde...).
 // ─────────────────────────────────────────────────────────────
 const LandingPage: React.FC = () => {
   // Platos destacados: datos REALES de la API (los primeros disponibles)
@@ -31,29 +31,29 @@ const LandingPage: React.FC = () => {
   }, []);
 
   const ventajas = [
-    { icono: QrCode, titulo: 'Menú digital QR', texto: 'Desde el celular, en la mesa' },
-    { icono: Zap, titulo: 'Pedidos en tiempo real', texto: 'Cocina y salón sincronizados' },
-    { icono: Receipt, titulo: 'Cobro en caja', texto: 'Cuenta clara y facturación' },
-    { icono: CalendarClock, titulo: 'Reservas y espera', texto: 'Gestión de mesas y turnos' },
+    { icono: QrCode, titulo: 'Menú digital QR', texto: 'Pide desde el celular, en tu mesa' },
+    { icono: Receipt, titulo: 'Paga en caja', texto: 'Efectivo o QR, antes de cocinar' },
+    { icono: Zap, titulo: 'Sigue tu pedido', texto: 'En vivo, sin preguntar' },
+    { icono: ShoppingBag, titulo: 'Para llevar', texto: 'Pide y recoge en el mostrador' },
   ];
 
   return (
     <div className="min-h-screen bg-carbon-50">
       {/* ───── HERO ───── */}
       <section className="relative overflow-hidden border-b border-carbon-200">
-        <div className="absolute inset-0 bg-gradient-to-br from-carbon-50 via-carbon-100 to-terracota-950/60" />
+        <div className="absolute inset-0 bg-gradient-to-br from-carbon-50 via-carbon-100 to-rojo-950/60" />
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 py-16 md:py-24 grid md:grid-cols-2 gap-10 items-center">
           <div className="space-y-5">
-            <span className="inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-ocre-400">
-              Gastronomía boliviana de autor
+            <span className="inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-amarillo-400">
+              Comida rápida · Cochabamba
             </span>
             <h1 className="font-serif text-4xl sm:text-6xl font-bold leading-tight text-carbon-900">
-              La tradición boliviana,{' '}
-              <span className="italic text-ocre-400">ahora en la era digital</span>
+              Pollo broaster{' '}
+              <span className="italic text-amarillo-400">crocante y dorado</span>
             </h1>
             <p className="text-carbon-700 max-w-md leading-relaxed">
-              Sabores de nuestra tierra con una experiencia gastronómica inteligente: pide desde tu
-              mesa, sigue tu pedido en vivo y paga en caja.
+              Nori Pollito, Nori Pollo, Nori Combo y pipokas de pollo. Escanea el QR de tu mesa, arma tu
+              pedido, paga en caja (efectivo o QR) y sigue tu pedido en vivo.
             </p>
             <div className="flex flex-wrap gap-3 pt-2">
               <Link to="/m/1" className="btn-primario px-6 py-3">
@@ -66,17 +66,17 @@ const LandingPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Foto principal: coloca tu imagen en frontend/public/platos/hero.jpg */}
+          {/* Imagen principal: logo oficial de Nori Pollo (frontend/public/menu/logo.jpg) */}
           <div className="relative">
-            <div className="absolute -inset-3 rounded-[2rem] bg-terracota-600/10 blur-2xl" />
-            <PlatoImagen
-              src="/platos/hero.jpg"
-              alt="Plato principal de la casa"
+            <div className="absolute -inset-3 rounded-[2rem] bg-rojo-600/10 blur-2xl" />
+            <img
+              src="/menu/logo.jpg"
+              alt="Nori Pollo: logo y mascotas"
               className="relative w-full aspect-[4/3] object-cover rounded-modal border border-carbon-200 shadow-warm-lg"
             />
           </div>
         </div>
-        <div className="franja-andina" />
+        <div className="franja-nori" />
       </section>
 
       {/* ───── VENTAJAS ───── */}
@@ -84,7 +84,7 @@ const LandingPage: React.FC = () => {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 grid grid-cols-2 md:grid-cols-4 gap-6">
           {ventajas.map(({ icono: Icono, titulo, texto }) => (
             <div key={titulo} className="flex items-start gap-3">
-              <Icono className="w-6 h-6 text-ocre-400 flex-shrink-0 mt-0.5" />
+              <Icono className="w-6 h-6 text-amarillo-400 flex-shrink-0 mt-0.5" />
               <div>
                 <p className="text-sm font-bold text-carbon-900">{titulo}</p>
                 <p className="text-xs text-carbon-600">{texto}</p>
@@ -99,7 +99,7 @@ const LandingPage: React.FC = () => {
         <section className="max-w-6xl mx-auto px-4 sm:px-6 py-14">
           <div className="flex items-end justify-between mb-6">
             <h2 className="font-serif text-3xl font-bold text-carbon-900">Nuestros Platos Destacados</h2>
-            <Link to="/m/1" className="text-sm font-semibold text-ocre-400 hover:text-ocre-500 flex items-center gap-1">
+            <Link to="/m/1" className="text-sm font-semibold text-amarillo-400 hover:text-amarillo-500 flex items-center gap-1">
               Ver todo el menú <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -112,7 +112,7 @@ const LandingPage: React.FC = () => {
                   className="w-full aspect-square object-cover rounded-xl mb-3"
                 />
                 <h3 className="font-serif text-base font-bold text-carbon-900 line-clamp-2">{p.nombre}</h3>
-                <p className="text-sm font-bold text-ocre-400 mt-auto pt-2">Bs. {Number(p.precio).toFixed(2)}</p>
+                <p className="text-sm font-bold text-amarillo-400 mt-auto pt-2">Bs. {Number(p.precio).toFixed(2)}</p>
               </article>
             ))}
           </div>
@@ -123,12 +123,12 @@ const LandingPage: React.FC = () => {
       <section className="bg-carbon-100 border-y border-carbon-200">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-14 grid md:grid-cols-3 gap-8">
           {[
-            { icono: Mountain, titulo: 'Nuestra tierra', texto: 'Cocina con raíces bolivianas, inspirada en los valles y el altiplano.' },
-            { icono: Wheat, titulo: 'Ingredientes locales', texto: 'Maíz, papa, quinua y ají: los sabores que nos identifican.' },
-            { icono: Flame, titulo: 'Fusión gourmet', texto: 'Recetas tradicionales presentadas con técnica contemporánea.' },
+            { icono: Drumstick, titulo: 'Pollo broaster', texto: 'Presas doradas y crujientes con arroz con zanahoria y papas fritas.' },
+            { icono: Flame, titulo: 'Pipokas de pollo', texto: 'Conitos de pipokas con papas fritas y chorizo.' },
+            { icono: CupSoda, titulo: 'Bebidas bien frías', texto: 'Limonada, refresco de tostada, gaseosas y jugos.' },
           ].map(({ icono: Icono, titulo, texto }) => (
             <div key={titulo} className="text-center space-y-2">
-              <div className="w-12 h-12 mx-auto rounded-2xl bg-terracota-100 text-terracota-400 flex items-center justify-center">
+              <div className="w-12 h-12 mx-auto rounded-2xl bg-rojo-100 text-rojo-400 flex items-center justify-center">
                 <Icono className="w-6 h-6" />
               </div>
               <h3 className="font-serif text-xl font-bold text-carbon-900">{titulo}</h3>
@@ -141,11 +141,11 @@ const LandingPage: React.FC = () => {
       {/* ───── ACCESO A LOS MÓDULOS DEL SISTEMA ───── */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 py-14">
         <h2 className="font-serif text-3xl font-bold text-carbon-900 text-center mb-1">Acceso al sistema</h2>
-        <p className="text-sm text-carbon-600 text-center mb-8">Elige el módulo que quieres usar</p>
+        <p className="text-sm text-carbon-600 text-center mb-8">Módulos del sistema FoodTech para el personal y los clientes</p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="card-gourmet flex flex-col justify-between">
             <div>
-              <div className="w-12 h-12 rounded-2xl bg-terracota-100 text-terracota-400 flex items-center justify-center mb-4">
+              <div className="w-12 h-12 rounded-2xl bg-rojo-100 text-rojo-400 flex items-center justify-center mb-4">
                 <QrCode className="w-6 h-6" />
               </div>
               <h3 className="font-serif text-xl font-bold text-carbon-900 mb-2">1. Menú QR Clientes</h3>
@@ -160,7 +160,7 @@ const LandingPage: React.FC = () => {
                   <Link
                     key={m}
                     to={`/m/${m}`}
-                    className="p-2 text-center rounded-xl bg-carbon-50 hover:bg-terracota-700 hover:text-white border border-carbon-200 text-xs font-bold text-carbon-900 transition-colors"
+                    className="p-2 text-center rounded-xl bg-carbon-50 hover:bg-rojo-700 hover:text-white border border-carbon-200 text-xs font-bold text-carbon-900 transition-colors"
                   >
                     Mesa {m}
                   </Link>
@@ -171,7 +171,7 @@ const LandingPage: React.FC = () => {
 
           <div className="card-gourmet flex flex-col justify-between">
             <div>
-              <div className="w-12 h-12 rounded-2xl bg-ocre-100 text-ocre-400 flex items-center justify-center mb-4">
+              <div className="w-12 h-12 rounded-2xl bg-amarillo-100 text-amarillo-400 flex items-center justify-center mb-4">
                 <ChefHat className="w-6 h-6" />
               </div>
               <h3 className="font-serif text-xl font-bold text-carbon-900 mb-2">2. Pantalla Cocina (KDS)</h3>
@@ -188,7 +188,7 @@ const LandingPage: React.FC = () => {
 
           <div className="card-gourmet flex flex-col justify-between">
             <div>
-              <div className="w-12 h-12 rounded-2xl bg-terracota-600 text-white flex items-center justify-center mb-4">
+              <div className="w-12 h-12 rounded-2xl bg-rojo-600 text-white flex items-center justify-center mb-4">
                 <LayoutDashboard className="w-6 h-6" />
               </div>
               <h3 className="font-serif text-xl font-bold text-carbon-900 mb-2">3. Panel Caja &amp; Salón</h3>
@@ -210,21 +210,21 @@ const LandingPage: React.FC = () => {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
           <h2 className="font-serif text-3xl font-bold text-carbon-900 mb-6">Contacto y reservas</h2>
           <div className="grid md:grid-cols-3 gap-6 text-sm text-carbon-700">
-            <p className="flex items-start gap-3"><MapPin className="w-5 h-5 text-ocre-400 flex-shrink-0" /> Dirección: por definir</p>
-            <p className="flex items-start gap-3"><Phone className="w-5 h-5 text-ocre-400 flex-shrink-0" /> Teléfono / WhatsApp: por definir</p>
-            <p className="flex items-start gap-3"><Clock className="w-5 h-5 text-ocre-400 flex-shrink-0" /> Horarios: por definir</p>
+            <p className="flex items-start gap-3"><MapPin className="w-5 h-5 text-amarillo-400 flex-shrink-0" /> Av. Petrolera km 7, avenida París, Cochabamba</p>
+            <p className="flex items-start gap-3"><Phone className="w-5 h-5 text-amarillo-400 flex-shrink-0" /> Teléfono / WhatsApp: por definir</p>
+            <p className="flex items-start gap-3"><Clock className="w-5 h-5 text-amarillo-400 flex-shrink-0" /> Lunes a jueves, sábado y domingo · Viernes cerrado</p>
           </div>
           <p className="text-xs text-carbon-600 mt-4">
-            Las reservas se registran en caja. Reemplaza estos datos cuando el restaurante los defina.
+            Las reservas se registran en caja. Falta definir el teléfono de contacto.
           </p>
         </div>
       </section>
 
       {/* ───── FOOTER ───── */}
       <footer className="border-t border-carbon-200 bg-carbon-50">
-        <div className="franja-andina" />
+        <div className="franja-nori" />
         <p className="text-center text-xs text-carbon-600 py-6">
-          FoodTech · Gastronomía boliviana y tecnología · UNICEN Cochabamba
+          Nori Pollo · Cochabamba · Sistema FoodTech (Universidad Central, Innovación Digital e IA)
         </p>
       </footer>
     </div>

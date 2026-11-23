@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, CheckCircle, CreditCard, Banknote, QrCode, ArrowLeftRight, Printer } from 'lucide-react';
+import { X, CheckCircle, Banknote, QrCode, Printer } from 'lucide-react';
 import { Pedido, MetodoPago } from '../../types';
 
 interface Props {
@@ -46,7 +46,7 @@ export const BillingModal: React.FC<Props> = ({
         {/* Header modal */}
         <div className="p-6 bg-carbon-50/80 border-b border-carbon-200 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-terracota-700 text-white flex items-center justify-center">
+            <div className="w-10 h-10 rounded-2xl bg-rojo-700 text-white flex items-center justify-center">
               <Banknote className="w-5 h-5 text-carbon-900" />
             </div>
             <div>
@@ -60,7 +60,7 @@ export const BillingModal: React.FC<Props> = ({
           </div>
           <button
             onClick={onClose}
-            className="p-2 text-carbon-500 hover:text-terracota-400 rounded-lg transition-colors"
+            className="p-2 text-carbon-500 hover:text-rojo-400 rounded-lg transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -71,8 +71,8 @@ export const BillingModal: React.FC<Props> = ({
           {/* Ticket de consumo */}
           <div className="border border-carbon-200 rounded-2xl p-4 bg-carbon-50/40 font-mono text-xs space-y-2">
             <div className="text-center pb-2 border-b border-dashed border-carbon-300">
-              <h4 className="font-bold text-sm font-serif text-carbon-900">RESTAURANTE FOODTECH UNICEN</h4>
-              <p className="text-[11px] text-carbon-600">Cochabamba - Bolivia • NIT: 1029384756</p>
+              <h4 className="font-bold text-sm font-serif text-carbon-900">NORI POLLO</h4>
+              <p className="text-[11px] text-carbon-600">Av. Petrolera km 7 · Cochabamba · Sin factura</p>
             </div>
 
             <div className="space-y-1 py-1">
@@ -88,7 +88,7 @@ export const BillingModal: React.FC<Props> = ({
 
             <div className="pt-2 border-t border-dashed border-carbon-300 flex justify-between items-center font-bold text-base text-carbon-900">
               <span>TOTAL A COBRAR:</span>
-              <span className="text-terracota-400 font-serif">Bs. {total.toFixed(2)}</span>
+              <span className="text-rojo-400 font-serif">Bs. {total.toFixed(2)}</span>
             </div>
           </div>
 
@@ -97,13 +97,13 @@ export const BillingModal: React.FC<Props> = ({
             <label className="block text-xs font-bold text-carbon-900 uppercase tracking-wider mb-2">
               Seleccionar Forma de Pago:
             </label>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            <div className="grid grid-cols-2 gap-2">
               <button
                 type="button"
                 onClick={() => setMetodo('efectivo')}
                 className={`p-3 rounded-xl border text-xs font-bold flex flex-col items-center gap-1.5 transition-all ${
                   metodo === 'efectivo'
-                    ? 'border-terracota-700 bg-terracota-50 text-carbon-900 shadow-sm'
+                    ? 'border-rojo-700 bg-rojo-50 text-carbon-900 shadow-sm'
                     : 'border-carbon-200 bg-carbon-100 text-carbon-700 hover:bg-carbon-50'
                 }`}
               >
@@ -113,42 +113,17 @@ export const BillingModal: React.FC<Props> = ({
 
               <button
                 type="button"
-                onClick={() => setMetodo('tarjeta')}
-                className={`p-3 rounded-xl border text-xs font-bold flex flex-col items-center gap-1.5 transition-all ${
-                  metodo === 'tarjeta'
-                    ? 'border-terracota-700 bg-terracota-50 text-carbon-900 shadow-sm'
-                    : 'border-carbon-200 bg-carbon-100 text-carbon-700 hover:bg-carbon-50'
-                }`}
-              >
-                <CreditCard className="w-5 h-5 text-terracota-400" />
-                <span>Tarjeta</span>
-              </button>
-
-              <button
-                type="button"
                 onClick={() => setMetodo('qr')}
                 className={`p-3 rounded-xl border text-xs font-bold flex flex-col items-center gap-1.5 transition-all ${
                   metodo === 'qr'
-                    ? 'border-terracota-700 bg-terracota-50 text-carbon-900 shadow-sm'
+                    ? 'border-rojo-700 bg-rojo-50 text-carbon-900 shadow-sm'
                     : 'border-carbon-200 bg-carbon-100 text-carbon-700 hover:bg-carbon-50'
                 }`}
               >
-                <QrCode className="w-5 h-5 text-ocre-400" />
+                <QrCode className="w-5 h-5 text-amarillo-400" />
                 <span>Pago QR</span>
               </button>
 
-              <button
-                type="button"
-                onClick={() => setMetodo('transferencia')}
-                className={`p-3 rounded-xl border text-xs font-bold flex flex-col items-center gap-1.5 transition-all ${
-                  metodo === 'transferencia'
-                    ? 'border-terracota-700 bg-terracota-50 text-carbon-900 shadow-sm'
-                    : 'border-carbon-200 bg-carbon-100 text-carbon-700 hover:bg-carbon-50'
-                }`}
-              >
-                <ArrowLeftRight className="w-5 h-5 text-ocre-400" />
-                <span>Transf.</span>
-              </button>
             </div>
           </div>
 
@@ -164,7 +139,7 @@ export const BillingModal: React.FC<Props> = ({
                   placeholder={total.toFixed(2)}
                   value={montoEntregado}
                   onChange={(e) => setMontoEntregado(e.target.value)}
-                  className="w-32 text-right font-bold text-sm px-3 py-1.5 border border-carbon-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-terracota-600"
+                  className="w-32 text-right font-bold text-sm px-3 py-1.5 border border-carbon-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-rojo-600"
                 />
               </div>
               {entregadoNum >= total && (
@@ -204,7 +179,7 @@ export const BillingModal: React.FC<Props> = ({
             ) : loading ? (
               <span>Procesando Cobro...</span>
             ) : (
-              <span>Confirmar Pago y Liberar Mesa</span>
+              <span>Confirmar Pago y Enviar a Cocina</span>
             )}
           </button>
         </div>

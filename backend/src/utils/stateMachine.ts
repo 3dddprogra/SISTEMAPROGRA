@@ -15,12 +15,14 @@ export class StateMachineError extends Error {
 }
 
 // Mapa de transiciones estrictas permitidas
+// RN07: por_cobrar -> pagado -> en_proceso -> terminado -> entregado.
+// Se puede cancelar solo ANTES de iniciar la preparación (por_cobrar o pagado).
 const ALLOWED_TRANSITIONS: Record<EstadoPedido, EstadoPedido[]> = {
-  pendiente: ['en_proceso', 'cancelado'],
-  en_proceso: ['terminado', 'cancelado'],
-  terminado: ['entregado', 'cancelado'],
-  entregado: ['pagado'],
-  pagado: [], // Estado terminal
+  por_cobrar: ['pagado', 'cancelado'],
+  pagado: ['en_proceso', 'cancelado'],
+  en_proceso: ['terminado'],
+  terminado: ['entregado'],
+  entregado: [], // Estado terminal
   cancelado: [], // Estado terminal
 };
 

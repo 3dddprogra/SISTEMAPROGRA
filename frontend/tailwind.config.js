@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 // ─────────────────────────────────────────────────────────────
-// SISTEMA DE DISEÑO "ANDINO PREMIUM" (FoodTech)
+// SISTEMA DE DISEÑO "NORI POLLO" (basado en el logo: rojo, amarillo, negro y blanco)
 // Aquí viven TODOS los colores. Si cambias un valor de esta
 // lista, cambia en toda la aplicación.
 // Regla de las escalas (para modo oscuro):
@@ -14,48 +14,48 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Neutros cálidos (INVERTIDOS: 50 = más oscuro, 900 = crema)
+        // Neutros (INVERTIDOS para modo oscuro: 50 = negro del logo, 900 = blanco cálido)
         carbon: {
-          50: '#0E0D0B',   // fondo principal (carbón profundo)
-          100: '#171512',  // superficie oscura (tarjetas, paneles)
-          150: '#211D18',  // superficie elevada
-          200: '#3B3027',  // borde cálido
-          300: '#4D3F33',
-          400: '#6E5E4E',
-          500: '#8F8068',
-          600: '#B8AA96',  // texto secundario
-          700: '#CFC2AD',
-          800: '#E3D6C0',
-          900: '#F2E6D2',  // crema quinoa (texto principal)
-          DEFAULT: '#0E0D0B',
+          50: '#0D0C0C',   // fondo principal (negro)
+          100: '#161414',  // superficie (tarjetas, paneles)
+          150: '#201D1D',  // superficie elevada
+          200: '#332E2E',  // bordes
+          300: '#473F3F',
+          400: '#675E5E',
+          500: '#8A8080',
+          600: '#B5ABAB',  // texto secundario
+          700: '#D0C8C8',
+          800: '#E8E2E2',
+          900: '#FFF8EE',  // texto principal (blanco cálido)
+          DEFAULT: '#0D0C0C',
         },
-        // Terracota andina: color PRINCIPAL de las acciones
-        terracota: {
-          50: '#1F130E', 100: '#2D1A13', 200: '#4A2A1E', 300: '#7A412B',
-          400: '#E0896A', 500: '#C9704D', 600: '#B95C3B', 700: '#B95C3B',
-          800: '#9E4A2D', 900: '#823B22', 950: '#5E2917',
-          DEFAULT: '#B95C3B',
+        // ROJO Nori Pollo: color PRINCIPAL de las acciones (fondo del logo)
+        rojo: {
+          50: '#240B0A', 100: '#3A1210', 200: '#5E1B17', 300: '#8F2620',
+          400: '#FF7B6E', 500: '#E8392F', 600: '#D91E18', 700: '#D91E18',
+          800: '#B01510', 900: '#8A100C', 950: '#4A0907',
+          DEFAULT: '#D91E18',
         },
-        // Ocre dorado: detalles premium (usar con moderación)
-        ocre: {
-          50: '#1E170B', 100: '#2C2210', 200: '#4A3718', 300: '#7D5F27',
-          400: '#E2B766', 500: '#D8A94F', 600: '#C99643', 700: '#B38236',
-          800: '#8F6628', 900: '#6E4E1E', 950: '#4A3414',
-          DEFAULT: '#C99643',
+        // AMARILLO Nori Pollo: letras del logo, precios y detalles destacados
+        amarillo: {
+          50: '#241C06', 100: '#382A08', 200: '#5C4510', 300: '#8F6C1A',
+          400: '#FFD84D', 500: '#FFCB2B', 600: '#FFC21A', 700: '#E6A800',
+          800: '#B88400', 900: '#8A6200', 950: '#4D3600',
+          DEFAULT: '#FFC21A',
         },
-        // Verde andino: estados positivos (disponible, listo)
+        // Verde: estados positivos (disponible, listo)
         verde: {
-          50: '#101A13', 100: '#172619', 200: '#24402B', 300: '#3A5A42',
-          400: '#8DB496', 500: '#55735B', 600: '#55735B', 700: '#476150',
-          800: '#3A5142', 900: '#2D4034', 950: '#1D2B23',
-          DEFAULT: '#55735B',
+          50: '#0F1A12', 100: '#162719', 200: '#21402A', 300: '#33603F',
+          400: '#7FD39A', 500: '#2F9E58', 600: '#2F9E58', 700: '#27824A',
+          800: '#1F6A3C', 900: '#185430', 950: '#0E3320',
+          DEFAULT: '#2F9E58',
         },
-        // Rojo kantuta: alertas y situaciones críticas
-        kantuta: {
-          50: '#2A1015', 100: '#3A161D', 200: '#5E2430', 300: '#7F2F3E',
-          400: '#E98796', 500: '#B24359', 600: '#963747', 700: '#963747',
-          800: '#7C2D3A', 900: '#632430', 950: '#451A22',
-          DEFAULT: '#963747',
+        // Rojo oscuro: peligro, alertas y cancelaciones (distinto del rojo de marca)
+        peligro: {
+          50: '#2A0D12', 100: '#3D1219', 200: '#5E1B26', 300: '#85283A',
+          400: '#F5A3B0', 500: '#B8324B', 600: '#9B2237', 700: '#9B2237',
+          800: '#7C1B2D', 900: '#611523', 950: '#420E18',
+          DEFAULT: '#9B2237',
         },
         // Azul: estado "reservada" / información
         azul: {

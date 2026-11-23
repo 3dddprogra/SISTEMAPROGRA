@@ -2,7 +2,7 @@ import { pool } from '../config/database';
 import { pedidoRepository } from '../repositories/pedidoRepository';
 import { mesaRepository } from '../repositories/mesaRepository';
 import { productoRepository } from '../repositories/productoRepository';
-import { EstadoPedido, MetodoPago, Pedido } from '../types';
+import { EstadoPedido, MetodoPago, Pedido, MESA_PARA_LLEVAR } from '../types';
 import { validateOrderTransition } from '../utils/stateMachine';
 import { socketEmitter } from '../sockets/socketManager';
 
@@ -83,7 +83,7 @@ export const pedidoService = {
           mesa_id: dto.mesa_id,
           usuario_id: dto.usuario_id || null,
           codigo,
-          estado: 'pendiente',
+          estado: 'por_cobrar',
           total: totalCalculado,
           notas: dto.notas || null,
         },
@@ -106,7 +106,9 @@ export const pedidoService = {
 
     // Emitir eventos en tiempo real
     socketEmitter.emitNuevoPedido(pedidoCreado);
-    socketEmitter.emitEstadoMesa(dto.mesa_id, 'ocupada');
+    if (mesa.numero !== MESA_PARA_LLEVAR) {
+      socketEmitter.emitEstadoMesa(dto.mesa_id, 'ocupada');
+    }
 
     return pedidoCreado;
   },
@@ -117,16 +119,26 @@ export const pedidoService = {
       throw { statusCode: 404, code: 'ORDER_NOT_FOUND', message: `Pedido con ID ${id} no encontrado.` };
     }
 
+    // El cobro tiene su propio flujo (cobrarPedido) porque exige método de pago
+    if (nuevoEstado === 'pagado') {
+      throw { statusCode: 400, code: 'USE_COBRAR', message: "Para marcar un pedido como pagado use el cobro en caja (POST /pedidos/:id/cobrar)." };
+    }
+
     // Validación estricta con máquina de estados (lanza StateMachineError 409 si es inválido)
     validateOrderTransition(pedido.estado, nuevoEstado);
 
     await pedidoRepository.updateEstado(id, nuevoEstado);
 
-    // Si el pedido pasa a pagado o cancelado, verificar si la mesa se libera
-    if (nuevoEstado === 'pagado') {
-      await mesaRepository.updateEstado(pedido.mesa_id, 'disponible');
-      socketEmitter.emitEstadoMesa(pedido.mesa_id, 'disponible');
+    // Un pedido cancelado de salón libera la mesa si no queda otro pedido activo
+    if (nuevoEstado === 'cancelado') {
+      const mesa = await mesaRepository.findById(pedido.mesa_id);
+      const otroActivo = await pedidoRepository.findActiveByMesaId(pedido.mesa_id);
+      if (mesa && mesa.numero !== MESA_PARA_LLEVAR && !otroActivo) {
+        await mesaRepository.updateEstado(pedido.mesa_id, 'disponible');
+        socketEmitter.emitEstadoMesa(pedido.mesa_id, 'disponible');
+      }
     }
+    // RN08: al marcar 'entregado' la mesa NO se libera sola; la libera el cajero cuando el cliente se retira
 
     const pedidoActualizado: Pedido = {
       ...pedido,
@@ -143,13 +155,16 @@ export const pedidoService = {
       throw { statusCode: 404, code: 'ORDER_NOT_FOUND', message: `Pedido con ID ${id} no encontrado.` };
     }
 
-    if (pedido.estado === 'pagado') {
-      throw { statusCode: 400, code: 'ORDER_ALREADY_PAID', message: 'Este pedido ya fue cobrado previamente.' };
+    if (pedido.estado !== 'por_cobrar') {
+      throw { statusCode: 409, code: 'ORDER_NOT_PAYABLE', message: `Solo se puede cobrar un pedido 'por_cobrar'. Estado actual: '${pedido.estado}'.` };
     }
+    validateOrderTransition(pedido.estado, 'pagado');
 
-    // Cobrar pedido y registrar método de pago
-    await pedidoRepository.cobrarPedido(id, metodoPago);
-    await mesaRepository.updateEstado(pedido.mesa_id, 'disponible');
+    // Cobro anticipado: registra el método de pago y pasa a 'pagado'
+    const cobrado = await pedidoRepository.cobrarPedido(id, metodoPago);
+    if (!cobrado) {
+      throw { statusCode: 409, code: 'ORDER_NOT_PAYABLE', message: 'El pedido ya no está pendiente de cobro.' };
+    }
 
     const pedidoActualizado: Pedido = {
       ...pedido,
@@ -157,8 +172,10 @@ export const pedidoService = {
       metodo_pago: metodoPago,
     };
 
+    // La mesa sigue ocupada hasta que el cajero la libere (RN08)
     socketEmitter.emitEstadoPedido(pedidoActualizado);
-    socketEmitter.emitEstadoMesa(pedido.mesa_id, 'disponible');
+    // Recién ahora el pedido llega a la cocina (KDS)
+    socketEmitter.emitPedidoParaCocina(pedidoActualizado);
 
     return pedidoActualizado;
   },

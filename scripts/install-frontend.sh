@@ -125,12 +125,12 @@ echo -e "${GREEN}[OK] Nginx configurado y reiniciado con éxito.${NC}"
 
 # [PASO 5/6] Configuración de Firewall UFW
 echo -e "\n${YELLOW}[PASO 5/6] Configurando firewall UFW en Frontend...${NC}"
-ufw --force enable
 ufw default deny incoming
 ufw default allow outgoing
 ufw allow 22/tcp comment 'SSH'
 ufw allow 80/tcp comment 'HTTP Nginx'
 ufw allow 443/tcp comment 'HTTPS'
+ufw --force enable
 ufw reload
 echo -e "${GREEN}[OK] Firewall UFW configurado (Puertos 80, 443 y 22 habilitados).${NC}"
 

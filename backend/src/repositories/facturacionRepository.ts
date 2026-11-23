@@ -19,13 +19,13 @@ export const facturacionRepository = {
          COUNT(*) AS pedidosCompletados,
          COALESCE(AVG(total), 0) AS ticketPromedio
        FROM pedidos
-       WHERE estado = 'pagado'`
+       WHERE estado IN ('pagado', 'en_proceso', 'terminado', 'entregado') AND DATE(creado_en) = CURDATE()`
     );
 
     const [todayRows] = await pool.query<RowDataPacket[]>(
       `SELECT COUNT(*) AS pedidosHoy
        FROM pedidos
-       WHERE DATE(creado_en) = CURDATE()`
+       WHERE DATE(creado_en) = CURDATE() AND estado <> 'cancelado'`
     );
 
     // 2. Desglose por método de pago
@@ -35,7 +35,7 @@ export const facturacionRepository = {
          COALESCE(SUM(total), 0) AS total,
          COUNT(*) AS cantidad
        FROM pedidos
-       WHERE estado = 'pagado'
+       WHERE estado IN ('pagado', 'en_proceso', 'terminado', 'entregado') AND DATE(creado_en) = CURDATE()
        GROUP BY metodo_pago`
     );
 
@@ -48,7 +48,7 @@ export const facturacionRepository = {
        FROM detalle_pedidos d
        INNER JOIN productos pr ON d.producto_id = pr.id
        INNER JOIN pedidos p ON d.pedido_id = p.id
-       WHERE p.estado = 'pagado'
+       WHERE p.estado IN ('pagado', 'en_proceso', 'terminado', 'entregado') AND DATE(p.creado_en) = CURDATE()
        GROUP BY pr.id, pr.nombre
        ORDER BY cantidad DESC
        LIMIT 5`

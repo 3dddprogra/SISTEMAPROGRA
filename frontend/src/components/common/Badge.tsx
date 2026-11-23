@@ -12,17 +12,17 @@ export const Badge: React.FC<BadgeProps> = ({ tipo, estado, size = 'md' }) => {
 
   if (tipo === 'pedido') {
     switch (estado) {
-      case 'pendiente':
+      case 'por_cobrar':
         return (
-          <span className={`inline-flex items-center gap-1.5 font-bold uppercase rounded-full bg-ocre-100 text-ocre-400 border border-ocre-300 ${sizeClasses}`}>
-            <span className="w-2 h-2 rounded-full bg-ocre-500 animate-pulse"></span>
-            Pendiente
+          <span className={`inline-flex items-center gap-1.5 font-bold uppercase rounded-full bg-amarillo-100 text-amarillo-400 border border-amarillo-300 ${sizeClasses}`}>
+            <span className="w-2 h-2 rounded-full bg-amarillo-500 animate-pulse"></span>
+            Por cobrar
           </span>
         );
       case 'en_proceso':
         return (
-          <span className={`inline-flex items-center gap-1.5 font-bold uppercase rounded-full bg-ocre-100 text-ocre-400 border border-ocre-300 ${sizeClasses}`}>
-            <span className="w-2 h-2 rounded-full bg-ocre-500 animate-spin"></span>
+          <span className={`inline-flex items-center gap-1.5 font-bold uppercase rounded-full bg-amarillo-100 text-amarillo-400 border border-amarillo-300 ${sizeClasses}`}>
+            <span className="w-2 h-2 rounded-full bg-amarillo-500 animate-spin"></span>
             En Cocina
           </span>
         );
@@ -42,8 +42,8 @@ export const Badge: React.FC<BadgeProps> = ({ tipo, estado, size = 'md' }) => {
         );
       case 'pagado':
         return (
-          <span className={`inline-flex items-center gap-1.5 font-bold uppercase rounded-full bg-terracota-100 text-carbon-900 border border-terracota-300 ${sizeClasses}`}>
-            <span className="w-2 h-2 rounded-full bg-terracota-700"></span>
+          <span className={`inline-flex items-center gap-1.5 font-bold uppercase rounded-full bg-verde-100 text-verde-400 border border-verde-300 ${sizeClasses}`}>
+            <span className="w-2 h-2 rounded-full bg-verde-500"></span>
             Pagado
           </span>
         );
@@ -67,15 +67,15 @@ export const Badge: React.FC<BadgeProps> = ({ tipo, estado, size = 'md' }) => {
         );
       case 'ocupada':
         return (
-          <span className={`inline-flex items-center gap-1 font-bold rounded-full bg-terracota-100 text-carbon-900 border border-terracota-300 ${sizeClasses}`}>
-            <span className="w-2 h-2 rounded-full bg-terracota-700"></span>
+          <span className={`inline-flex items-center gap-1 font-bold rounded-full bg-rojo-100 text-carbon-900 border border-rojo-300 ${sizeClasses}`}>
+            <span className="w-2 h-2 rounded-full bg-rojo-700"></span>
             Ocupada
           </span>
         );
       case 'reservada':
         return (
-          <span className={`inline-flex items-center gap-1 font-bold rounded-full bg-ocre-100 text-ocre-400 border border-ocre-300 ${sizeClasses}`}>
-            <span className="w-2 h-2 rounded-full bg-ocre-600"></span>
+          <span className={`inline-flex items-center gap-1 font-bold rounded-full bg-amarillo-100 text-amarillo-400 border border-amarillo-300 ${sizeClasses}`}>
+            <span className="w-2 h-2 rounded-full bg-amarillo-600"></span>
             Reservada
           </span>
         );

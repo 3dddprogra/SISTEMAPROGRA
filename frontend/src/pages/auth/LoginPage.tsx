@@ -41,15 +41,15 @@ export const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-carbon-100 via-carbon-50 to-terracota-50/40 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-carbon-100 via-carbon-50 to-rojo-50/40 flex items-center justify-center p-4">
       <div className="max-w-md w-full bg-carbon-100 rounded-3xl shadow-warm-lg border border-carbon-200 overflow-hidden">
         {/* Cabecera Gourmet */}
-        <div className="p-8 bg-gradient-to-br from-carbon-100 via-terracota-950 to-carbon-100 text-white text-center border-b border-ocre-600/60 relative">
+        <div className="p-8 bg-gradient-to-br from-carbon-100 via-rojo-950 to-carbon-100 text-white text-center border-b border-amarillo-600/60 relative">
           <div className="w-16 h-16 rounded-2xl bg-carbon-100/10 backdrop-blur-md text-white flex items-center justify-center mx-auto mb-3 border border-white/20 shadow-md">
             <Utensils className="w-8 h-8 text-carbon-900" />
           </div>
           <h1 className="font-serif text-2xl font-bold tracking-tight">
-            FOOD<span className="text-ocre-400 font-sans">TECH</span>
+            NORI <span className="text-amarillo-400">POLLO</span>
           </h1>
           <p className="text-xs text-carbon-900 mt-1">
             Portal de Acceso para Personal de Salón y Cocina
@@ -59,7 +59,7 @@ export const LoginPage: React.FC = () => {
         {/* Formulario */}
         <div className="p-8 space-y-6">
           {error && (
-            <div className="p-3.5 rounded-xl bg-kantuta-50 border border-kantuta-200 text-xs text-kantuta-400 font-semibold">
+            <div className="p-3.5 rounded-xl bg-peligro-50 border border-peligro-200 text-xs text-peligro-400 font-semibold">
               ⚠️ {error}
             </div>
           )}
@@ -77,7 +77,7 @@ export const LoginPage: React.FC = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="ejemplo@foodtech.bo"
-                  className="w-full pl-10 pr-3.5 py-2.5 text-xs rounded-xl border border-carbon-300 bg-carbon-50/50 focus:bg-carbon-100 focus:outline-none focus:ring-2 focus:ring-terracota-600"
+                  className="w-full pl-10 pr-3.5 py-2.5 text-xs rounded-xl border border-carbon-300 bg-carbon-50/50 focus:bg-carbon-100 focus:outline-none focus:ring-2 focus:ring-rojo-600"
                 />
               </div>
             </div>
@@ -94,7 +94,7 @@ export const LoginPage: React.FC = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full pl-10 pr-3.5 py-2.5 text-xs rounded-xl border border-carbon-300 bg-carbon-50/50 focus:bg-carbon-100 focus:outline-none focus:ring-2 focus:ring-terracota-600"
+                  className="w-full pl-10 pr-3.5 py-2.5 text-xs rounded-xl border border-carbon-300 bg-carbon-50/50 focus:bg-carbon-100 focus:outline-none focus:ring-2 focus:ring-rojo-600"
                 />
               </div>
             </div>
@@ -115,7 +115,7 @@ export const LoginPage: React.FC = () => {
             </button>
           </form>
 
-          {/* Accesos Rápidos de Prueba (Demo UNICEN) */}
+          {/* Accesos Rápidos de Prueba (demostración) */}
           <div className="pt-4 border-t border-carbon-200">
             <span className="block text-[11px] font-bold text-carbon-600 uppercase tracking-wider mb-2.5 text-center">
               Acceso Rápido de Demostración (1 Clic)
@@ -124,25 +124,25 @@ export const LoginPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => handleQuickDemo('admin@foodtech.bo', 'Admin1234!')}
-                className="p-2.5 rounded-xl border border-carbon-300 bg-carbon-50/70 hover:bg-terracota-50 hover:border-terracota-400 text-center transition-all"
+                className="p-2.5 rounded-xl border border-carbon-300 bg-carbon-50/70 hover:bg-rojo-50 hover:border-rojo-400 text-center transition-all"
               >
-                <ShieldCheck className="w-4 h-4 text-terracota-400 mx-auto mb-1" />
+                <ShieldCheck className="w-4 h-4 text-rojo-400 mx-auto mb-1" />
                 <span className="block text-[11px] font-bold text-carbon-900">Admin</span>
               </button>
 
               <button
                 type="button"
                 onClick={() => handleQuickDemo('cajero@foodtech.bo', 'Cajero1234!')}
-                className="p-2.5 rounded-xl border border-carbon-300 bg-carbon-50/70 hover:bg-terracota-50 hover:border-terracota-400 text-center transition-all"
+                className="p-2.5 rounded-xl border border-carbon-300 bg-carbon-50/70 hover:bg-rojo-50 hover:border-rojo-400 text-center transition-all"
               >
-                <UserCheck className="w-4 h-4 text-ocre-400 mx-auto mb-1" />
+                <UserCheck className="w-4 h-4 text-amarillo-400 mx-auto mb-1" />
                 <span className="block text-[11px] font-bold text-carbon-900">Cajero</span>
               </button>
 
               <button
                 type="button"
                 onClick={() => handleQuickDemo('cocina@foodtech.bo', 'Cocina1234!')}
-                className="p-2.5 rounded-xl border border-carbon-300 bg-carbon-50/70 hover:bg-terracota-50 hover:border-terracota-400 text-center transition-all"
+                className="p-2.5 rounded-xl border border-carbon-300 bg-carbon-50/70 hover:bg-rojo-50 hover:border-rojo-400 text-center transition-all"
               >
                 <ChefHat className="w-4 h-4 text-verde-400 mx-auto mb-1" />
                 <span className="block text-[11px] font-bold text-carbon-900">Cocina</span>

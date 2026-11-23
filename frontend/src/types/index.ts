@@ -2,15 +2,17 @@ export type RolUsuario = 'admin' | 'cajero' | 'cocina';
 
 export type EstadoMesa = 'disponible' | 'ocupada' | 'reservada' | 'inactiva';
 
+// Modelo de PRE-PAGO: por_cobrar -> pagado -> en_proceso -> terminado -> entregado
 export type EstadoPedido =
-  | 'pendiente'
+  | 'por_cobrar'
+  | 'pagado'
   | 'en_proceso'
   | 'terminado'
   | 'entregado'
-  | 'pagado'
   | 'cancelado';
 
-export type MetodoPago = 'efectivo' | 'tarjeta' | 'qr' | 'transferencia';
+// Solo efectivo o QR (no se acepta tarjeta ni se emite factura)
+export type MetodoPago = 'efectivo' | 'qr';
 
 export type EstadoReserva = 'pendiente' | 'confirmada' | 'cancelada' | 'completada';
 

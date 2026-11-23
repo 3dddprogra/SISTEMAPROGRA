@@ -21,7 +21,7 @@ export const PlatoImagen: React.FC<Props> = ({ src, alt, className = '' }) => {
       <div
         role="img"
         aria-label={alt}
-        className={`flex items-center justify-center bg-gradient-to-br from-carbon-150 via-terracota-100 to-carbon-100 text-terracota-400 ${className}`}
+        className={`flex items-center justify-center bg-gradient-to-br from-carbon-150 via-rojo-100 to-carbon-100 text-rojo-400 ${className}`}
       >
         <Utensils className="w-1/4 h-1/4 opacity-60" />
       </div>

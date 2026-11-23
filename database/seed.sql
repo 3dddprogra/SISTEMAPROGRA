@@ -14,66 +14,58 @@ INSERT INTO usuarios (nombre, email, password_hash, rol, activo) VALUES
 ('Cajera Principal (Salón)', 'cajero@foodtech.bo', '$2a$10$arMcDK2h4zanOiPWJywp8uqftVVz1o6Lh7GawnQULri.tde5Flu26', 'cajero', TRUE),
 ('Jefe de Cocina (KDS)', 'cocina@foodtech.bo', '$2a$10$Xk.0O3lwL8Qb5wrae00XQevj35NBg0L0Qr1z2/tX8qF/NfwWNPAKi', 'cocina', TRUE);
 
--- 2. Categorías del Restaurante
+-- 2. Categorías del menú de Nori Pollo (5 categorías)
 INSERT INTO categorias (id, nombre, descripcion, icono, orden, activo) VALUES
-(1, 'Entradas', 'Para comenzar y compartir la experiencia culinaria', 'UtensilsCrossed', 1, TRUE),
-(2, 'Platos Fuertes', 'Especialidades gourmet y tradicionales de la casa', 'Utensils', 2, TRUE),
-(3, 'Bebidas', 'Limonadas, jugos naturales y cervezas', 'GlassWater', 6, TRUE),
-(4, 'Postres', 'El cierre dulce artesanal para tu mesa', 'Cake', 7, TRUE),
-(5, 'Refrescos Hervidos', 'Refrescos tradicionales cocidos: chicha morada, mocochinchi y api', 'Coffee', 4, TRUE),
-(6, 'Gaseosas', 'Gaseosas frías para acompañar tu plato', 'CupSoda', 5, TRUE),
-(7, 'Pollo Broaster', 'Pollo crocante a la broaster con papas y ensalada', 'Drumstick', 3, TRUE);
+(1, 'Platos broaster', 'Pollo broaster con arroz con zanahoria y papas fritas', 'Drumstick', 1, TRUE),
+(2, 'Pipokas de pollo', 'Conos de pipokas de pollo con papas fritas y chorizo', 'Cone', 2, TRUE),
+(3, 'Refrescos naturales', 'Refrescos hervidos servidos con hielo', 'GlassWater', 3, TRUE),
+(4, 'Gaseosas', 'Gaseosas frías en distintos tamaños', 'CupSoda', 4, TRUE),
+(5, 'Jugos', 'Néctares en botella de vidrio retornable', 'Citrus', 5, TRUE);
 
--- 3. Catálogo de 15 Productos Gastronómicos
+-- 3. Menú oficial de Nori Pollo: 21 productos (precios en Bs).
+-- Las fotos están en frontend/public/menu/. Los tiempos de preparación son estimados y deben confirmarse con la cocina.
 INSERT INTO productos (id, categoria_id, nombre, descripcion, precio, imagen_url, disponible, tiempo_estimado_min) VALUES
--- Entradas
-(1, 1, 'Empanadas Cochabambinas (3 uds)', 'Rellenas de carne picada sazonada, papa, arvejas y caldo aromático en masa crocante horneada.', 18.00, 'https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=400&q=80', TRUE, 10),
-(2, 1, 'Anticuchos al Fuego Vivo', 'Finas láminas de corazón de res marinadas en ají panca y vinagre, con papas doradas y llajwa.', 25.00, 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&q=80', TRUE, 12),
-(3, 1, 'Sopa de Maní Tradicional', 'Concentrado cremoso de maní con costilla tierna, verduras andinas y lluvias de papas hilo.', 22.00, 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400&q=80', TRUE, 8),
-(4, 1, 'Tabla de Quesos y Fiambres', 'Selección de quesos criollos, jamón serrano, aceitunas marinadas y pan artesanal al romero.', 35.00, 'https://images.unsplash.com/photo-1631709497146-a239ef373cf1?w=400&q=80', TRUE, 10),
+-- Platos broaster
+(1, 1, 'Nori Pollito', '1 presa + arroz con zanahoria + papas fritas', 16.00, '/menu/nori-pollito.jpg', TRUE, 12),
+(2, 1, 'Nori Pollo', '2 presas + arroz con zanahoria + papas fritas', 22.00, '/menu/nori-pollo.jpg', TRUE, 15),
+(3, 1, 'Nori Combo', 'Porción grande + arroz con zanahoria + papas fritas', 28.00, '/menu/nori-combo.jpg', TRUE, 15),
+-- Pipokas de pollo
+(4, 2, 'Nori Conito', 'Pipokas de pollo, papas fritas y chorizo', 15.00, '/menu/pipokas.jpg', TRUE, 10),
+(5, 2, 'Nori Cono', 'Pipokas de pollo, papas fritas y chorizo (grande)', 20.00, '/menu/pipokas.jpg', TRUE, 10),
+-- Refrescos naturales
+(6, 3, 'Limonada', 'Hervida, con hielo', 5.00, '/menu/refrescos-naturales.jpg', TRUE, 2),
+(7, 3, 'Refresco de tostada', 'Cebada tostada, con hielo', 8.00, '/menu/refrescos-naturales.jpg', TRUE, 2),
+-- Gaseosas
+(8, 4, 'Mini 190 ml Coca-Cola', 'Botella de vidrio personal', 3.00, '/menu/gaseosas-minis.jpg', TRUE, 2),
+(9, 4, 'Mini 190 ml Fanta Naranja', 'Botella de vidrio personal', 3.00, '/menu/gaseosas-minis.jpg', TRUE, 2),
+(10, 4, 'Mini 190 ml Fanta Mandarina', 'Botella de vidrio personal', 3.00, '/menu/gaseosas-minis.jpg', TRUE, 2),
+(11, 4, 'Mini 190 ml Fanta Papaya', 'Botella de vidrio personal', 3.00, '/menu/gaseosas-minis.jpg', TRUE, 2),
+(12, 4, 'Popular Coca-Cola', 'Botella mediana', 7.00, '/menu/gaseosas-populares.jpg', TRUE, 2),
+(13, 4, 'Popular Fanta', 'Botella mediana', 7.00, '/menu/gaseosas-populares.jpg', TRUE, 2),
+(14, 4, 'Coca-Cola 1.5 L', 'Litro y medio', 12.00, '/menu/coca-cola-1-5l.jpg', TRUE, 2),
+(15, 4, 'Coca-Cola retornable 2.5 L', 'Familiar', 14.00, '/menu/coca-cola-2-5l.jpg', TRUE, 2),
+(16, 4, 'Simba 2 L Piña', 'Familiar', 14.00, '/menu/simba-2l.jpg', TRUE, 2),
+(17, 4, 'Simba 2 L Durazno', 'Familiar', 14.00, '/menu/simba-2l.jpg', TRUE, 2),
+(18, 4, 'Simba 2 L Manzana', 'Familiar', 14.00, '/menu/simba-2l.jpg', TRUE, 2),
+(19, 4, 'Fanta Naranja 2 L', 'Familiar', 16.00, '/menu/fanta-2l.jpg', TRUE, 2),
+-- Jugos
+(20, 5, 'Jugo Del Valle 1 L', 'Néctar en botella de vidrio retornable', 16.00, '/menu/jugos-1l.jpg', TRUE, 2),
+(21, 5, 'Jugo Del Sol 1 L', 'Néctar en botella de vidrio retornable', 16.00, '/menu/jugos-1l.jpg', TRUE, 2);
 
--- Platos Fuertes
-(5, 2, 'Pique Macho Gourmet', 'Lomo de res salteado a fuego alto con salchicha viena, pimientos, cebolla, huevo duro y locoto fresco.', 55.00, 'https://images.unsplash.com/photo-1544025162-d76694265947?w=400&q=80', TRUE, 20),
-(6, 2, 'Silpancho Cochabambino', 'Fina milanesa de lomo apanada sobre colchón de arroz graneado, papas doradas, huevo frito y k''allu.', 42.00, 'https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=400&q=80', TRUE, 15),
-(7, 2, 'Trucha Frita del Altiplano', 'Filete de trucha asalmonada a la plancha con limón, guarnición de arroz criollo y ensalada de palta.', 48.00, 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=400&q=80', TRUE, 18),
-(8, 2, 'Lomo a la Pimienta Negra', 'Medallón de lomo fino 300g en reducción de vino tinto y pimienta verde, con puré rústico de papa.', 58.00, 'https://images.unsplash.com/photo-1558030006-450675393462?w=400&q=80', TRUE, 22),
-(9, 2, 'Costillas BBQ al Horno de Leña', 'Costillas de cerdo glaseadas en salsa barbacoa de chicha morada, con papas rústicas al pimentón.', 52.00, 'https://images.unsplash.com/photo-1544025162-d76694265947?w=400&q=80', TRUE, 20),
-
--- Bebidas
-(10, 5, 'Chicha Morada Artesanal (500ml)', 'Infusión natural de maíz morado con piña, manzana, canela y gotas de limón fresco.', 12.00, 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=400&q=80', TRUE, 5),
-(11, 5, 'Mocochinchi Tradicional Frío (500ml)', 'Refresco andino de durazno deshidratado caramelizado con especias y hielo frappé.', 10.00, 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=400&q=80', TRUE, 5),
-(12, 3, 'Limonada de Hierbabuena y Jengibre', 'Jugo fresco de limones sutiles batido con hojas de hierbabuena y toque sutil de jengibre.', 14.00, 'https://images.unsplash.com/photo-1523371067-1ac2b2108573?w=400&q=80', TRUE, 5),
-(13, 3, 'Cerveza Huari Tradicional (620ml)', 'Cerveza rubia boliviana tipo Pilsener elaborada con agua pura de vertientes andinas.', 22.00, 'https://images.unsplash.com/photo-1608270116812-40a1b80d0d8f?w=400&q=80', TRUE, 3),
-
--- Postres
-(14, 4, 'Cheesecake de Maracuyá', 'Base crujiente de galleta con suave crema de queso y cobertura brillante de maracuyá ácido.', 24.00, 'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=400&q=80', TRUE, 6),
-(15, 4, 'Volcán de Chocolate Criollo', 'Bizcocho tibio de cacao boliviano al 70% con corazón fundido y helado artesanal de canela.', 26.00, 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400&q=80', TRUE, 12);
-
--- Refrescos hervidos, gaseosas y pollo broaster (nombres genéricos, sin imagen: se muestra imagen por defecto)
-INSERT INTO productos (id, categoria_id, nombre, descripcion, precio, imagen_url, disponible, tiempo_estimado_min) VALUES
-(16, 5, 'Api Morado Tradicional (caliente)', 'Bebida caliente espesa de maíz morado con canela y clavo, servida bien caliente.', 10.00, NULL, TRUE, 5),
-(17, 6, 'Gaseosa Cola (500ml)', 'Gaseosa fría sabor cola.', 8.00, NULL, TRUE, 2),
-(18, 6, 'Gaseosa Naranja (500ml)', 'Gaseosa fría sabor naranja.', 8.00, NULL, TRUE, 2),
-(19, 6, 'Gaseosa Lima-Limón (500ml)', 'Gaseosa fría sabor lima-limón.', 8.00, NULL, TRUE, 2),
-(20, 7, 'Pollo Broaster 1/4 con Papas', 'Cuarto de pollo crocante a la broaster con papas fritas, ensalada y salsas de la casa.', 28.00, NULL, TRUE, 18),
-(21, 7, 'Pollo Broaster 1/2 con Papas', 'Medio pollo crocante a la broaster con papas fritas, ensalada y salsas de la casa.', 45.00, NULL, TRUE, 22),
-(22, 7, 'Pollo Broaster Familiar (entero)', 'Pollo entero a la broaster para compartir, con papas fritas grandes, ensalada y salsas.', 85.00, NULL, TRUE, 28),
-(23, 7, 'Alitas Broaster (8 unidades)', 'Alitas crocantes bañadas en salsa de la casa, con papas fritas.', 32.00, NULL, TRUE, 15);
-
--- 4. 8 Mesas del Salón
+-- 4. Mesas: 7 mesas del salón (6 de 4 sillas y 1 de 2 = 26 sillas) + mesa virtual 8 «Mostrador – Para llevar» (RN01)
 INSERT INTO mesas (id, numero, capacidad, estado, ubicacion, qr_token) VALUES
-(1, 1, 2, 'disponible', 'Terraza Exterior', 'qr_token_mesa_01_a7b8c9'),
-(2, 2, 2, 'disponible', 'Terraza Exterior', 'qr_token_mesa_02_d1e2f3'),
-(3, 3, 4, 'disponible', 'Salón Principal', 'qr_token_mesa_03_g4h5i6'),
-(4, 4, 4, 'disponible', 'Salón Principal', 'qr_token_mesa_04_j7k8l9'),
-(5, 5, 4, 'disponible', 'Salón Principal', 'qr_token_mesa_05_m1n2o3'),
-(6, 6, 6, 'disponible', 'Zona Familiar', 'qr_token_mesa_06_p4q5r6'),
-(7, 7, 6, 'disponible', 'Zona Familiar', 'qr_token_mesa_07_s7t8u9'),
-(8, 8, 8, 'disponible', 'Salón VIP', 'qr_token_mesa_08_v1w2x3');
+(1, 1, 4, 'disponible', 'Salón', 'qr_token_mesa_01_a7b8c9'),
+(2, 2, 4, 'disponible', 'Salón', 'qr_token_mesa_02_d1e2f3'),
+(3, 3, 4, 'disponible', 'Salón', 'qr_token_mesa_03_g4h5i6'),
+(4, 4, 4, 'disponible', 'Salón', 'qr_token_mesa_04_j7k8l9'),
+(5, 5, 4, 'disponible', 'Salón', 'qr_token_mesa_05_m1n2o3'),
+(6, 6, 4, 'disponible', 'Salón', 'qr_token_mesa_06_p4q5r6'),
+(7, 7, 2, 'disponible', 'Salón', 'qr_token_mesa_07_s7t8u9'),
+(8, 8, 1, 'disponible', 'Mostrador – Para llevar', 'qr_token_mesa_08_v1w2x3');
 
 -- 5. Registro inicial de reservas de prueba
 INSERT INTO reservas (mesa_id, cliente_nombre, cliente_telefono, cliente_email, num_personas, fecha_hora, estado, notas) VALUES
-(8, 'Ing. Franz Guzmán (UNICEN)', '+591 71234567', 'franz.guzman@unicen.edu', 6, DATE_ADD(NOW(), INTERVAL 2 HOUR), 'confirmada', 'Reunión de docentes de Innovación Digital'),
+(6, 'Ing. Franz Guzmán (UNICEN)', '+591 71234567', 'franz.guzman@unicen.edu', 4, DATE_ADD(NOW(), INTERVAL 2 HOUR), 'confirmada', 'Reunión de docentes de Innovación Digital'),
 (3, 'Carla Mendoza', '+591 76543210', 'carla.mendoza@gmail.com', 4, DATE_ADD(NOW(), INTERVAL 4 HOUR), 'pendiente', 'Celebración de cumpleaños familiar');
 
 -- 6. Registro inicial en lista de espera

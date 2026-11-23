@@ -22,13 +22,13 @@ export const KdsBoard: React.FC = () => {
     return () => clearInterval(timer);
   }, []);
 
-  // Cargar pedidos activos de cocina (pendiente, en_proceso, terminado)
+  // Cargar pedidos de cocina: solo los YA PAGADOS (pagado, en_proceso, terminado)
   const fetchOrders = async () => {
     try {
       setLoading(true);
       const res = await api.get<Pedido[]>('/pedidos');
       const activos = res.filter((p) =>
-        ['pendiente', 'en_proceso', 'terminado'].includes(p.estado)
+        ['pagado', 'en_proceso', 'terminado'].includes(p.estado)
       );
       setPedidos(activos);
     } catch (err) {
@@ -58,7 +58,7 @@ export const KdsBoard: React.FC = () => {
 
     const handleEstadoPedido = (actualizado: Pedido) => {
       setPedidos((prev) => {
-        if (['entregado', 'pagado', 'cancelado'].includes(actualizado.estado)) {
+        if (['entregado', 'por_cobrar', 'cancelado'].includes(actualizado.estado)) {
           return prev.filter((p) => p.id !== actualizado.id);
         }
         const exists = prev.some((p) => p.id === actualizado.id);
@@ -89,7 +89,7 @@ export const KdsBoard: React.FC = () => {
 
       // Actualizar estado local inmediatamente
       setPedidos((prev) => {
-        if (['entregado', 'pagado', 'cancelado'].includes(nextState)) {
+        if (['entregado', 'cancelado'].includes(nextState)) {
           return prev.filter((p) => p.id !== pedidoId);
         }
         return prev.map((p) => (p.id === pedidoId ? res : p));
@@ -102,7 +102,7 @@ export const KdsBoard: React.FC = () => {
   };
 
   // Filtrado de pedidos por columnas Kanban
-  const pendientes = pedidos.filter((p) => p.estado === 'pendiente');
+  const pendientes = pedidos.filter((p) => p.estado === 'pagado');
   const enProceso = pedidos.filter((p) => p.estado === 'en_proceso');
   const terminados = pedidos.filter((p) => p.estado === 'terminado');
 
@@ -111,7 +111,7 @@ export const KdsBoard: React.FC = () => {
       {/* Barra de control superior de KDS */}
       <header className="bg-carbon-100 border border-carbon-200 rounded-2xl p-4 sm:p-5 shadow-warm mb-6 flex flex-wrap items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-xl bg-ocre-600 text-white flex items-center justify-center shadow-md">
+          <div className="w-12 h-12 rounded-xl bg-amarillo-600 text-white flex items-center justify-center shadow-md">
             <ChefHat className="w-6 h-6" />
           </div>
           <div>
@@ -121,7 +121,7 @@ export const KdsBoard: React.FC = () => {
             <div className="flex items-center gap-2 text-xs text-carbon-600 mt-0.5">
               <span>{pedidos.length} comandas en preparación activa</span>
               <span>•</span>
-              <span className={isConnected ? 'text-verde-400 font-bold' : 'text-ocre-400'}>
+              <span className={isConnected ? 'text-verde-400 font-bold' : 'text-amarillo-400'}>
                 {isConnected ? '🟢 Sockets Sincronizados' : '🟠 Reconectando'}
               </span>
             </div>
@@ -131,7 +131,7 @@ export const KdsBoard: React.FC = () => {
         {/* Reloj y Controles */}
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-carbon-50 border border-carbon-200 font-mono text-sm font-bold text-carbon-900">
-            <Clock className="w-4 h-4 text-ocre-400" />
+            <Clock className="w-4 h-4 text-amarillo-400" />
             <span>{currentTime.toLocaleTimeString()}</span>
           </div>
 
@@ -139,7 +139,7 @@ export const KdsBoard: React.FC = () => {
             onClick={() => setSoundEnabled(!soundEnabled)}
             className={`p-2.5 rounded-xl border transition-colors ${
               soundEnabled
-                ? 'bg-ocre-50 text-ocre-400 border-ocre-300'
+                ? 'bg-amarillo-50 text-amarillo-400 border-amarillo-300'
                 : 'bg-carbon-100 text-carbon-500 border-carbon-200'
             }`}
             title={soundEnabled ? 'Silenciar campanilla' : 'Activar campanilla'}
@@ -149,7 +149,7 @@ export const KdsBoard: React.FC = () => {
 
           <button
             onClick={fetchOrders}
-            className="p-2.5 rounded-xl bg-carbon-100 text-carbon-700 hover:text-terracota-400 border border-carbon-200"
+            className="p-2.5 rounded-xl bg-carbon-100 text-carbon-700 hover:text-rojo-400 border border-carbon-200"
             title="Refrescar comanderas"
           >
             <RefreshCw className="w-5 h-5" />
@@ -161,12 +161,12 @@ export const KdsBoard: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 flex-1">
         {/* Columna 1: PENDIENTES */}
         <section className="bg-carbon-50/70 border border-carbon-300 rounded-3xl p-4 flex flex-col shadow-xs">
-          <div className="flex items-center justify-between pb-3 mb-4 border-b border-ocre-300/80">
+          <div className="flex items-center justify-between pb-3 mb-4 border-b border-amarillo-300/80">
             <div className="flex items-center gap-2">
-              <span className="w-3.5 h-3.5 rounded-full bg-ocre-500 animate-pulse"></span>
-              <h2 className="font-serif text-lg font-bold text-ocre-400">Nuevos Pedidos</h2>
+              <span className="w-3.5 h-3.5 rounded-full bg-amarillo-500 animate-pulse"></span>
+              <h2 className="font-serif text-lg font-bold text-amarillo-400">Nuevos Pedidos</h2>
             </div>
-            <span className="px-2.5 py-0.5 rounded-full bg-ocre-100 text-ocre-400 text-xs font-bold border border-ocre-300">
+            <span className="px-2.5 py-0.5 rounded-full bg-amarillo-100 text-amarillo-400 text-xs font-bold border border-amarillo-300">
               {pendientes.length}
             </span>
           </div>
@@ -174,7 +174,7 @@ export const KdsBoard: React.FC = () => {
           <div className="space-y-4 flex-1 overflow-y-auto">
             {pendientes.length === 0 ? (
               <div className="h-48 flex items-center justify-center text-center text-xs text-carbon-500">
-                Sin pedidos pendientes de ingreso
+                Sin pedidos pagados por preparar
               </div>
             ) : (
               pendientes.map((p) => (
@@ -190,13 +190,13 @@ export const KdsBoard: React.FC = () => {
         </section>
 
         {/* Columna 2: EN PROCESO */}
-        <section className="bg-carbon-50/70 border border-ocre-300 rounded-3xl p-4 flex flex-col shadow-xs">
-          <div className="flex items-center justify-between pb-3 mb-4 border-b border-ocre-400/80">
+        <section className="bg-carbon-50/70 border border-amarillo-300 rounded-3xl p-4 flex flex-col shadow-xs">
+          <div className="flex items-center justify-between pb-3 mb-4 border-b border-amarillo-400/80">
             <div className="flex items-center gap-2">
-              <span className="w-3.5 h-3.5 rounded-full bg-ocre-500 animate-spin"></span>
-              <h2 className="font-serif text-lg font-bold text-ocre-400">En Preparación</h2>
+              <span className="w-3.5 h-3.5 rounded-full bg-amarillo-500 animate-spin"></span>
+              <h2 className="font-serif text-lg font-bold text-amarillo-400">En Preparación</h2>
             </div>
-            <span className="px-2.5 py-0.5 rounded-full bg-ocre-100 text-ocre-400 text-xs font-bold border border-ocre-300">
+            <span className="px-2.5 py-0.5 rounded-full bg-amarillo-100 text-amarillo-400 text-xs font-bold border border-amarillo-300">
               {enProceso.length}
             </span>
           </div>
