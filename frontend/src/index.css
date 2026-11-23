@@ -5,8 +5,8 @@
 /* ───────────── Base global ───────────── */
 @layer base {
   body {
-    background-color: #0D0C0C; /* carbon-50 */
-    color: #FFF8EE;            /* carbon-900 (blanco cálido) */
+    background-color: #FFE27A;
+    color: #18110B;
   }
   /* Foco visible para navegación por teclado */
   :focus-visible {
@@ -23,7 +23,7 @@
   }
   /* Botón DORADO: acciones premium / secundarias de énfasis */
   .btn-dorado {
-    @apply bg-amarillo-600 hover:bg-amarillo-700 active:bg-amarillo-800 text-carbon-50 font-semibold px-4 py-2.5 rounded-boton shadow-sm transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2;
+    @apply bg-amarillo-600 hover:bg-amarillo-700 active:bg-amarillo-800 text-carbon-900 font-semibold px-4 py-2.5 rounded-boton shadow-sm transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2;
   }
   /* Botón SECUNDARIO: solo contorno */
   .btn-contorno {
@@ -71,6 +71,6 @@
 
 /* Scrollbar refinada */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: #0D0C0C; }
+::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: #332E2E; border-radius: 9999px; }
 ::-webkit-scrollbar-thumb:hover { background: #D91E18; }
