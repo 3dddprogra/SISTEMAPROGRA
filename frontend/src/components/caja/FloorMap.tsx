@@ -1,15 +1,16 @@
 import React from 'react';
 import { Users, Clock, Receipt, CheckCircle, AlertCircle } from 'lucide-react';
-import { Mesa, Pedido } from '../../types';
+import { Mesa, Pedido, EstadoMesa } from '../../types';
 import { Badge } from '../common/Badge';
 
 interface Props {
   mesas: Mesa[];
   pedidosActivos: Map<number, Pedido>;
   onSelectMesa: (mesa: Mesa, pedido?: Pedido) => void;
+  onUpdateEstadoMesa: (mesaId: number, estado: EstadoMesa) => void;
 }
 
-export const FloorMap: React.FC<Props> = ({ mesas, pedidosActivos, onSelectMesa }) => {
+export const FloorMap: React.FC<Props> = ({ mesas, pedidosActivos, onSelectMesa, onUpdateEstadoMesa }) => {
   return (
     <div className="space-y-6">
       {/* Leyenda de estados */}
@@ -20,27 +21,27 @@ export const FloorMap: React.FC<Props> = ({ mesas, pedidosActivos, onSelectMesa 
           <span className="font-semibold text-carbon-800">Disponible</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <span className="w-3.5 h-3.5 rounded-md bg-terracota-700"></span>
+          <span className="w-3.5 h-3.5 rounded-md bg-rojo-700"></span>
           <span className="font-semibold text-carbon-900">Ocupada con Comanda</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <span className="w-3.5 h-3.5 rounded-md bg-ocre-600"></span>
-          <span className="font-semibold text-ocre-400">Reservada</span>
+          <span className="w-3.5 h-3.5 rounded-md bg-amarillo-600"></span>
+          <span className="font-semibold text-amarillo-400">Reservada</span>
         </div>
       </div>
 
       {/* Cuadrícula interactiva de mesas */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {mesas.map((mesa) => {
+        {mesas.filter((m) => m.numero !== 8).map((mesa) => { {/* la mesa 8 es virtual (Para llevar): no va en el plano */}
           const pedidoActivo = pedidosActivos.get(mesa.id);
           const isOcupada = mesa.estado === 'ocupada';
           const isReservada = mesa.estado === 'reservada';
 
           let cardBorder = 'border-carbon-200 hover:border-verde-400 bg-carbon-100';
           if (isOcupada) {
-            cardBorder = 'border-terracota-400 bg-gradient-to-br from-carbon-100 to-terracota-50/40 shadow-warm';
+            cardBorder = 'border-rojo-400 bg-gradient-to-br from-carbon-100 to-rojo-50/40 shadow-warm';
           } else if (isReservada) {
-            cardBorder = 'border-ocre-400 bg-gradient-to-br from-carbon-100 to-ocre-50/40';
+            cardBorder = 'border-amarillo-400 bg-gradient-to-br from-carbon-100 to-amarillo-50/40';
           }
 
           return (
@@ -55,9 +56,9 @@ export const FloorMap: React.FC<Props> = ({ mesas, pedidosActivos, onSelectMesa 
                     <div
                       className={`w-9 h-9 rounded-xl flex items-center justify-center font-serif font-bold text-base ${
                         isOcupada
-                          ? 'bg-terracota-700 text-white'
+                          ? 'bg-rojo-700 text-white'
                           : isReservada
-                          ? 'bg-ocre-600 text-white'
+                          ? 'bg-amarillo-600 text-white'
                           : 'bg-verde-100 text-verde-400'
                       }`}
                     >
@@ -73,18 +74,18 @@ export const FloorMap: React.FC<Props> = ({ mesas, pedidosActivos, onSelectMesa 
 
                 {/* Info de Ocupación / Comanda Activa */}
                 {isOcupada && pedidoActivo && (
-                  <div className="mt-3 p-2.5 rounded-xl bg-carbon-100/90 border border-terracota-200/60 shadow-xs space-y-1">
+                  <div className="mt-3 p-2.5 rounded-xl bg-carbon-100/90 border border-rojo-200/60 shadow-xs space-y-1">
                     <div className="flex items-center justify-between text-xs">
                       <span className="font-semibold text-carbon-900 truncate">
                         #{pedidoActivo.codigo}
                       </span>
-                      <span className="font-bold text-terracota-400">
+                      <span className="font-bold text-rojo-400">
                         Bs. {pedidoActivo.total.toFixed(2)}
                       </span>
                     </div>
                     <div className="flex items-center justify-between text-[11px] text-carbon-600">
                       <span>Platos: {pedidoActivo.detalles?.length || 0}</span>
-                      <span className="capitalize font-medium text-ocre-400">
+                      <span className="capitalize font-medium text-amarillo-400">
                         {pedidoActivo.estado.replace('_', ' ')}
                       </span>
                     </div>
@@ -99,10 +100,23 @@ export const FloorMap: React.FC<Props> = ({ mesas, pedidosActivos, onSelectMesa 
                   <span>Cap. {mesa.capacidad} pers.</span>
                 </span>
 
-                {isOcupada ? (
-                  <button className="text-[11px] font-bold text-terracota-400 hover:text-carbon-900 flex items-center gap-1">
+                {isOcupada && pedidoActivo?.estado === 'por_cobrar' ? (
+                  <button className="text-[11px] font-bold text-rojo-400 hover:text-carbon-900 flex items-center gap-1">
                     <Receipt className="w-3.5 h-3.5" />
                     <span>Cobrar</span>
+                  </button>
+                ) : isOcupada && pedidoActivo ? (
+                  <span className="text-[11px] font-medium text-verde-400">Pagado · en curso</span>
+                ) : isOcupada ? (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onUpdateEstadoMesa(mesa.id, 'disponible');
+                    }}
+                    className="text-[11px] font-bold text-verde-400 hover:text-carbon-900 flex items-center gap-1"
+                  >
+                    <CheckCircle className="w-3.5 h-3.5" />
+                    <span>Liberar mesa</span>
                   </button>
                 ) : (
                   <span className="text-[11px] font-medium text-verde-400">Disponible</span>

@@ -54,7 +54,7 @@ export const pedidoRepository = {
 
     // Actualizar estado de la mesa a 'ocupada'
     await conn.query<ResultSetHeader>(
-      `UPDATE mesas SET estado = 'ocupada' WHERE id = ?`,
+      `UPDATE mesas SET estado = 'ocupada' WHERE id = ? AND numero <> 8`, // la mesa 8 es virtual (para llevar)
       [pedido.mesa_id]
     );
 
@@ -101,7 +101,7 @@ export const pedidoRepository = {
     const [rows] = await pool.query<RowDataPacket[]>(
       `SELECT p.id
        FROM pedidos p
-       WHERE p.mesa_id = ? AND p.estado NOT IN ('pagado', 'cancelado')
+       WHERE p.mesa_id = ? AND p.estado NOT IN ('entregado', 'cancelado')
        ORDER BY p.id DESC
        LIMIT 1`,
       [mesaId]
@@ -189,7 +189,7 @@ export const pedidoRepository = {
 
   async cobrarPedido(id: number, metodoPago: MetodoPago): Promise<boolean> {
     const [result] = await pool.query<ResultSetHeader>(
-      `UPDATE pedidos SET estado = 'pagado', metodo_pago = ? WHERE id = ?`,
+      `UPDATE pedidos SET estado = 'pagado', metodo_pago = ? WHERE id = ? AND estado = 'por_cobrar'`,
       [metodoPago, id]
     );
     return result.affectedRows > 0;

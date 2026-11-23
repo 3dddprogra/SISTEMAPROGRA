@@ -57,9 +57,17 @@ export function getIO(): SocketIOServer | null {
 export const socketEmitter = {
   emitNuevoPedido(pedido: Pedido): void {
     if (!ioInstance) return;
-    logger.info(`Emitiendo 'pedido:nuevo' para pedido #${pedido.codigo} a 'cocina' y 'caja'`);
-    ioInstance.to('cocina').to('caja').emit('pedido:nuevo', pedido);
+    // Pre-pago: un pedido nuevo (por_cobrar) solo lo ve caja; la cocina aún NO lo recibe
+    logger.info(`Emitiendo 'pedido:nuevo' para pedido #${pedido.codigo} a 'caja'`);
+    ioInstance.to('caja').emit('pedido:nuevo', pedido);
     ioInstance.to(`mesa:${pedido.mesa_id}`).emit('pedido:estado', pedido);
+  },
+
+  // Se llama al confirmarse el pago: recién entonces el pedido llega a la cocina (KDS)
+  emitPedidoParaCocina(pedido: Pedido): void {
+    if (!ioInstance) return;
+    logger.info(`Emitiendo 'pedido:nuevo' (pagado) para pedido #${pedido.codigo} a 'cocina'`);
+    ioInstance.to('cocina').emit('pedido:nuevo', pedido);
   },
 
   emitEstadoPedido(pedido: Pedido): void {

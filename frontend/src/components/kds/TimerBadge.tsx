@@ -26,17 +26,17 @@ export const TimerBadge: React.FC<Props> = ({ createdAt }) => {
   let isAlert = false;
 
   if (elapsedMinutes >= 20) {
-    badgeStyle = 'bg-kantuta-100 text-kantuta-400 border-kantuta-400 animate-pulse';
+    badgeStyle = 'bg-peligro-100 text-peligro-400 border-peligro-400 animate-pulse';
     isAlert = true;
   } else if (elapsedMinutes >= 10) {
-    badgeStyle = 'bg-ocre-100 text-ocre-400 border-ocre-300';
+    badgeStyle = 'bg-amarillo-100 text-amarillo-400 border-amarillo-300';
   }
 
   return (
     <span
       className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold border shadow-xs ${badgeStyle}`}
     >
-      {isAlert ? <AlertTriangle className="w-3.5 h-3.5 text-kantuta-400" /> : <Clock className="w-3.5 h-3.5" />}
+      {isAlert ? <AlertTriangle className="w-3.5 h-3.5 text-peligro-400" /> : <Clock className="w-3.5 h-3.5" />}
       <span>{elapsedMinutes} min</span>
     </span>
   );

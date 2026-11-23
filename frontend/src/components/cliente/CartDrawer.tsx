@@ -43,17 +43,17 @@ export const CartDrawer: React.FC<Props> = ({
           {/* Header del carrito */}
           <div className="p-5 border-b border-carbon-200 bg-carbon-50/70 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-terracota-700 text-white flex items-center justify-center">
+              <div className="w-10 h-10 rounded-xl bg-rojo-700 text-white flex items-center justify-center">
                 <ShoppingBag className="w-5 h-5 text-carbon-900" />
               </div>
               <div>
                 <h2 className="font-serif text-lg font-bold text-carbon-900">Su Comanda</h2>
-                <span className="text-xs font-semibold text-ocre-400">Mesa #{mesaNumero}</span>
+                <span className="text-xs font-semibold text-amarillo-400">Mesa #{mesaNumero}</span>
               </div>
             </div>
             <button
               onClick={onClose}
-              className="p-2 text-carbon-600 hover:text-terracota-400 rounded-lg transition-colors"
+              className="p-2 text-carbon-600 hover:text-rojo-400 rounded-lg transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
@@ -80,7 +80,7 @@ export const CartDrawer: React.FC<Props> = ({
                     <h4 className="text-sm font-bold text-carbon-900 truncate">{item.producto.nombre}</h4>
                     <p className="text-xs text-carbon-700">Bs. {item.producto.precio.toFixed(2)} c/u</p>
                     {item.notas && (
-                      <p className="text-[11px] text-ocre-400 italic truncate mt-0.5">
+                      <p className="text-[11px] text-amarillo-400 italic truncate mt-0.5">
                         Nota: {item.notas}
                       </p>
                     )}
@@ -90,7 +90,7 @@ export const CartDrawer: React.FC<Props> = ({
                   <div className="flex items-center gap-1.5 bg-carbon-100 border border-carbon-200 rounded-lg p-1">
                     <button
                       onClick={() => onUpdateQuantity(item.producto.id, -1)}
-                      className="w-6 h-6 flex items-center justify-center text-xs font-bold text-carbon-700 hover:text-terracota-400"
+                      className="w-6 h-6 flex items-center justify-center text-xs font-bold text-carbon-700 hover:text-rojo-400"
                     >
                       -
                     </button>
@@ -99,7 +99,7 @@ export const CartDrawer: React.FC<Props> = ({
                     </span>
                     <button
                       onClick={() => onUpdateQuantity(item.producto.id, 1)}
-                      className="w-6 h-6 flex items-center justify-center text-xs font-bold text-carbon-700 hover:text-terracota-400"
+                      className="w-6 h-6 flex items-center justify-center text-xs font-bold text-carbon-700 hover:text-rojo-400"
                     >
                       +
                     </button>
@@ -107,7 +107,7 @@ export const CartDrawer: React.FC<Props> = ({
 
                   <button
                     onClick={() => onRemoveItem(item.producto.id)}
-                    className="p-1.5 text-carbon-400 hover:text-kantuta-400 transition-colors"
+                    className="p-1.5 text-carbon-400 hover:text-peligro-400 transition-colors"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -126,7 +126,7 @@ export const CartDrawer: React.FC<Props> = ({
                   value={notas}
                   onChange={(e) => setNotas(e.target.value)}
                   placeholder="Ej: Servir bebidas de inmediato, sin cubiertos de plástico..."
-                  className="w-full text-xs p-3 rounded-xl border border-carbon-300 bg-carbon-50/50 focus:bg-carbon-100 focus:outline-none focus:ring-1 focus:ring-terracota-600"
+                  className="w-full text-xs p-3 rounded-xl border border-carbon-300 bg-carbon-50/50 focus:bg-carbon-100 focus:outline-none focus:ring-1 focus:ring-rojo-600"
                 />
               </div>
             )}
@@ -141,7 +141,7 @@ export const CartDrawer: React.FC<Props> = ({
               </div>
               <div className="flex items-center justify-between text-base">
                 <span className="font-serif font-bold text-carbon-900">Total a Pagar:</span>
-                <span className="font-serif font-bold text-xl text-terracota-400">Bs. {total.toFixed(2)}</span>
+                <span className="font-serif font-bold text-xl text-rojo-400">Bs. {total.toFixed(2)}</span>
               </div>
 
               <button

@@ -8,25 +8,25 @@ interface Props {
 }
 
 const STEPS: Array<{ estado: EstadoPedido; label: string; desc: string; icon: React.ElementType }> = [
-  { estado: 'pendiente', label: 'Recibido', desc: 'Comanda ingresada al sistema', icon: Bell },
-  { estado: 'en_proceso', label: 'En Cocina', desc: 'Preparando ingredientes y cocción', icon: ChefHat },
-  { estado: 'terminado', label: 'Plato Listo', desc: 'Listo en barra para entrega', icon: Utensils },
-  { estado: 'entregado', label: 'En su Mesa', desc: '¡Buen provecho! Comida servida', icon: CheckCircle2 },
-  { estado: 'pagado', label: 'Pagado', desc: 'Cuenta saldada exitosamente', icon: Receipt },
+  { estado: 'por_cobrar', label: 'Registrado', desc: 'Pase a caja a pagar', icon: Receipt },
+  { estado: 'pagado', label: 'Pagado', desc: 'Enviado a la cocina', icon: Bell },
+  { estado: 'en_proceso', label: 'En Cocina', desc: 'Preparando su pedido', icon: ChefHat },
+  { estado: 'terminado', label: 'Plato Listo', desc: 'Listo para entregar', icon: Utensils },
+  { estado: 'entregado', label: 'Entregado', desc: '¡Buen provecho!', icon: CheckCircle2 },
 ];
 
 export const OrderTracker: React.FC<Props> = ({ pedido }) => {
   const getStepIndex = (estado: EstadoPedido): number => {
     switch (estado) {
-      case 'pendiente':
+      case 'por_cobrar':
         return 0;
-      case 'en_proceso':
-        return 1;
-      case 'terminado':
-        return 2;
-      case 'entregado':
-        return 3;
       case 'pagado':
+        return 1;
+      case 'en_proceso':
+        return 2;
+      case 'terminado':
+        return 3;
+      case 'entregado':
         return 4;
       default:
         return 0;
@@ -36,13 +36,13 @@ export const OrderTracker: React.FC<Props> = ({ pedido }) => {
   const currentIndex = getStepIndex(pedido.estado);
 
   return (
-    <div className="card-gourmet bg-gradient-to-br from-carbon-100 via-carbon-50/50 to-ocre-50/30 border-2 border-terracota-200 shadow-warm-lg mb-8">
+    <div className="card-gourmet bg-gradient-to-br from-carbon-100 via-carbon-50/50 to-amarillo-50/30 border-2 border-rojo-200 shadow-warm-lg mb-8">
       {/* Encabezado del seguimiento */}
       <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-carbon-200">
         <div>
           <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-ocre-500 animate-ping"></span>
-            <span className="text-xs font-bold uppercase tracking-wider text-ocre-400">
+            <span className="w-2.5 h-2.5 rounded-full bg-amarillo-500 animate-ping"></span>
+            <span className="text-xs font-bold uppercase tracking-wider text-amarillo-400">
               Seguimiento de Comanda en Vivo
             </span>
           </div>
@@ -63,6 +63,14 @@ export const OrderTracker: React.FC<Props> = ({ pedido }) => {
         </div>
       </div>
 
+      {/* Pre-pago: la cocina solo prepara el pedido cuando ya fue pagado en caja */}
+      {pedido.estado === 'por_cobrar' && (
+        <div className="mt-4 p-3.5 rounded-xl bg-amarillo-100 border border-amarillo-300 text-sm text-amarillo-400 font-semibold flex items-center gap-2">
+          <Receipt className="w-5 h-5 flex-shrink-0" />
+          <span>Acérquese a caja y pague Bs. {pedido.total.toFixed(2)} (efectivo o QR). Su pedido pasará a cocina apenas se confirme el pago.</span>
+        </div>
+      )}
+
       {/* Línea de tiempo visual responsiva */}
       <div className="py-6">
         <div className="relative">
@@ -70,7 +78,7 @@ export const OrderTracker: React.FC<Props> = ({ pedido }) => {
           <div className="absolute top-5 left-4 right-4 h-1 bg-carbon-200 -z-0" />
           {/* Barra de progreso activa */}
           <div
-            className="absolute top-5 left-4 h-1 bg-terracota-700 transition-all duration-700 -z-0"
+            className="absolute top-5 left-4 h-1 bg-rojo-700 transition-all duration-700 -z-0"
             style={{ width: `${(currentIndex / (STEPS.length - 1)) * 95}%` }}
           />
 
@@ -82,9 +90,9 @@ export const OrderTracker: React.FC<Props> = ({ pedido }) => {
 
               let iconBg = 'bg-carbon-100 border-2 border-carbon-300 text-carbon-400';
               if (isCompleted) {
-                iconBg = 'bg-terracota-700 text-white border-2 border-terracota-700 shadow-sm';
+                iconBg = 'bg-rojo-700 text-white border-2 border-rojo-700 shadow-sm';
               } else if (isCurrent) {
-                iconBg = 'bg-ocre-600 text-white border-2 border-ocre-600 ring-4 ring-ocre-100 shadow-md animate-pulse';
+                iconBg = 'bg-amarillo-600 text-white border-2 border-amarillo-600 ring-4 ring-amarillo-100 shadow-md animate-pulse';
               }
 
               return (
@@ -95,7 +103,7 @@ export const OrderTracker: React.FC<Props> = ({ pedido }) => {
                   <span
                     className={`mt-2 text-xs font-bold leading-tight ${
                       isCurrent
-                        ? 'text-ocre-400'
+                        ? 'text-amarillo-400'
                         : isCompleted
                         ? 'text-carbon-900'
                         : 'text-carbon-400'
@@ -126,7 +134,7 @@ export const OrderTracker: React.FC<Props> = ({ pedido }) => {
                 className="flex items-center justify-between p-2.5 rounded-lg bg-carbon-100 border border-carbon-200 text-xs"
               >
                 <div className="flex items-center gap-2">
-                  <span className="w-5 h-5 rounded-md bg-terracota-100 text-terracota-400 font-bold flex items-center justify-center text-[11px]">
+                  <span className="w-5 h-5 rounded-md bg-rojo-100 text-rojo-400 font-bold flex items-center justify-center text-[11px]">
                     {d.cantidad}x
                   </span>
                   <span className="font-semibold text-carbon-900 truncate max-w-[140px]">

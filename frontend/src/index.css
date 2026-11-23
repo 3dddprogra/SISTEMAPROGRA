@@ -5,29 +5,29 @@
 /* ───────────── Base global ───────────── */
 @layer base {
   body {
-    background-color: #0E0D0B; /* carbon-50 */
-    color: #F2E6D2;            /* carbon-900 (crema) */
+    background-color: #0D0C0C; /* carbon-50 */
+    color: #FFF8EE;            /* carbon-900 (blanco cálido) */
   }
   /* Foco visible para navegación por teclado */
   :focus-visible {
-    outline: 2px solid #C99643; /* ocre */
+    outline: 2px solid #FFC21A; /* amarillo */
     outline-offset: 2px;
   }
 }
 
 /* ───────────── Componentes reutilizables ───────────── */
 @layer components {
-  /* Botón PRIMARIO: fondo terracota */
+  /* Botón PRIMARIO: fondo rojo */
   .btn-primario {
-    @apply bg-terracota-600 hover:bg-terracota-800 active:bg-terracota-900 text-white font-semibold px-4 py-2.5 rounded-boton shadow-sm transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2;
+    @apply bg-rojo-600 hover:bg-rojo-800 active:bg-rojo-900 text-white font-semibold px-4 py-2.5 rounded-boton shadow-sm transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2;
   }
   /* Botón DORADO: acciones premium / secundarias de énfasis */
   .btn-dorado {
-    @apply bg-ocre-600 hover:bg-ocre-700 active:bg-ocre-800 text-carbon-50 font-semibold px-4 py-2.5 rounded-boton shadow-sm transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2;
+    @apply bg-amarillo-600 hover:bg-amarillo-700 active:bg-amarillo-800 text-carbon-50 font-semibold px-4 py-2.5 rounded-boton shadow-sm transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2;
   }
   /* Botón SECUNDARIO: solo contorno */
   .btn-contorno {
-    @apply border border-ocre-600 text-ocre-400 hover:bg-ocre-100 active:bg-ocre-200 font-semibold px-4 py-2 rounded-boton transition-all duration-200 inline-flex items-center justify-center gap-2;
+    @apply border border-amarillo-600 text-amarillo-400 hover:bg-amarillo-100 active:bg-amarillo-200 font-semibold px-4 py-2 rounded-boton transition-all duration-200 inline-flex items-center justify-center gap-2;
   }
   .btn-contorno-dorado {
     @apply border border-carbon-700 text-carbon-900 hover:bg-carbon-150 active:bg-carbon-200 font-semibold px-4 py-2 rounded-boton transition-all duration-200 inline-flex items-center justify-center gap-2;
@@ -36,9 +36,9 @@
   .btn-suave {
     @apply bg-transparent hover:bg-carbon-150 text-carbon-800 font-semibold px-4 py-2.5 rounded-boton transition-all duration-200 inline-flex items-center justify-center gap-2;
   }
-  /* Botón PELIGRO: rojo kantuta */
+  /* Botón PELIGRO: rojo peligro */
   .btn-peligro {
-    @apply bg-kantuta-600 hover:bg-kantuta-800 text-white font-semibold px-4 py-2.5 rounded-boton transition-all duration-200 inline-flex items-center justify-center gap-2;
+    @apply bg-peligro-600 hover:bg-peligro-800 text-white font-semibold px-4 py-2.5 rounded-boton transition-all duration-200 inline-flex items-center justify-center gap-2;
   }
 
   /* Tarjeta oscura con borde discreto */
@@ -47,32 +47,30 @@
   }
 
   /* Badges de estado */
-  .badge-terracota {
-    @apply bg-terracota-100 text-terracota-400 border border-terracota-200 px-2.5 py-0.5 rounded-full text-xs font-semibold uppercase tracking-wider;
+  .badge-rojo {
+    @apply bg-rojo-100 text-rojo-400 border border-rojo-200 px-2.5 py-0.5 rounded-full text-xs font-semibold uppercase tracking-wider;
   }
-  .badge-ocre {
-    @apply bg-ocre-100 text-ocre-400 border border-ocre-200 px-2.5 py-0.5 rounded-full text-xs font-semibold uppercase tracking-wider;
+  .badge-amarillo {
+    @apply bg-amarillo-100 text-amarillo-400 border border-amarillo-200 px-2.5 py-0.5 rounded-full text-xs font-semibold uppercase tracking-wider;
   }
   .badge-neutro {
     @apply bg-carbon-150 text-carbon-700 border border-carbon-200 px-2.5 py-0.5 rounded-full text-xs font-semibold uppercase tracking-wider;
   }
 
-  /* Detalle andino sutil: franja geométrica tipo aguayo (separadores / bordes) */
-  .franja-andina {
-    height: 6px;
-    background-image:
-      linear-gradient(135deg, #B95C3B 25%, transparent 25%),
-      linear-gradient(225deg, #C99643 25%, transparent 25%),
-      linear-gradient(45deg, #55735B 25%, transparent 25%),
-      linear-gradient(315deg, #963747 25%, #171512 25%);
-    background-size: 12px 12px;
-    background-position: 6px 0, 6px 0, 0 0, 0 0;
-    opacity: 0.85;
+  /* Franja de marca: rayas rojas y amarillas (separadores y bordes) */
+  .franja-nori {
+    height: 8px;
+    background-image: repeating-linear-gradient(
+      -45deg,
+      #D91E18 0 12px,
+      #FFC21A 12px 24px,
+      #0D0C0C 24px 28px
+    );
   }
 }
 
 /* Scrollbar refinada */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: #0E0D0B; }
-::-webkit-scrollbar-thumb { background: #3B3027; border-radius: 9999px; }
-::-webkit-scrollbar-thumb:hover { background: #B95C3B; }
+::-webkit-scrollbar-track { background: #0D0C0C; }
+::-webkit-scrollbar-thumb { background: #332E2E; border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: #D91E18; }

@@ -2,15 +2,20 @@ export type RolUsuario = 'admin' | 'cajero' | 'cocina';
 
 export type EstadoMesa = 'disponible' | 'ocupada' | 'reservada' | 'inactiva';
 
+// Modelo de PRE-PAGO (Nori Pollo): por_cobrar -> pagado -> en_proceso -> terminado -> entregado
 export type EstadoPedido =
-  | 'pendiente'
+  | 'por_cobrar'
+  | 'pagado'
   | 'en_proceso'
   | 'terminado'
   | 'entregado'
-  | 'pagado'
   | 'cancelado';
 
-export type MetodoPago = 'efectivo' | 'tarjeta' | 'qr' | 'transferencia';
+// RN09: solo se acepta efectivo o QR (no tarjeta, no factura)
+export type MetodoPago = 'efectivo' | 'qr';
+
+// RN01: la mesa virtual número 8 es el «Mostrador – Para llevar»
+export const MESA_PARA_LLEVAR = 8;
 
 export type EstadoReserva = 'pendiente' | 'confirmada' | 'cancelada' | 'completada';
 

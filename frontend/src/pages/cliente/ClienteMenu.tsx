@@ -152,15 +152,15 @@ export const ClienteMenu: React.FC = () => {
   return (
     <div className="min-h-screen bg-carbon-50 pb-24">
       {/* Banner de Bienvenida a la Mesa con Selector Rápido */}
-      <section className="bg-gradient-to-r from-carbon-100 via-terracota-950 to-carbon-100 text-white py-8 px-4 sm:px-6 shadow-md border-b border-ocre-600/60">
+      <section className="bg-gradient-to-r from-carbon-100 via-rojo-950 to-carbon-100 text-white py-8 px-4 sm:px-6 shadow-md border-b border-amarillo-600/60">
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-terracota-700/80 border border-terracota-600 text-xs font-semibold text-carbon-900 mb-2">
-              <Sparkles className="w-3.5 h-3.5 text-ocre-400" />
-              <span>Experiencia Gastronómica UNICEN</span>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rojo-700/80 border border-rojo-600 text-xs font-semibold text-carbon-900 mb-2">
+              <Sparkles className="w-3.5 h-3.5 text-amarillo-400" />
+              <span>Pollo broaster crocante · Nori Pollo</span>
             </div>
             <h1 className="font-serif text-3xl sm:text-4xl font-bold tracking-tight text-white">
-              Carta Digital • Mesa #{numericMesaId}
+              Carta Digital • {numericMesaId === 8 ? 'Para llevar' : `Mesa #${numericMesaId}`}
             </h1>
             <p className="text-xs sm:text-sm text-carbon-900 mt-1">
               Ordene cómodamente desde su smartphone. Sus platos se sincronizan al instante con cocina.
@@ -173,11 +173,11 @@ export const ClienteMenu: React.FC = () => {
             <select
               value={numericMesaId}
               onChange={(e) => navigate(`/m/${e.target.value}`)}
-              className="bg-terracota-700 text-white text-xs font-bold py-1.5 px-3 rounded-xl border border-terracota-500 focus:outline-none"
+              className="bg-rojo-700 text-white text-xs font-bold py-1.5 px-3 rounded-xl border border-rojo-500 focus:outline-none"
             >
               {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
                 <option key={n} value={n}>
-                  Mesa {n}
+                  {n === 8 ? 'Para llevar' : `Mesa ${n}`}
                 </option>
               ))}
             </select>
@@ -196,7 +196,7 @@ export const ClienteMenu: React.FC = () => {
         <div className="mb-6">
           <div className="flex items-center justify-between mb-3">
             <h2 className="font-serif text-xl font-bold text-carbon-900 flex items-center gap-2">
-              <Utensils className="w-5 h-5 text-terracota-400" />
+              <Utensils className="w-5 h-5 text-rojo-400" />
               Nuestras Especialidades
             </h2>
             <span className="text-xs text-carbon-600 font-medium">
@@ -236,12 +236,12 @@ export const ClienteMenu: React.FC = () => {
         <div className="fixed bottom-5 left-0 right-0 max-w-lg mx-auto px-4 z-40">
           <button
             onClick={() => setIsCartOpen(true)}
-            className="w-full bg-terracota-700 hover:bg-terracota-800 text-white p-4 rounded-2xl shadow-warm-lg flex items-center justify-between font-bold text-sm transition-all hover:scale-[1.02] border-2 border-ocre-400"
+            className="w-full bg-rojo-700 hover:bg-rojo-800 text-white p-4 rounded-2xl shadow-warm-lg flex items-center justify-between font-bold text-sm transition-all hover:scale-[1.02] border-2 border-amarillo-400"
           >
             <div className="flex items-center gap-3">
               <div className="relative">
                 <ShoppingBag className="w-6 h-6 text-carbon-900" />
-                <span className="absolute -top-2 -right-2 w-5 h-5 bg-ocre-500 text-white rounded-full text-xs font-bold flex items-center justify-center">
+                <span className="absolute -top-2 -right-2 w-5 h-5 bg-amarillo-500 text-white rounded-full text-xs font-bold flex items-center justify-center">
                   {totalCartCount}
                 </span>
               </div>

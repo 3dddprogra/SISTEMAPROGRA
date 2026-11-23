@@ -19,7 +19,7 @@ export const TableList: React.FC<Props> = ({
   const [search, setSearch] = useState('');
   const [filterEstado, setFilterEstado] = useState<string>('todos');
 
-  const filtered = mesas.filter((m) => {
+  const filtered = mesas.filter((m) => m.numero !== 8).filter((m) => {
     const matchesSearch =
       m.numero.toString().includes(search) ||
       m.ubicacion.toLowerCase().includes(search.toLowerCase());
@@ -38,7 +38,7 @@ export const TableList: React.FC<Props> = ({
             placeholder="Buscar por mesa o ubicación..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-carbon-300 bg-carbon-50/50 focus:bg-carbon-100 focus:outline-none focus:ring-1 focus:ring-terracota-600"
+            className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-carbon-300 bg-carbon-50/50 focus:bg-carbon-100 focus:outline-none focus:ring-1 focus:ring-rojo-600"
           />
         </div>
 
@@ -47,7 +47,7 @@ export const TableList: React.FC<Props> = ({
           <select
             value={filterEstado}
             onChange={(e) => setFilterEstado(e.target.value)}
-            className="text-xs py-2 px-3 rounded-xl border border-carbon-300 bg-carbon-50/50 focus:outline-none focus:ring-1 focus:ring-terracota-600 font-medium"
+            className="text-xs py-2 px-3 rounded-xl border border-carbon-300 bg-carbon-50/50 focus:outline-none focus:ring-1 focus:ring-rojo-600 font-medium"
           >
             <option value="todos">Todos los estados</option>
             <option value="disponible">Disponibles</option>
@@ -89,20 +89,20 @@ export const TableList: React.FC<Props> = ({
                   </td>
                   <td className="py-3.5 px-4 font-mono font-medium">
                     {pedido ? (
-                      <span className="text-terracota-400 font-bold">#{pedido.codigo}</span>
+                      <span className="text-rojo-400 font-bold">#{pedido.codigo}</span>
                     ) : (
                       <span className="text-carbon-400">-</span>
                     )}
                   </td>
                   <td className="py-3.5 px-4 font-bold">
                     {pedido ? (
-                      <span className="text-terracota-400">Bs. {pedido.total.toFixed(2)}</span>
+                      <span className="text-rojo-400">Bs. {pedido.total.toFixed(2)}</span>
                     ) : (
                       <span className="text-carbon-400">-</span>
                     )}
                   </td>
                   <td className="py-3.5 px-4 text-right space-x-2">
-                    {pedido ? (
+                    {pedido && pedido.estado === 'por_cobrar' ? (
                       <button
                         onClick={() => onSelectMesa(mesa, pedido)}
                         className="btn-primario text-[11px] py-1.5 px-3"

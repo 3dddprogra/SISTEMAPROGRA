@@ -8,6 +8,9 @@ import { ENV } from './config/env';
 
 export const app: Application = express();
 
+// El backend está detrás de Nginx: confiar en el proxy para contar bien las IP (límite de intentos de login)
+app.set('trust proxy', 1);
+
 // Seguridad con Helmet
 app.use(
   helmet({

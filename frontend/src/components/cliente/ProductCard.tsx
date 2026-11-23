@@ -28,7 +28,7 @@ export const ProductCard: React.FC<Props> = ({ producto, onAddToCart }) => {
       {/* Indicador de disponibilidad */}
       {!producto.disponible && (
         <div className="absolute inset-0 bg-carbon-100/80 backdrop-blur-xs z-10 flex items-center justify-center">
-          <span className="bg-kantuta-100 text-kantuta-400 border border-kantuta-300 px-4 py-1.5 rounded-full font-bold text-sm tracking-wide">
+          <span className="bg-peligro-100 text-peligro-400 border border-peligro-300 px-4 py-1.5 rounded-full font-bold text-sm tracking-wide">
             Agotado por el momento
           </span>
         </div>
@@ -39,17 +39,17 @@ export const ProductCard: React.FC<Props> = ({ producto, onAddToCart }) => {
         <div className="relative w-full h-44 rounded-xl overflow-hidden bg-carbon-100 mb-4">
           <PlatoImagen src={producto.imagen_url} alt={producto.nombre} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
           <div className="absolute bottom-2 left-2 flex items-center gap-1.5 bg-black/60 backdrop-blur-md text-white text-[11px] font-medium px-2.5 py-1 rounded-lg">
-            <Clock className="w-3.5 h-3.5 text-ocre-400" />
+            <Clock className="w-3.5 h-3.5 text-amarillo-400" />
             <span>~{producto.tiempo_estimado_min} min</span>
           </div>
-          <div className="absolute top-2 right-2 bg-terracota-700 text-white font-bold text-sm px-3 py-1 rounded-lg shadow-md">
+          <div className="absolute top-2 right-2 bg-rojo-700 text-white font-bold text-sm px-3 py-1 rounded-lg shadow-md">
             Bs. {producto.precio.toFixed(2)}
           </div>
         </div>
 
         {/* Datos del producto */}
         <div className="mb-3">
-          <span className="text-[11px] font-semibold tracking-wider text-ocre-400 uppercase">
+          <span className="text-[11px] font-semibold tracking-wider text-amarillo-400 uppercase">
             {producto.categoria_nombre || 'Especialidad'}
           </span>
           <h3 className="font-serif text-lg font-bold text-carbon-900 line-clamp-1 mt-0.5">
@@ -68,7 +68,7 @@ export const ProductCard: React.FC<Props> = ({ producto, onAddToCart }) => {
               placeholder="Instrucciones especiales (ej: sin picante)..."
               value={notas}
               onChange={(e) => setNotas(e.target.value)}
-              className="w-full text-xs px-3 py-2 rounded-lg border border-carbon-300 bg-carbon-50/50 focus:bg-carbon-100 focus:outline-none focus:ring-1 focus:ring-terracota-500"
+              className="w-full text-xs px-3 py-2 rounded-lg border border-carbon-300 bg-carbon-50/50 focus:bg-carbon-100 focus:outline-none focus:ring-1 focus:ring-rojo-500"
             />
           </div>
         )}
@@ -79,14 +79,14 @@ export const ProductCard: React.FC<Props> = ({ producto, onAddToCart }) => {
         <div className="flex items-center border border-carbon-200 rounded-xl bg-carbon-50/80 p-0.5">
           <button
             onClick={() => setCantidad(Math.max(1, cantidad - 1))}
-            className="w-7 h-7 flex items-center justify-center text-carbon-700 hover:text-terracota-400 hover:bg-carbon-100 rounded-lg transition-colors"
+            className="w-7 h-7 flex items-center justify-center text-carbon-700 hover:text-rojo-400 hover:bg-carbon-100 rounded-lg transition-colors"
           >
             <Minus className="w-3.5 h-3.5" />
           </button>
           <span className="w-7 text-center font-bold text-sm text-carbon-900">{cantidad}</span>
           <button
             onClick={() => setCantidad(cantidad + 1)}
-            className="w-7 h-7 flex items-center justify-center text-carbon-700 hover:text-terracota-400 hover:bg-carbon-100 rounded-lg transition-colors"
+            className="w-7 h-7 flex items-center justify-center text-carbon-700 hover:text-rojo-400 hover:bg-carbon-100 rounded-lg transition-colors"
           >
             <Plus className="w-3.5 h-3.5" />
           </button>
@@ -95,7 +95,7 @@ export const ProductCard: React.FC<Props> = ({ producto, onAddToCart }) => {
         <div className="flex items-center gap-1.5 flex-1 justify-end">
           <button
             onClick={() => setShowNotes(!showNotes)}
-            className="text-[11px] text-carbon-600 hover:text-terracota-400 underline px-1"
+            className="text-[11px] text-carbon-600 hover:text-rojo-400 underline px-1"
           >
             {showNotes ? 'Ocultar' : '+ Nota'}
           </button>

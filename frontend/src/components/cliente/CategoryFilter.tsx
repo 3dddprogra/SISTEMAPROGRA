@@ -14,8 +14,8 @@ export const CategoryFilter: React.FC<Props> = ({ categorias, selectedId, onSele
         onClick={() => onSelect(null)}
         className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all whitespace-nowrap shadow-xs ${
           selectedId === null
-            ? 'bg-terracota-700 text-white shadow-sm'
-            : 'bg-carbon-100 border border-carbon-200 text-carbon-700 hover:bg-carbon-100 hover:text-terracota-400'
+            ? 'bg-rojo-700 text-white shadow-sm'
+            : 'bg-carbon-100 border border-carbon-200 text-carbon-700 hover:bg-carbon-100 hover:text-rojo-400'
         }`}
       >
         🍽️ Todos los Platos
@@ -29,8 +29,8 @@ export const CategoryFilter: React.FC<Props> = ({ categorias, selectedId, onSele
             onClick={() => onSelect(cat.id)}
             className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all whitespace-nowrap shadow-xs ${
               isSelected
-                ? 'bg-terracota-700 text-white shadow-sm'
-                : 'bg-carbon-100 border border-carbon-200 text-carbon-700 hover:bg-carbon-100 hover:text-terracota-400'
+                ? 'bg-rojo-700 text-white shadow-sm'
+                : 'bg-carbon-100 border border-carbon-200 text-carbon-700 hover:bg-carbon-100 hover:text-rojo-400'
             }`}
           >
             {cat.nombre}

@@ -44,33 +44,28 @@ echo -e "${GREEN}[OK] MySQL Server instalado y ejecutándose.${NC}"
 echo -e "\n${YELLOW}[PASO 3/6] Configurando acceso de red en MySQL (bind-address)...${NC}"
 MYSQL_CNF="/etc/mysql/mysql.conf.d/mysqld.cnf"
 if grep -q "bind-address" "$MYSQL_CNF"; then
-  sed -i 's/bind-address\s*=.*/bind-address = 0.0.0.0/' "$MYSQL_CNF"
+  sed -i 's/bind-address\s*=.*/bind-address = ${VM_DB_IP}/' "$MYSQL_CNF"
 else
   echo "[mysqld]" >> "$MYSQL_CNF"
-  echo "bind-address = 0.0.0.0" >> "$MYSQL_CNF"
+  echo "bind-address = ${VM_DB_IP}" >> "$MYSQL_CNF"
 fi
 systemctl restart mysql
-echo -e "${GREEN}[OK] bind-address configurado a 0.0.0.0 y servicio reiniciado.${NC}"
+echo -e "${GREEN}[OK] bind-address configurado a ${VM_DB_IP} (solo la red interna) y servicio reiniciado.${NC}"
 
 # [PASO 4/6] Crear base de datos y usuario con permisos
 echo -e "\n${YELLOW}[PASO 4/6] Creando base de datos '${DB_NAME}' y usuario '${DB_USER}'...${NC}"
 mysql -uroot <<EOSQL
 CREATE DATABASE IF NOT EXISTS \`${DB_NAME}\` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
--- Usuario para la VM Backend
+-- Usuario de la aplicación: SOLO existe para la IP de la VM del backend y con permisos mínimos (RNF04)
 CREATE USER IF NOT EXISTS '${DB_USER}'@'${VM_BACKEND_IP}' IDENTIFIED BY '${DB_PASSWORD}';
 ALTER USER '${DB_USER}'@'${VM_BACKEND_IP}' IDENTIFIED BY '${DB_PASSWORD}';
-GRANT ALL PRIVILEGES ON \`${DB_NAME}\`.* TO '${DB_USER}'@'${VM_BACKEND_IP}';
+REVOKE ALL PRIVILEGES, GRANT OPTION FROM '${DB_USER}'@'${VM_BACKEND_IP}';
+GRANT SELECT, INSERT, UPDATE, DELETE ON \`${DB_NAME}\`.* TO '${DB_USER}'@'${VM_BACKEND_IP}';
 
--- Usuario para localhost (mantenimiento y verificación)
-CREATE USER IF NOT EXISTS '${DB_USER}'@'localhost' IDENTIFIED BY '${DB_PASSWORD}';
-ALTER USER '${DB_USER}'@'localhost' IDENTIFIED BY '${DB_PASSWORD}';
-GRANT ALL PRIVILEGES ON \`${DB_NAME}\`.* TO '${DB_USER}'@'localhost';
-
--- Usuario para la subnet completa host-only (resiliencia de red)
-CREATE USER IF NOT EXISTS '${DB_USER}'@'192.168.56.%' IDENTIFIED BY '${DB_PASSWORD}';
-ALTER USER '${DB_USER}'@'192.168.56.%' IDENTIFIED BY '${DB_PASSWORD}';
-GRANT ALL PRIVILEGES ON \`${DB_NAME}\`.* TO '${DB_USER}'@'192.168.56.%';
+-- Se eliminan usuarios más amplios de versiones anteriores del script
+DROP USER IF EXISTS '${DB_USER}'@'localhost';
+DROP USER IF EXISTS '${DB_USER}'@'192.168.56.%';
 
 FLUSH PRIVILEGES;
 EOSQL
@@ -82,7 +77,7 @@ SCHEMA_FILE="${ROOT_DIR}/database/schema.sql"
 SEED_FILE="${ROOT_DIR}/database/seed.sql"
 
 if [[ -f "$SCHEMA_FILE" ]]; then
-  mysql -u"${DB_USER}" -p"${DB_PASSWORD}" "${DB_NAME}" < "$SCHEMA_FILE"
+  mysql -uroot --default-character-set=utf8mb4 "${DB_NAME}" < "$SCHEMA_FILE"
   echo -e "${GREEN}[OK] Tablas creadas con éxito desde schema.sql.${NC}"
 else
   echo -e "${RED}[ERROR] Archivo ${SCHEMA_FILE} no encontrado.${NC}"
@@ -90,7 +85,7 @@ else
 fi
 
 if [[ -f "$SEED_FILE" ]]; then
-  mysql -u"${DB_USER}" -p"${DB_PASSWORD}" "${DB_NAME}" < "$SEED_FILE"
+  mysql -uroot --default-character-set=utf8mb4 "${DB_NAME}" < "$SEED_FILE"
   echo -e "${GREEN}[OK] Datos iniciales insertados desde seed.sql.${NC}"
 else
   echo -e "${RED}[ERROR] Archivo ${SEED_FILE} no encontrado.${NC}"
@@ -99,11 +94,11 @@ fi
 
 # [PASO 6/6] Configuración del Firewall UFW
 echo -e "\n${YELLOW}[PASO 6/6] Configurando reglas de firewall (UFW)...${NC}"
-ufw --force enable
 ufw default deny incoming
 ufw default allow outgoing
 ufw allow 22/tcp comment 'SSH'
 ufw allow from "${VM_BACKEND_IP}" to any port 3306 proto tcp comment 'MySQL desde Backend'
+ufw --force enable
 ufw reload
 echo -e "${GREEN}[OK] Firewall UFW configurado y activo.${NC}"
 
@@ -112,15 +107,15 @@ echo -e "\n${CYAN}=======================================================${NC}"
 echo -e "${CYAN}  VERIFICACIÓN AUTOMÁTICA DE VM BASE DE DATOS         ${NC}"
 echo -e "${CYAN}=======================================================${NC}"
 
-TOTAL_PROD=$(mysql -u"${DB_USER}" -p"${DB_PASSWORD}" -N -e "SELECT COUNT(*) FROM \`${DB_NAME}\`.productos;")
-TOTAL_MESAS=$(mysql -u"${DB_USER}" -p"${DB_PASSWORD}" -N -e "SELECT COUNT(*) FROM \`${DB_NAME}\`.mesas;")
-TOTAL_USERS=$(mysql -u"${DB_USER}" -p"${DB_PASSWORD}" -N -e "SELECT COUNT(*) FROM \`${DB_NAME}\`.usuarios;")
+TOTAL_PROD=$(mysql -uroot -N -e "SELECT COUNT(*) FROM \`${DB_NAME}\`.productos;")
+TOTAL_MESAS=$(mysql -uroot -N -e "SELECT COUNT(*) FROM \`${DB_NAME}\`.mesas;")
+TOTAL_USERS=$(mysql -uroot -N -e "SELECT COUNT(*) FROM \`${DB_NAME}\`.usuarios;")
 
-echo -e "Productos en BD : ${TOTAL_PROD} (esperado >= 15)"
-echo -e "Mesas activas   : ${TOTAL_MESAS} (esperado >= 8)"
+echo -e "Productos en BD : ${TOTAL_PROD} (esperado >= 21)"
+echo -e "Mesas activas   : ${TOTAL_MESAS} (esperado >= 8: 7 mesas + Para llevar)"
 echo -e "Usuarios staff  : ${TOTAL_USERS} (esperado >= 3)"
 
-if [[ "$TOTAL_PROD" -ge 15 && "$TOTAL_MESAS" -ge 8 && "$TOTAL_USERS" -ge 3 ]]; then
+if [[ "$TOTAL_PROD" -ge 21 && "$TOTAL_MESAS" -ge 8 && "$TOTAL_USERS" -ge 3 ]]; then
   echo -e "\n${GREEN}[OK] Verificación completada exitosamente. VM 1 (DB) lista para producción.${NC}"
 else
   echo -e "\n${RED}[ERROR] La verificación no cumplió con las cantidades mínimas esperadas.${NC}"

@@ -23,17 +23,15 @@ export const Navbar: React.FC = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo y Marca */}
           <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-xl bg-terracota-700 flex items-center justify-center text-white shadow-md group-hover:bg-terracota-800 transition-colors">
-              <Utensils className="w-5 h-5 text-carbon-900" />
-            </div>
-            <div>
-              <span className="font-serif text-xl font-bold tracking-tight text-carbon-900 group-hover:text-terracota-400 transition-colors">
-                FOOD<span className="text-ocre-400 font-sans">TECH</span>
-              </span>
-              <span className="block text-[10px] font-semibold tracking-wider text-carbon-600 uppercase -mt-1">
-                Restaurante Inteligente
-              </span>
-            </div>
+            {/* Logo oficial de Nori Pollo: frontend/public/menu/logo-rotulo.jpg */}
+            <img
+              src="/menu/logo-rotulo.jpg"
+              alt="Nori Pollo"
+              className="h-11 w-auto rounded-lg border border-carbon-200 shadow-md group-hover:scale-105 transition-transform"
+            />
+            <span className="hidden sm:block text-[10px] font-semibold tracking-wider text-carbon-600 uppercase leading-tight">
+              Pedidos<br />en línea
+            </span>
           </Link>
 
           {/* Estado de Conexión WebSocket */}
@@ -46,9 +44,9 @@ export const Navbar: React.FC = () => {
               </>
             ) : (
               <>
-                <span className="w-2 h-2 rounded-full bg-ocre-500"></span>
-                <WifiOff className="w-3.5 h-3.5 text-ocre-400" />
-                <span className="text-ocre-400 font-medium">Reconectando...</span>
+                <span className="w-2 h-2 rounded-full bg-amarillo-500"></span>
+                <WifiOff className="w-3.5 h-3.5 text-amarillo-400" />
+                <span className="text-amarillo-400 font-medium">Reconectando...</span>
               </>
             )}
           </div>
@@ -59,11 +57,11 @@ export const Navbar: React.FC = () => {
               to="/m/1"
               className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-medium transition-all ${
                 isActive('/m/1')
-                  ? 'bg-terracota-50 text-terracota-400 font-semibold shadow-xs'
-                  : 'text-carbon-700 hover:text-terracota-400 hover:bg-carbon-100'
+                  ? 'bg-rojo-50 text-rojo-400 font-semibold shadow-xs'
+                  : 'text-carbon-700 hover:text-rojo-400 hover:bg-carbon-100'
               }`}
             >
-              <QrCode className="w-4 h-4 text-terracota-400" />
+              <QrCode className="w-4 h-4 text-rojo-400" />
               Menú QR (Mesa)
             </Link>
 
@@ -71,11 +69,11 @@ export const Navbar: React.FC = () => {
               to="/kds"
               className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-medium transition-all ${
                 isActive('/kds')
-                  ? 'bg-ocre-50 text-ocre-400 font-semibold shadow-xs'
-                  : 'text-carbon-700 hover:text-ocre-400 hover:bg-carbon-100'
+                  ? 'bg-amarillo-50 text-amarillo-400 font-semibold shadow-xs'
+                  : 'text-carbon-700 hover:text-amarillo-400 hover:bg-carbon-100'
               }`}
             >
-              <ChefHat className="w-4 h-4 text-ocre-400" />
+              <ChefHat className="w-4 h-4 text-amarillo-400" />
               Cocina (KDS)
             </Link>
 
@@ -83,8 +81,8 @@ export const Navbar: React.FC = () => {
               to="/caja"
               className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-medium transition-all ${
                 isActive('/caja')
-                  ? 'bg-terracota-700 text-white font-semibold shadow-sm'
-                  : 'text-carbon-700 hover:text-terracota-400 hover:bg-carbon-100'
+                  ? 'bg-rojo-700 text-white font-semibold shadow-sm'
+                  : 'text-carbon-700 hover:text-rojo-400 hover:bg-carbon-100'
               }`}
             >
               <LayoutDashboard className="w-4 h-4" />
@@ -98,14 +96,14 @@ export const Navbar: React.FC = () => {
               <div className="flex items-center gap-3 pl-3 border-l border-carbon-200">
                 <div className="text-right">
                   <div className="text-xs font-semibold text-carbon-900">{user.nombre}</div>
-                  <span className="inline-block px-2 py-0.5 text-[10px] font-bold uppercase rounded-md bg-terracota-100 text-terracota-400">
+                  <span className="inline-block px-2 py-0.5 text-[10px] font-bold uppercase rounded-md bg-rojo-100 text-rojo-400">
                     {user.rol}
                   </span>
                 </div>
                 <button
                   onClick={logout}
                   title="Cerrar sesión"
-                  className="p-2 text-carbon-600 hover:text-terracota-400 hover:bg-terracota-50 rounded-lg transition-colors"
+                  className="p-2 text-carbon-600 hover:text-rojo-400 hover:bg-rojo-50 rounded-lg transition-colors"
                 >
                   <LogOut className="w-4 h-4" />
                 </button>
@@ -125,7 +123,7 @@ export const Navbar: React.FC = () => {
           <div className="flex items-center md:hidden gap-2">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-carbon-700 hover:text-terracota-400 rounded-lg focus:outline-none"
+              className="p-2 text-carbon-700 hover:text-rojo-400 rounded-lg focus:outline-none"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -141,7 +139,7 @@ export const Navbar: React.FC = () => {
             onClick={() => setMobileMenuOpen(false)}
             className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-base font-medium text-carbon-900 hover:bg-carbon-100"
           >
-            <QrCode className="w-5 h-5 text-terracota-400" />
+            <QrCode className="w-5 h-5 text-rojo-400" />
             Menú QR Clientes
           </Link>
           <Link
@@ -149,7 +147,7 @@ export const Navbar: React.FC = () => {
             onClick={() => setMobileMenuOpen(false)}
             className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-base font-medium text-carbon-900 hover:bg-carbon-100"
           >
-            <ChefHat className="w-5 h-5 text-ocre-400" />
+            <ChefHat className="w-5 h-5 text-amarillo-400" />
             Cocina (KDS)
           </Link>
           <Link
@@ -157,7 +155,7 @@ export const Navbar: React.FC = () => {
             onClick={() => setMobileMenuOpen(false)}
             className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-base font-medium text-carbon-900 hover:bg-carbon-100"
           >
-            <LayoutDashboard className="w-5 h-5 text-terracota-400" />
+            <LayoutDashboard className="w-5 h-5 text-rojo-400" />
             Caja & Salón
           </Link>
 
