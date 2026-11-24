@@ -1,6 +1,9 @@
 import { ApiResponse } from '../types';
 
-const BASE_URL = 'http://192.168.0.15:3000/api/v1';
+// Ruta relativa: el navegador llama a la MISMA dirección desde la que cargó la página.
+// En las VMs, Nginx (VM del frontend) reenvía /api al backend; en desarrollo lo hace el proxy de Vite.
+// Así no hay ninguna IP escrita en el código y funciona en cualquier red.
+const BASE_URL = '/api/v1';
 
 export class ApiError extends Error {
   public code: string;
