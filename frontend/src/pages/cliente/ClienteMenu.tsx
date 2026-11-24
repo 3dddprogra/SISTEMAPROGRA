@@ -4,12 +4,14 @@ import { ShoppingBag, Sparkles, Utensils, AlertCircle } from 'lucide-react';
 import { Producto, Categoria, CartItem, Pedido } from '../../types';
 import { api } from '../../services/api';
 import { useSocket } from '../../hooks/useSocket';
+import { useAuth } from '../../context/AuthContext';
 import { CategoryFilter } from '../../components/cliente/CategoryFilter';
 import { ProductCard } from '../../components/cliente/ProductCard';
 import { CartDrawer } from '../../components/cliente/CartDrawer';
 import { OrderTracker } from '../../components/cliente/OrderTracker';
 
 export const ClienteMenu: React.FC = () => {
+  const { isAuthenticated } = useAuth(); // el selector de mesa es solo para el personal
   const { mesaId = '1' } = useParams<{ mesaId: string }>();
   const navigate = useNavigate();
   const numericMesaId = parseInt(mesaId, 10) || 1;
@@ -152,7 +154,7 @@ export const ClienteMenu: React.FC = () => {
   return (
     <div className="min-h-screen bg-carbon-50 pb-24">
       {/* Banner de Bienvenida a la Mesa con Selector Rápido */}
-      <section className="bg-gradient-to-r from-rojo-600 via-rojo-500 to-amarillo-600 text-white py-8 px-4 sm:px-6 shadow-md border-b border-amarillo-600/60">
+      <section className="bg-gradient-to-r from-rojo-700 via-rojo-600 to-amarillo-600 text-white py-8 px-4 sm:px-6 shadow-md border-b border-amarillo-600/60">
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rojo-700/80 border border-rojo-600 text-xs font-semibold text-white mb-2">
@@ -167,7 +169,8 @@ export const ClienteMenu: React.FC = () => {
             </p>
           </div>
 
-          {/* Selector de mesa para pruebas de simulación */}
+          {/* Selector de mesa: solo lo ve el personal (el cliente queda fijo en su mesa) */}
+          {isAuthenticated && (
           <div className="flex items-center gap-2 bg-black/30 backdrop-blur-md p-2 rounded-2xl border border-white/10 self-start sm:self-auto">
             <span className="text-xs font-medium text-white pl-2">Cambiar Mesa:</span>
             <select
@@ -182,6 +185,7 @@ export const ClienteMenu: React.FC = () => {
               ))}
             </select>
           </div>
+          )}
         </div>
       </section>
 

@@ -7,6 +7,8 @@ import { ClienteMenu } from './pages/cliente/ClienteMenu';
 import { KdsBoard } from './pages/kds/KdsBoard';
 import { CajaDashboard } from './pages/caja/CajaDashboard';
 import { LoginPage } from './pages/auth/LoginPage';
+import { ProtectedRoute } from './components/common/ProtectedRoute';
+import { useAuth } from './context/AuthContext';
 import { api } from './services/api';
 import { Producto } from './types';
 import {
@@ -21,6 +23,7 @@ import {
 // tailwind.config.js (rojo, amarillo, carbon, verde...).
 // ─────────────────────────────────────────────────────────────
 const LandingPage: React.FC = () => {
+  const { isAuthenticated } = useAuth(); // los accesos a caja y cocina son solo para el personal
   // Platos destacados: datos REALES de la API (los primeros disponibles)
   const [destacados, setDestacados] = useState<Producto[]>([]);
   useEffect(() => {
@@ -41,26 +44,26 @@ const LandingPage: React.FC = () => {
     <div className="min-h-screen bg-carbon-50">
       {/* ───── HERO ───── */}
       <section className="relative overflow-hidden border-b border-carbon-200">
-        <div className="absolute inset-0 bg-gradient-to-br from-amarillo-400 via-amarillo-500 to-rojo-400" />
+        <div className="absolute inset-0 bg-gradient-to-br from-rojo-600 via-rojo-500 to-amarillo-500" />
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 py-16 md:py-24 grid md:grid-cols-2 gap-10 items-center">
           <div className="space-y-5">
-            <span className="inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-rojo-700">
+            <span className="inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-amarillo-200">
               Comida rápida · Cochabamba
             </span>
-            <h1 className="font-serif text-4xl sm:text-6xl font-bold leading-tight text-carbon-900">
+            <h1 className="font-serif text-4xl sm:text-6xl font-bold leading-tight text-white">
               Pollo broaster{' '}
-              <span className="italic text-rojo-700">crocante y dorado</span>
+              <span className="italic text-amarillo-200">crocante y dorado</span>
             </h1>
-            <p className="text-carbon-700 max-w-md leading-relaxed">
+            <p className="text-white/90 max-w-md leading-relaxed">
               Nori Pollito, Nori Pollo, Nori Combo y pipokas de pollo. Escanea el QR de tu mesa, arma tu
               pedido, paga en caja (efectivo o QR) y sigue tu pedido en vivo.
             </p>
             <div className="flex flex-wrap gap-3 pt-2">
-              <Link to="/m/1" className="btn-primario px-6 py-3">
+              <Link to="/m/1" className="inline-flex items-center gap-2 px-6 py-3 rounded-boton bg-amarillo-500 text-carbon-900 font-bold shadow-warm hover:bg-amarillo-600 transition-colors">
                 Ver Menú <ArrowRight className="w-4 h-4" />
               </Link>
               {/* "Reservar Mesa" lleva a la sección de Contacto (no hay reserva pública en el sistema) */}
-              <a href="#contacto" className="inline-flex items-center gap-2 px-6 py-3 rounded-boton border-2 border-carbon-900 text-carbon-900 font-semibold hover:bg-white/40">
+              <a href="#contacto" className="inline-flex items-center gap-2 px-6 py-3 rounded-boton border-2 border-white text-white font-semibold hover:bg-white/15">
                 <CalendarClock className="w-4 h-4" /> Reservar Mesa
               </a>
             </div>
@@ -138,7 +141,8 @@ const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* ───── ACCESO A LOS MÓDULOS DEL SISTEMA ───── */}
+      {/* ───── ACCESO A LOS MÓDULOS DEL SISTEMA (solo personal con sesión) ───── */}
+      {isAuthenticated && (
       <section className="max-w-6xl mx-auto px-4 sm:px-6 py-14">
         <h2 className="font-serif text-3xl font-bold text-carbon-900 text-center mb-1">Acceso al sistema</h2>
         <p className="text-sm text-carbon-600 text-center mb-8">Módulos del sistema FoodTech para el personal y los clientes</p>
@@ -204,6 +208,7 @@ const LandingPage: React.FC = () => {
           </div>
         </div>
       </section>
+      )}
 
       {/* ───── CONTACTO (datos por definir: no inventamos información real) ───── */}
       <section id="contacto" className="bg-carbon-100 border-t border-carbon-200 scroll-mt-16">
@@ -241,8 +246,8 @@ export const App: React.FC = () => {
             <Routes>
               <Route path="/" element={<LandingPage />} />
               <Route path="/m/:mesaId" element={<ClienteMenu />} />
-              <Route path="/kds" element={<KdsBoard />} />
-              <Route path="/caja" element={<CajaDashboard />} />
+              <Route path="/kds" element={<ProtectedRoute roles={['cocina']}><KdsBoard /></ProtectedRoute>} />
+              <Route path="/caja" element={<ProtectedRoute roles={['cajero']}><CajaDashboard /></ProtectedRoute>} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>

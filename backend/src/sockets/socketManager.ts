@@ -2,6 +2,20 @@ import { Server as SocketIOServer, Socket } from 'socket.io';
 import { Server as HttpServer } from 'http';
 import { Pedido, EstadoMesa, Reserva, ListaEspera } from '../types';
 import { logger } from '../utils/logger';
+import { verifyToken } from '../middleware/auth';
+import { JwtPayload } from '../types';
+
+// Quién puede escuchar cada sala en tiempo real (el admin puede todas)
+const ROLES_POR_SALA: Record<'cocina' | 'caja', string[]> = {
+  cocina: ['cocina', 'admin'],
+  caja: ['cajero', 'admin'],
+};
+
+export function puedeUnirseASala(sala: 'cocina' | 'caja', token?: string | null): boolean {
+  if (!token) return false;
+  const payload = verifyToken<JwtPayload>(token);
+  return !!payload && ROLES_POR_SALA[sala].includes(payload.rol);
+}
 
 let ioInstance: SocketIOServer | null = null;
 
@@ -28,14 +42,22 @@ export function initSocketIO(server: HttpServer): SocketIOServer {
     });
 
     // Unirse a sala de cocina (KDS)
-    socket.on('unirse:cocina', () => {
+    socket.on('unirse:cocina', (token?: string) => {
+      if (!puedeUnirseASala('cocina', token)) {
+        socket.emit('error:autorizacion', { sala: 'cocina', message: 'Se requiere iniciar sesión como cocina.' });
+        return;
+      }
       socket.join('cocina');
       logger.info(`Socket ${socket.id} se unió a sala 'cocina'`);
       socket.emit('conectado:cocina', { ok: true });
     });
 
     // Unirse a sala de caja / administración
-    socket.on('unirse:caja', () => {
+    socket.on('unirse:caja', (token?: string) => {
+      if (!puedeUnirseASala('caja', token)) {
+        socket.emit('error:autorizacion', { sala: 'caja', message: 'Se requiere iniciar sesión como cajero.' });
+        return;
+      }
       socket.join('caja');
       logger.info(`Socket ${socket.id} se unió a sala 'caja'`);
       socket.emit('conectado:caja', { ok: true });

@@ -5,10 +5,16 @@ import { useAuth } from '../../context/AuthContext';
 import { useSocket } from '../../hooks/useSocket';
 
 export const Navbar: React.FC = () => {
-  const { user, logout, isAuthenticated } = useAuth();
+  const { user, logout, isAuthenticated, hasRole } = useAuth();
   const { isConnected } = useSocket();
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Cliente que entró por el QR: sin sesión y dentro del menú de una mesa (/m/…).
+  // No debe ver NADA del personal: ni enlaces a caja/cocina ni el botón de ingreso.
+  const esClienteQR = !isAuthenticated && location.pathname.startsWith('/m/');
+  const veCocina = hasRole(['cocina']);
+  const veCaja = hasRole(['cajero']);
 
   const isActive = (path: string) => {
     if (path === '/caja' && location.pathname.startsWith('/caja')) return true;
@@ -22,7 +28,7 @@ export const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo y Marca */}
-          <Link to="/" className="flex items-center gap-3 group">
+          <Link to={esClienteQR ? location.pathname : '/'} className="flex items-center gap-3 group">
             {/* Logo oficial de Nori Pollo: frontend/public/menu/logo-rotulo.jpg */}
             <img
               src="/menu/logo-rotulo.jpg"
@@ -52,7 +58,9 @@ export const Navbar: React.FC = () => {
           </div>
 
           {/* Enlaces de Navegación Escritorio */}
+          {!esClienteQR && (
           <nav className="hidden md:flex items-center gap-1.5">
+            {isAuthenticated && (
             <Link
               to="/m/1"
               className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-medium transition-all ${
@@ -64,7 +72,9 @@ export const Navbar: React.FC = () => {
               <QrCode className="w-4 h-4 text-rojo-400" />
               Menú QR (Mesa)
             </Link>
+            )}
 
+            {veCocina && (
             <Link
               to="/kds"
               className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-medium transition-all ${
@@ -76,7 +86,9 @@ export const Navbar: React.FC = () => {
               <ChefHat className="w-4 h-4 text-amarillo-400" />
               Cocina (KDS)
             </Link>
+            )}
 
+            {veCaja && (
             <Link
               to="/caja"
               className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-medium transition-all ${
@@ -88,9 +100,12 @@ export const Navbar: React.FC = () => {
               <LayoutDashboard className="w-4 h-4" />
               Caja & Salón
             </Link>
+            )}
           </nav>
+          )}
 
           {/* Sección Usuario / Login */}
+          {!esClienteQR && (
           <div className="hidden md:flex items-center gap-3">
             {isAuthenticated && user ? (
               <div className="flex items-center gap-3 pl-3 border-l border-carbon-200">
@@ -118,8 +133,10 @@ export const Navbar: React.FC = () => {
               </Link>
             )}
           </div>
+          )}
 
           {/* Botón Menú Móvil */}
+          {!esClienteQR && (
           <div className="flex items-center md:hidden gap-2">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -128,12 +145,14 @@ export const Navbar: React.FC = () => {
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
+          )}
         </div>
       </div>
 
       {/* Menú Móvil Desplegable */}
-      {mobileMenuOpen && (
+      {mobileMenuOpen && !esClienteQR && (
         <div className="md:hidden border-t border-carbon-200 bg-carbon-100 px-4 pt-3 pb-5 space-y-2">
+          {isAuthenticated && (
           <Link
             to="/m/1"
             onClick={() => setMobileMenuOpen(false)}
@@ -142,6 +161,8 @@ export const Navbar: React.FC = () => {
             <QrCode className="w-5 h-5 text-rojo-400" />
             Menú QR Clientes
           </Link>
+          )}
+          {veCocina && (
           <Link
             to="/kds"
             onClick={() => setMobileMenuOpen(false)}
@@ -150,6 +171,8 @@ export const Navbar: React.FC = () => {
             <ChefHat className="w-5 h-5 text-amarillo-400" />
             Cocina (KDS)
           </Link>
+          )}
+          {veCaja && (
           <Link
             to="/caja"
             onClick={() => setMobileMenuOpen(false)}
@@ -158,6 +181,7 @@ export const Navbar: React.FC = () => {
             <LayoutDashboard className="w-5 h-5 text-rojo-400" />
             Caja & Salón
           </Link>
+          )}
 
           <div className="pt-3 border-t border-carbon-200">
             {isAuthenticated && user ? (

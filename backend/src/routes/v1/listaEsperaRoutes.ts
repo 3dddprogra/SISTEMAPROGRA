@@ -23,8 +23,9 @@ const sentarSchema = z.object({
   mesa_id: z.number().int().positive(),
 });
 
-router.get('/', listaEsperaController.getLista);
-router.post('/', validateBody(crearEsperaSchema), listaEsperaController.agregar);
+// La lista de espera la maneja caja: solo personal con sesión
+router.get('/', authenticateStaff, requireRoles('cajero', 'admin'), listaEsperaController.getLista);
+router.post('/', authenticateStaff, requireRoles('cajero', 'admin'), validateBody(crearEsperaSchema), listaEsperaController.agregar);
 router.patch(
   '/:id/estado',
   authenticateStaff,
