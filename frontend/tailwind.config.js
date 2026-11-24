@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 // ─────────────────────────────────────────────────────────────
-// SISTEMA DE DISEÑO "SOL DE MEDIODÍA" (Nori Pollo)
-// Fondo amarillo, tarjetas blancas, rojo y naranja de marca.
+// SISTEMA DE DISEÑO "CREMA Y FUEGO" (Nori Pollo)
+// Fondo crema, tarjetas blancas, degradado rojo→naranja→amarillo en cabeceras.
 // Aquí viven TODOS los colores: si cambias un valor de esta
 // lista, cambia en toda la aplicación.
 // Regla de las escalas:
@@ -15,9 +15,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Neutros cálidos: 50 = fondo de la página (amarillo), 100 = tarjetas (blanco), 900 = texto (casi negro)
+        // Neutros cálidos: 50 = fondo de la página (crema), 100 = tarjetas (blanco), 900 = texto (casi negro)
         carbon: {
-          50: '#FFE27A',   // fondo principal de la página
+          50: '#FFF4DE',   // fondo principal de la página (crema)
           100: '#FFFFFF',  // superficie: tarjetas y paneles
           150: '#FFF3DD',  // superficie elevada
           200: '#EBD9BB',  // bordes
@@ -28,7 +28,7 @@ export default {
           700: '#51432F',
           800: '#33291C',
           900: '#18110B',  // texto principal
-          DEFAULT: '#FFE27A',
+          DEFAULT: '#FFF4DE',
         },
         // ROJO Nori Pollo: color PRINCIPAL de las acciones (botones)
         rojo: {

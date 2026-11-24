@@ -44,7 +44,7 @@ export const LoginPage: React.FC = () => {
     <div className="min-h-screen bg-gradient-to-br from-carbon-100 via-carbon-50 to-rojo-50/40 flex items-center justify-center p-4">
       <div className="max-w-md w-full bg-carbon-100 rounded-3xl shadow-warm-lg border border-carbon-200 overflow-hidden">
         {/* Cabecera Gourmet */}
-        <div className="p-8 bg-gradient-to-r from-rojo-600 via-rojo-500 to-amarillo-600 text-white text-center border-b border-amarillo-600/60 relative">
+        <div className="p-8 bg-gradient-to-r from-rojo-700 via-rojo-600 to-amarillo-600 text-white text-center border-b border-amarillo-600/60 relative">
           <div className="w-16 h-16 rounded-2xl bg-carbon-100/10 backdrop-blur-md text-white flex items-center justify-center mx-auto mb-3 border border-white/20 shadow-md">
             <Utensils className="w-8 h-8 text-white" />
           </div>

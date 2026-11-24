@@ -154,7 +154,7 @@ export const ClienteMenu: React.FC = () => {
   return (
     <div className="min-h-screen bg-carbon-50 pb-24">
       {/* Banner de Bienvenida a la Mesa con Selector Rápido */}
-      <section className="bg-gradient-to-r from-rojo-600 via-rojo-500 to-amarillo-600 text-white py-8 px-4 sm:px-6 shadow-md border-b border-amarillo-600/60">
+      <section className="bg-gradient-to-r from-rojo-700 via-rojo-600 to-amarillo-600 text-white py-8 px-4 sm:px-6 shadow-md border-b border-amarillo-600/60">
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rojo-700/80 border border-rojo-600 text-xs font-semibold text-white mb-2">
