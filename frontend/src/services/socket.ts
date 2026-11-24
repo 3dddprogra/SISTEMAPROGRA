@@ -4,7 +4,8 @@ let socket: Socket | null = null;
 
 export function getSocket(): Socket {
   if (!socket) {
-    socket = io('http://192.168.0.15:3000', {
+    // Sin URL: se conecta al mismo origen de la página (Nginx o el proxy de Vite reenvían /socket.io)
+    socket = io({
       path: '/socket.io',
       transports: ['websocket', 'polling'],
       autoConnect: true,
