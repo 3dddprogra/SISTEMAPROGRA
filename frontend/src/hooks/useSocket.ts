@@ -13,9 +13,10 @@ export function useSocket(room?: { type: 'mesa' | 'cocina' | 'caja'; id?: number
         if (room.type === 'mesa' && room.id) {
           socket.emit('unirse:mesa', room.id);
         } else if (room.type === 'cocina') {
-          socket.emit('unirse:cocina');
+          // Las salas del personal exigen el token de sesión
+          socket.emit('unirse:cocina', localStorage.getItem('foodtech_token'));
         } else if (room.type === 'caja') {
-          socket.emit('unirse:caja');
+          socket.emit('unirse:caja', localStorage.getItem('foodtech_token'));
         }
       }
     };

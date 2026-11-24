@@ -4,12 +4,14 @@ import { ShoppingBag, Sparkles, Utensils, AlertCircle } from 'lucide-react';
 import { Producto, Categoria, CartItem, Pedido } from '../../types';
 import { api } from '../../services/api';
 import { useSocket } from '../../hooks/useSocket';
+import { useAuth } from '../../context/AuthContext';
 import { CategoryFilter } from '../../components/cliente/CategoryFilter';
 import { ProductCard } from '../../components/cliente/ProductCard';
 import { CartDrawer } from '../../components/cliente/CartDrawer';
 import { OrderTracker } from '../../components/cliente/OrderTracker';
 
 export const ClienteMenu: React.FC = () => {
+  const { isAuthenticated } = useAuth(); // el selector de mesa es solo para el personal
   const { mesaId = '1' } = useParams<{ mesaId: string }>();
   const navigate = useNavigate();
   const numericMesaId = parseInt(mesaId, 10) || 1;
@@ -167,7 +169,8 @@ export const ClienteMenu: React.FC = () => {
             </p>
           </div>
 
-          {/* Selector de mesa para pruebas de simulación */}
+          {/* Selector de mesa: solo lo ve el personal (el cliente queda fijo en su mesa) */}
+          {isAuthenticated && (
           <div className="flex items-center gap-2 bg-black/30 backdrop-blur-md p-2 rounded-2xl border border-white/10 self-start sm:self-auto">
             <span className="text-xs font-medium text-white pl-2">Cambiar Mesa:</span>
             <select
@@ -182,6 +185,7 @@ export const ClienteMenu: React.FC = () => {
               ))}
             </select>
           </div>
+          )}
         </div>
       </section>
 

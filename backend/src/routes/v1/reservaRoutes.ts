@@ -20,8 +20,9 @@ const updateEstadoSchema = z.object({
   estado: z.enum(['pendiente', 'confirmada', 'cancelada', 'completada']),
 });
 
-router.get('/', reservaController.getReservas);
-router.post('/', validateBody(crearReservaSchema), reservaController.crearReserva);
+// Las reservas se registran y consultan en caja: solo personal con sesión
+router.get('/', authenticateStaff, requireRoles('cajero', 'admin'), reservaController.getReservas);
+router.post('/', authenticateStaff, requireRoles('cajero', 'admin'), validateBody(crearReservaSchema), reservaController.crearReserva);
 router.patch(
   '/:id/estado',
   authenticateStaff,

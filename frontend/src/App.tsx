@@ -7,6 +7,8 @@ import { ClienteMenu } from './pages/cliente/ClienteMenu';
 import { KdsBoard } from './pages/kds/KdsBoard';
 import { CajaDashboard } from './pages/caja/CajaDashboard';
 import { LoginPage } from './pages/auth/LoginPage';
+import { ProtectedRoute } from './components/common/ProtectedRoute';
+import { useAuth } from './context/AuthContext';
 import { api } from './services/api';
 import { Producto } from './types';
 import {
@@ -21,6 +23,7 @@ import {
 // tailwind.config.js (rojo, amarillo, carbon, verde...).
 // ─────────────────────────────────────────────────────────────
 const LandingPage: React.FC = () => {
+  const { isAuthenticated } = useAuth(); // los accesos a caja y cocina son solo para el personal
   // Platos destacados: datos REALES de la API (los primeros disponibles)
   const [destacados, setDestacados] = useState<Producto[]>([]);
   useEffect(() => {
@@ -138,7 +141,8 @@ const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* ───── ACCESO A LOS MÓDULOS DEL SISTEMA ───── */}
+      {/* ───── ACCESO A LOS MÓDULOS DEL SISTEMA (solo personal con sesión) ───── */}
+      {isAuthenticated && (
       <section className="max-w-6xl mx-auto px-4 sm:px-6 py-14">
         <h2 className="font-serif text-3xl font-bold text-carbon-900 text-center mb-1">Acceso al sistema</h2>
         <p className="text-sm text-carbon-600 text-center mb-8">Módulos del sistema FoodTech para el personal y los clientes</p>
@@ -204,6 +208,7 @@ const LandingPage: React.FC = () => {
           </div>
         </div>
       </section>
+      )}
 
       {/* ───── CONTACTO (datos por definir: no inventamos información real) ───── */}
       <section id="contacto" className="bg-carbon-100 border-t border-carbon-200 scroll-mt-16">
@@ -241,8 +246,8 @@ export const App: React.FC = () => {
             <Routes>
               <Route path="/" element={<LandingPage />} />
               <Route path="/m/:mesaId" element={<ClienteMenu />} />
-              <Route path="/kds" element={<KdsBoard />} />
-              <Route path="/caja" element={<CajaDashboard />} />
+              <Route path="/kds" element={<ProtectedRoute roles={['cocina']}><KdsBoard /></ProtectedRoute>} />
+              <Route path="/caja" element={<ProtectedRoute roles={['cajero']}><CajaDashboard /></ProtectedRoute>} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>

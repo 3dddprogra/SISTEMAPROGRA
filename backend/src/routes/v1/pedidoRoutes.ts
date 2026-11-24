@@ -32,9 +32,11 @@ const cobrarPedidoSchema = z.object({
 router.post('/', authenticateMesaOrStaff, validateBody(crearPedidoSchema), pedidoController.crearPedido);
 
 // Listar pedidos y ver detalles
-router.get('/', pedidoController.getPedidos);
+// El listado general y el detalle son SOLO para el personal (caja, cocina, admin).
+// El cliente únicamente consulta el pedido activo de su propia mesa para el seguimiento.
+router.get('/', authenticateStaff, requireRoles('cajero', 'cocina', 'admin'), pedidoController.getPedidos);
 router.get('/mesa/:mesaId/activo', pedidoController.getActivoMesa);
-router.get('/:id', pedidoController.getPedidoById);
+router.get('/:id', authenticateStaff, requireRoles('cajero', 'cocina', 'admin'), pedidoController.getPedidoById);
 
 // Cambiar estado del pedido (cocina o personal)
 router.patch(
